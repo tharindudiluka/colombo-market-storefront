@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "title": "Colombo Market - Sri-lankische, indische & internationale Lebensmittel",
+    "description": "Colombo Market in Ravensburg — Gewürze, Reis, frisches Gemüse und mehr, online bestellen mit Abholung im Markt."
+  },
+  "announcementBar": {
+    "rating": "4,7 (1.840 Bewertungen)",
+    "pickup": "Abholung im Markt in Ravensburg",
+    "freeDelivery": "Kostenloser Versand ab {threshold}"
+  },
+  "header": {
+    "searchPlaceholder": "Wonach suchst du?",
+    "accountLabel": "Konto",
+    "cartLabel": "Warenkorb"
+  },
+  "nav": {
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "menuTitle": "Menü",
+    "angebote": "Angebote",
+    "gewurze": "Gewürze",
+    "reis-und-mehl": "Reis und Mehl",
+    "frisches-gemuse": "Frisches Gemüse",
+    "linsen-und-bohnen": "Linsen und Bohnen",
+    "tee-und-kekse": "Tee und Kekse",
+    "ayurvedische-produkte": "Ayurvedische Produkte",
+    "gefrorenes-fleisch-und-fisch": "Gefrorenes Fleisch und Fisch",
+    "tiefkuhlprodukte": "Tiefkühlprodukte",
+    "mehl-produkte": "Mehl Produkte",
+    "pickles-und-chutneys": "Pickles und Chutneys",
+    "snacks": "Snacks",
+    "bio-produkte": "Bio Produkte"
+  },
+  "hero": {
+    "slideLabel": "Zu Folie {number} wechseln",
+    "slides": [
+      {
+        "eyebrow": "Willkommen",
+        "title": "Willkommen bei Colombo Market",
+        "body": "Authentische Gewürze, Reis und Feinkost aus Sri Lanka, Indien und aller Welt.",
+        "cta": "Jetzt einkaufen"
+      },
+      {
+        "eyebrow": "Bestseller",
+        "title": "Authentische Gewürze aus Sri Lanka",
+        "body": "Ganze und gemahlene Gewürze, direkt für deine Küche.",
+        "cta": "Gewürze entdecken"
+      },
+      {
+        "eyebrow": "Diese Woche",
+        "title": "Angebote der Woche",
+        "body": "Ausgewählte Produkte zu reduzierten Preisen — nur für kurze Zeit.",
+        "cta": "Angebote ansehen"
+      }
+    ]
+  },
+  "promo": {
+    "tiles": [
+      { "title": "Frisches Gemüse & Obst", "subtitle": "Handverlesen und garantiert frisch" },
+      { "title": "Tee & Gebäck entdecken", "subtitle": "Für die Pause zwischendurch" }
+    ]
+  },
+  "productRow": {
+    "weeklySpecials": {
+      "title": "Angebote der Woche",
+      "subtitle": "Frische Highlights, saisonale Favoriten und zeitlich begrenzte Angebote."
+    },
+    "freshVegetables": {
+      "title": "Frisches Gemüse",
+      "subtitle": "Mehrmals wöchentlich bezogen, Frische garantiert."
+    },
+    "pantryPicks": {
+      "title": "Vorratskammer",
+      "subtitle": "Alltägliche Grundnahrungsmittel zu alltäglichen Preisen."
+    }
+  },
+  "categoryGrid": {
+    "title": "Nach Kategorie einkaufen"
+  },
+  "brandStrip": {
+    "title": "Vertrauenswürdige Marken"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "items": [
+      {
+        "q": "Wie lange dauert die Lieferung?",
+        "a": "Die meisten Bestellungen kommen innerhalb von 1–3 Werktagen in ganz Deutschland an. Abholung im Markt in Ravensburg ist ebenfalls möglich."
+      },
+      {
+        "q": "Garantiert ihr die Frische von Gemüse?",
+        "a": "Ja — frisches Gemüse wird mehrmals wöchentlich bezogen. Artikel unter unserem Frischestandard werden ohne Rückfragen erstattet oder ersetzt."
+      },
+      {
+        "q": "Könnt ihr ein bestimmtes Produkt für mich besorgen?",
+        "a": "Wenn du eine Marke oder ein Produkt suchst, das wir aktuell nicht führen, schreib uns — unser Einkaufsteam prüft die Aufnahme gerne."
+      },
+      {
+        "q": "Wie kann ich euch erreichen?",
+        "a": "Nutze die Chat-Blase am Bildschirmrand oder schreib unserem Support-Team eine E-Mail — wir antworten in der Regel innerhalb eines Werktags."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Sri-lankische, indische und internationale Lebensmittel — mit Abholung im Markt in Ravensburg.",
+    "shopTitle": "Shop",
+    "supportTitle": "Support",
+    "companyTitle": "Unternehmen",
+    "support": ["Lieferinfo", "Rückgabe & Erstattung", "Bestellung verfolgen", "Kontakt"],
+    "company": ["Über uns", "Karriere", "Herkunft", "Blog"],
+    "copyright": "Alle Rechte vorbehalten.",
+    "privacyPolicy": "Datenschutz",
+    "termsOfService": "AGB"
+  },
+  "promoModal": {
+    "close": "Schließen",
+    "title": "5% Rabatt auf deine erste Bestellung",
+    "body": "Melde dich an für wöchentliche Angebote, Neuheiten und Festival-Specials.",
+    "emailPlaceholder": "Deine E-Mail-Adresse",
+    "submit": "Anmelden und 5% sichern",
+    "terms": "Gültig ab einem Bestellwert von 39,99 €. Ein Gutschein pro Kunde."
+  },
+  "seoContent": {
+    "title": "Sri-lankisch, indisch und international einkaufen — ganz einfach",
+    "paragraph1": "Colombo Market bringt authentische Gewürze, Reis, Linsen und Feinkost aus Sri Lanka, Indien und aller Welt nach Ravensburg — für den täglichen Kochtopf und besondere Anlässe.",
+    "paragraph2": "Kategorien sind so sortiert, wie zu Hause tatsächlich eingekauft wird, mit klarer Preisangabe je Einheit. Bestellungen kannst du bequem im Markt in Ravensburg abholen oder dir liefern lassen."
+  },
+  "helpButton": {
+    "ariaLabel": "Chat mit uns"
+  }
+}

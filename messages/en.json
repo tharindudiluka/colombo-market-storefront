@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "title": "Colombo Market - Sri Lankan, Indian & International Groceries",
+    "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup."
+  },
+  "announcementBar": {
+    "rating": "4.7 (1,840 reviews)",
+    "pickup": "In-store pickup in Ravensburg",
+    "freeDelivery": "Free delivery from {threshold}"
+  },
+  "header": {
+    "searchPlaceholder": "What are you looking for?",
+    "accountLabel": "Account",
+    "cartLabel": "Cart"
+  },
+  "nav": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuTitle": "Menu",
+    "angebote": "Offers",
+    "gewurze": "Spices",
+    "reis-und-mehl": "Rice & Flour",
+    "frisches-gemuse": "Fresh Vegetables",
+    "linsen-und-bohnen": "Lentils & Beans",
+    "tee-und-kekse": "Tea & Biscuits",
+    "ayurvedische-produkte": "Ayurvedic Products",
+    "gefrorenes-fleisch-und-fisch": "Frozen Meat & Fish",
+    "tiefkuhlprodukte": "Frozen Products",
+    "mehl-produkte": "Flour Products",
+    "pickles-und-chutneys": "Pickles & Chutneys",
+    "snacks": "Snacks",
+    "bio-produkte": "Organic Products"
+  },
+  "hero": {
+    "slideLabel": "Go to slide {number}",
+    "slides": [
+      {
+        "eyebrow": "Welcome",
+        "title": "Welcome to Colombo Market",
+        "body": "Authentic spices, rice and specialty foods from Sri Lanka, India and around the world.",
+        "cta": "Shop now"
+      },
+      {
+        "eyebrow": "Bestsellers",
+        "title": "Authentic Spices from Sri Lanka",
+        "body": "Whole and ground spices, straight to your kitchen.",
+        "cta": "Explore spices"
+      },
+      {
+        "eyebrow": "This Week",
+        "title": "This Week's Offers",
+        "body": "Selected products at reduced prices — for a limited time only.",
+        "cta": "View offers"
+      }
+    ]
+  },
+  "promo": {
+    "tiles": [
+      { "title": "Fresh Vegetables & Fruit", "subtitle": "Hand-picked & guaranteed fresh" },
+      { "title": "Discover Tea & Biscuits", "subtitle": "For your coffee break" }
+    ]
+  },
+  "productRow": {
+    "weeklySpecials": {
+      "title": "This Week's Offers",
+      "subtitle": "Fresh picks, seasonal favourites and limited-time finds."
+    },
+    "freshVegetables": {
+      "title": "Fresh Vegetables",
+      "subtitle": "Sourced a few times a week, freshness guaranteed."
+    },
+    "pantryPicks": {
+      "title": "Pantry Picks",
+      "subtitle": "Everyday staples at everyday prices."
+    }
+  },
+  "categoryGrid": {
+    "title": "Shop by Category"
+  },
+  "brandStrip": {
+    "title": "Trusted Brands"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "How long does delivery take?",
+        "a": "Most orders arrive within 1–3 business days across Germany. In-store pickup in Ravensburg is also available."
+      },
+      {
+        "q": "Do you guarantee the freshness of vegetables?",
+        "a": "Yes — fresh produce is sourced a few times a week and any item that arrives below our freshness standard is refunded or replaced, no questions asked."
+      },
+      {
+        "q": "Can you source a specific product for me?",
+        "a": "If you're after a brand or item we don't currently stock, send us a message and our buying team will look into adding it."
+      },
+      {
+        "q": "How can I get in touch?",
+        "a": "Use the chat bubble in the corner of the site, or email our support team — we typically reply within one business day."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Sri Lankan, Indian and international groceries — with in-store pickup in Ravensburg.",
+    "shopTitle": "Shop",
+    "supportTitle": "Support",
+    "companyTitle": "Company",
+    "support": ["Delivery Info", "Returns & Refunds", "Track Order", "Contact Us"],
+    "company": ["About Us", "Careers", "Sourcing", "Blog"],
+    "copyright": "All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "promoModal": {
+    "close": "Close",
+    "title": "Get 5% Off Your First Order",
+    "body": "Sign up for weekly deals, fresh arrivals and festival specials.",
+    "emailPlaceholder": "Your email address",
+    "submit": "Sign Up and Get 5% Off",
+    "terms": "Valid on orders over €39.99. One use per customer."
+  },
+  "seoContent": {
+    "title": "Sri Lankan, Indian & International Shopping, Made Simple",
+    "paragraph1": "Colombo Market brings authentic spices, rice, lentils and specialty foods from Sri Lanka, India and around the world to Ravensburg — for everyday cooking and special occasions alike.",
+    "paragraph2": "Categories are organised the way home cooks actually shop, with clear unit pricing on every product. Orders can be picked up at our Ravensburg store or delivered to your door."
+  },
+  "helpButton": {
+    "ariaLabel": "Chat with us"
+  }
+}
