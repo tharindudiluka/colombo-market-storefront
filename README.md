@@ -80,5 +80,5 @@ German product titles — this is expected Shopify behavior, not a bug here.
 This project was bootstrapped with
 [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and uses
 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to
-load Marcellus (headings) and Arimo (body) from Google Fonts.
+load Geist, matching the spice_clone reference UI's original theme.
 # colombo_frontend
