@@ -1,8 +1,15 @@
-import type { ShopifyCollection, ShopifyProductNode } from "@/lib/shopify/types";
+import type {
+  ShopifyCart,
+  ShopifyCollection,
+  ShopifyCollectionDetail,
+  ShopifyProductDetail,
+  ShopifyProductNode,
+  ShopifyProductVariant,
+} from "@/lib/shopify/types";
 
 /**
  * Normalized shape presentation components consume. Components never import a Shopify
- * type directly — this is the seam that keeps ProductCard/ProductRow/CategoryGrid
+ * type directly — this is the seam that keeps ProductTile/ProductRow/CategoryGrid
  * decoupled from the Storefront API's GraphQL shape.
  */
 export type UiProduct = {
@@ -47,6 +54,171 @@ export function toUiProduct(node: ShopifyProductNode): UiProduct {
   };
 }
 
+export type UiProductVariant = {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  quantityAvailable: number | null;
+  selectedOptions: { name: string; value: string }[];
+  price: { amount: number; currencyCode: string };
+  compareAtPrice: { amount: number; currencyCode: string } | null;
+  image: { url: string; alt: string } | null;
+  unitPrice: { amount: number; currencyCode: string; referenceValue: number; referenceUnit: string } | null;
+};
+
+export type UiProductDetail = {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  descriptionHtml: string;
+  vendor: string | null;
+  productType: string | null;
+  tags: string[];
+  images: { url: string; alt: string }[];
+  options: { name: string; values: string[] }[];
+  variants: UiProductVariant[];
+  price: { amount: number; currencyCode: string };
+  compareAtPrice: { amount: number; currencyCode: string } | null;
+  availableForSale: boolean;
+  breadcrumbCategory: { handle: string; title: string } | null;
+  seo: { title: string | null; description: string | null };
+};
+
+function toUiVariant(node: ShopifyProductVariant, fallbackAlt: string): UiProductVariant {
+  const compareAtAmount = node.compareAtPrice?.amount;
+  const priceAmount = node.price.amount;
+  const isOnSale = compareAtAmount !== undefined && Number(compareAtAmount) > Number(priceAmount);
+
+  return {
+    id: node.id,
+    title: node.title,
+    availableForSale: node.availableForSale,
+    // Storefront token doesn't have unauthenticated_read_product_inventory granted yet —
+    // see colombo_frontend/README.md setup step 2.3. Null is the documented "unknown" state
+    // everywhere this is consumed (QuantityStepper/BuyBox treat it as unbounded).
+    quantityAvailable: null,
+    selectedOptions: node.selectedOptions,
+    price: { amount: Number(priceAmount), currencyCode: node.price.currencyCode },
+    compareAtPrice: isOnSale
+      ? { amount: Number(compareAtAmount), currencyCode: node.compareAtPrice!.currencyCode }
+      : null,
+    image: node.image ? { url: node.image.url, alt: node.image.altText ?? fallbackAlt } : null,
+    unitPrice:
+      node.unitPrice && node.unitPriceMeasurement
+        ? {
+            amount: Number(node.unitPrice.amount),
+            currencyCode: node.unitPrice.currencyCode,
+            referenceValue: node.unitPriceMeasurement.referenceValue,
+            referenceUnit: node.unitPriceMeasurement.referenceUnit ?? node.unitPriceMeasurement.quantityUnit ?? "",
+          }
+        : null,
+  };
+}
+
+export function toUiProductDetail(node: ShopifyProductDetail): UiProductDetail {
+  const compareAtAmount = node.compareAtPriceRange?.minVariantPrice.amount;
+  const priceAmount = node.priceRange.minVariantPrice.amount;
+  const isOnSale = compareAtAmount !== undefined && Number(compareAtAmount) > Number(priceAmount);
+  const breadcrumbEdge = node.collections.edges[0];
+
+  return {
+    id: node.id,
+    handle: node.handle,
+    title: node.title,
+    description: node.description,
+    descriptionHtml: node.descriptionHtml,
+    vendor: node.vendor || null,
+    productType: node.productType || null,
+    tags: node.tags,
+    images: node.images.edges.map((edge) => ({
+      url: edge.node.url,
+      alt: edge.node.altText ?? node.title,
+    })),
+    options: node.options.map((option) => ({
+      name: option.name,
+      values: option.optionValues.map((value) => value.name),
+    })),
+    variants: node.variants.edges.map((edge) => toUiVariant(edge.node, node.title)),
+    price: {
+      amount: Number(priceAmount),
+      currencyCode: node.priceRange.minVariantPrice.currencyCode,
+    },
+    compareAtPrice: isOnSale
+      ? {
+          amount: Number(compareAtAmount),
+          currencyCode: node.compareAtPriceRange!.minVariantPrice.currencyCode,
+        }
+      : null,
+    availableForSale: node.availableForSale,
+    breadcrumbCategory: breadcrumbEdge
+      ? { handle: breadcrumbEdge.node.handle, title: breadcrumbEdge.node.title }
+      : null,
+    seo: { title: node.seo.title, description: node.seo.description },
+  };
+}
+
+export type UiCartLine = {
+  id: string;
+  quantity: number;
+  title: string;
+  handle: string;
+  variantTitle: string | null;
+  selectedOptions: { name: string; value: string }[];
+  image: { url: string; alt: string } | null;
+  price: { amount: number; currencyCode: string };
+  lineTotal: { amount: number; currencyCode: string };
+  availableForSale: boolean;
+};
+
+export type UiCart = {
+  id: string;
+  checkoutUrl: string;
+  totalQuantity: number;
+  subtotal: { amount: number; currencyCode: string };
+  total: { amount: number; currencyCode: string };
+  lines: UiCartLine[];
+};
+
+export function toUiCart(cart: ShopifyCart): UiCart {
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    totalQuantity: cart.totalQuantity,
+    subtotal: {
+      amount: Number(cart.cost.subtotalAmount.amount),
+      currencyCode: cart.cost.subtotalAmount.currencyCode,
+    },
+    total: {
+      amount: Number(cart.cost.totalAmount.amount),
+      currencyCode: cart.cost.totalAmount.currencyCode,
+    },
+    lines: cart.lines.edges.map(({ node }) => ({
+      id: node.id,
+      quantity: node.quantity,
+      title: node.merchandise.product.title,
+      handle: node.merchandise.product.handle,
+      variantTitle: node.merchandise.title !== "Default Title" ? node.merchandise.title : null,
+      selectedOptions: node.merchandise.selectedOptions,
+      image: node.merchandise.image
+        ? {
+            url: node.merchandise.image.url,
+            alt: node.merchandise.image.altText ?? node.merchandise.product.title,
+          }
+        : null,
+      price: {
+        amount: Number(node.merchandise.price.amount),
+        currencyCode: node.merchandise.price.currencyCode,
+      },
+      lineTotal: {
+        amount: Number(node.cost.totalAmount.amount),
+        currencyCode: node.cost.totalAmount.currencyCode,
+      },
+      availableForSale: node.merchandise.availableForSale,
+    })),
+  };
+}
+
 export function toUiCategory(collection: ShopifyCollection): UiCategory {
   return {
     handle: collection.handle,
@@ -54,5 +226,29 @@ export function toUiCategory(collection: ShopifyCollection): UiCategory {
     image: collection.image
       ? { url: collection.image.url, alt: collection.image.altText ?? collection.title }
       : null,
+  };
+}
+
+export type UiCollectionDetail = {
+  id: string;
+  handle: string;
+  title: string;
+  descriptionHtml: string;
+  image: { url: string; alt: string } | null;
+  seo: { title: string | null; description: string | null };
+  products: UiProduct[];
+};
+
+export function toUiCollectionDetail(collection: ShopifyCollectionDetail): UiCollectionDetail {
+  return {
+    id: collection.id,
+    handle: collection.handle,
+    title: collection.title,
+    descriptionHtml: collection.descriptionHtml,
+    image: collection.image
+      ? { url: collection.image.url, alt: collection.image.altText ?? collection.title }
+      : null,
+    seo: { title: collection.seo.title, description: collection.seo.description },
+    products: collection.products.edges.map((edge) => toUiProduct(edge.node)),
   };
 }

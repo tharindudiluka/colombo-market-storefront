@@ -77,6 +77,29 @@
   "categoryGrid": {
     "title": "Shop by Category"
   },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "collection": {
+    "productCount": "{count, plural, one {# product} other {# products}}",
+    "sortLabel": "Sort by:",
+    "sortFeatured": "Featured",
+    "sortAlphaAsc": "Alphabetically, A-Z",
+    "sortAlphaDesc": "Alphabetically, Z-A",
+    "sortPriceAsc": "Price, low to high",
+    "sortPriceDesc": "Price, high to low",
+    "filter": "Filter",
+    "availability": "Availability",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "clearFilters": "Clear",
+    "viewGrid": "Grid view",
+    "viewList": "List view",
+    "empty": "No products match your filters.",
+    "resetFilters": "Reset filters",
+    "aboutTitle": "About {title}",
+    "aboutFallback": "Shop {title} online at Colombo Market — {count, plural, one {# product} other {# products}} picked for everyday cooking, pantry restocking and family meals. Order online for delivery across Germany or pick up in-store in Ravensburg."
+  },
   "brandStrip": {
     "title": "Trusted Brands"
   },
@@ -127,5 +150,49 @@
   },
   "helpButton": {
     "ariaLabel": "Chat with us"
+  },
+  "product": {
+    "unitPrice": "{price} / {unit}",
+    "taxIncluded": "tax included",
+    "quantityLabel": "Quantity",
+    "addToCart": "Add to Cart",
+    "adding": "Adding…",
+    "addedToCart": "Added ✓",
+    "addToCartError": "Couldn't add this to your cart. Please try again.",
+    "soldOut": "Sold Out",
+    "onlyLeft": "Only {count} left",
+    "details": {
+      "descriptionTitle": "Description",
+      "deliveryTitle": "Delivery & Pickup",
+      "deliveryBody": "Pick up in-store in Ravensburg or get it delivered — free from {threshold}.",
+      "returnsTitle": "Returns & Contact",
+      "returnsBody": "Questions about this product? Message us via chat — we typically reply within one business day."
+    },
+    "relatedProducts": {
+      "title": "You May Also Like"
+    },
+    "trust": {
+      "rating": "4.7 (1,840 reviews)",
+      "delivery": "Free delivery from {threshold}",
+      "pickup": "In-store pickup in Ravensburg"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "close": "Close",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "quantityLabel": "Quantity",
+    "remove": "Remove",
+    "soldOut": "No longer available",
+    "subtotal": "Subtotal",
+    "taxNote": "Tax included. Shipping calculated at checkout.",
+    "checkout": "Checkout"
+  },
+  "search": {
+    "title": "Search",
+    "resultsFor": "Search results for “{query}”",
+    "prompt": "Enter a search term to find products.",
+    "noResults": "No products found for “{query}”. Try a different search term."
   }
 }

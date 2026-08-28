@@ -77,6 +77,29 @@
   "categoryGrid": {
     "title": "Nach Kategorie einkaufen"
   },
+  "breadcrumbs": {
+    "home": "Start"
+  },
+  "collection": {
+    "productCount": "{count, plural, one {# Produkt} other {# Produkte}}",
+    "sortLabel": "Sortieren nach:",
+    "sortFeatured": "Empfohlen",
+    "sortAlphaAsc": "Alphabetisch, A-Z",
+    "sortAlphaDesc": "Alphabetisch, Z-A",
+    "sortPriceAsc": "Preis, aufsteigend",
+    "sortPriceDesc": "Preis, absteigend",
+    "filter": "Filter",
+    "availability": "Verfügbarkeit",
+    "inStock": "Auf Lager",
+    "outOfStock": "Ausverkauft",
+    "clearFilters": "Zurücksetzen",
+    "viewGrid": "Rasteransicht",
+    "viewList": "Listenansicht",
+    "empty": "Keine Produkte entsprechen deiner Filterauswahl.",
+    "resetFilters": "Filter zurücksetzen",
+    "aboutTitle": "Über {title}",
+    "aboutFallback": "Kaufe {title} online bei Colombo Market — {count, plural, one {# Produkt} other {# Produkte}} für den täglichen Kochtopf, den Vorratsschrank und Familienessen. Bestelle online mit Lieferung in ganz Deutschland oder hol im Markt in Ravensburg ab."
+  },
   "brandStrip": {
     "title": "Vertrauenswürdige Marken"
   },
@@ -127,5 +150,49 @@
   },
   "helpButton": {
     "ariaLabel": "Chat mit uns"
+  },
+  "product": {
+    "unitPrice": "{price} / {unit}",
+    "taxIncluded": "inkl. MwSt.",
+    "quantityLabel": "Menge",
+    "addToCart": "In den Warenkorb",
+    "adding": "Wird hinzugefügt…",
+    "addedToCart": "Hinzugefügt ✓",
+    "addToCartError": "Konnte nicht zum Warenkorb hinzugefügt werden. Bitte versuche es erneut.",
+    "soldOut": "Ausverkauft",
+    "onlyLeft": "Nur noch {count} verfügbar",
+    "details": {
+      "descriptionTitle": "Beschreibung",
+      "deliveryTitle": "Lieferung & Abholung",
+      "deliveryBody": "Abholung im Markt in Ravensburg oder Lieferung nach Hause — kostenlos ab {threshold}.",
+      "returnsTitle": "Rückgabe & Kontakt",
+      "returnsBody": "Fragen zu diesem Produkt? Schreib uns über den Chat — wir antworten in der Regel innerhalb eines Werktags."
+    },
+    "relatedProducts": {
+      "title": "Das könnte dir auch gefallen"
+    },
+    "trust": {
+      "rating": "4,7 (1.840 Bewertungen)",
+      "delivery": "Kostenloser Versand ab {threshold}",
+      "pickup": "Abholung im Markt in Ravensburg"
+    }
+  },
+  "cart": {
+    "title": "Dein Warenkorb",
+    "close": "Schließen",
+    "empty": "Dein Warenkorb ist leer.",
+    "continueShopping": "Weiter einkaufen",
+    "quantityLabel": "Menge",
+    "remove": "Entfernen",
+    "soldOut": "Nicht mehr verfügbar",
+    "subtotal": "Zwischensumme",
+    "taxNote": "Inkl. MwSt. Versandkosten werden an der Kasse berechnet.",
+    "checkout": "Zur Kasse"
+  },
+  "search": {
+    "title": "Suche",
+    "resultsFor": "Suchergebnisse für „{query}“",
+    "prompt": "Gib einen Suchbegriff ein, um Produkte zu finden.",
+    "noResults": "Keine Produkte für „{query}“ gefunden. Versuche einen anderen Suchbegriff."
   }
 }
