@@ -227,7 +227,8 @@ footer.bg-brand-teal-dark {
   box-shadow: var(--glass-shadow);
 }
 
-/* --- product cards: frosted, rounded, lift on hover --- */
+/* --- product cards: frosted, rounded (no elevation — the row's overflow-x
+ * scroller clips any shadow/transform that bleeds past its vertical padding) --- */
 a.rounded-xl.bg-white {
   background-color: var(--glass-fill-strong);
   background-image: var(--gradient-sheen);
@@ -235,12 +236,10 @@ a.rounded-xl.bg-white {
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-rim);
   border-radius: var(--radius-glass);
-  box-shadow: var(--glass-shadow);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 0.2s ease;
 }
 a.rounded-xl.bg-white:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-lift);
+  border-color: var(--glass-edge);
 }
 
 /* --- category circles --- */
@@ -255,11 +254,6 @@ button.fixed.rounded-full {
   box-shadow: 0 20px 44px -12px rgba(180, 83, 31, 0.55);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  a.rounded-xl.bg-white {
-    transition: none;
-  }
-}
 /* ================= END GLASS + GRADIENT LAYER ================= */
 
 .no-scrollbar::-webkit-scrollbar {
