@@ -13,18 +13,17 @@ type ProductTileProps = {
   locale?: string;
   /** "grid" is the vertical card used in scroll rows/grids; "list" is a horizontal row. */
   variant?: "grid" | "list";
-  /** Extra classes for the root — e.g. a fixed width when a parent uses horizontal scroll. */
-  className?: string;
 };
 
 /**
  * The single product tile used everywhere a product is shown as a clickable summary
- * (ProductRow, CategoryBrowser grid/list, PDP related products). Sizing comes entirely
- * from the parent (flex/grid) via `className` — the tile itself never hardcodes a pixel
- * width, so it can't overflow a narrower grid cell than a previous fixed-width version
- * assumed.
+ * (ProductRow, CollectionBrowser grid/list, PDP related products). The tile always fills
+ * its container width (`w-full`/`min-w-0`) rather than taking a `className` override —
+ * two width utilities on the same element race in Tailwind's generated stylesheet, not
+ * in source order, so a caller that needs a fixed width (ProductRow's horizontal scroll
+ * row) wraps the tile in its own sizing `<div>` instead of fighting this one.
  */
-export function ProductTile({ product, locale = "de-DE", variant = "grid", className = "" }: ProductTileProps) {
+export function ProductTile({ product, locale = "de-DE", variant = "grid" }: ProductTileProps) {
   const price = formatMoney(product.price.amount, product.price.currencyCode, locale);
   const compareAtPrice = product.compareAtPrice
     ? formatMoney(product.compareAtPrice.amount, product.compareAtPrice.currencyCode, locale)
@@ -38,7 +37,7 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", class
         e.preventDefault();
         e.stopPropagation();
       }}
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-brand-teal-dark shadow"
+      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-brand-teal-dark ring-1 ring-black/10"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-3.5 w-3.5">
         <path d="M12 5v14M5 12h14" />
@@ -78,7 +77,7 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", class
     return (
       <Link
         href={`/products/${product.handle}`}
-        className={`flex min-w-0 items-center gap-4 py-3 transition-colors hover:bg-brand-cream/50 ${className}`}
+        className="flex min-w-0 items-center gap-4 py-3 transition-colors hover:bg-brand-cream/50"
       >
         {image}
         <div className="min-w-0 flex-1">
@@ -104,7 +103,7 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", class
   return (
     <Link
       href={`/products/${product.handle}`}
-      className={`flex w-full min-w-0 flex-col overflow-hidden rounded-xl border border-black/5 bg-white transition-shadow hover:shadow-md ${className}`}
+      className="flex w-full min-w-0 flex-col overflow-hidden rounded-xl border border-black/5 bg-white transition-colors hover:border-black/15"
     >
       {image}
       <div className="flex flex-1 flex-col gap-1 p-3">

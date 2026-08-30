@@ -166,3 +166,18 @@ export type CartLinesRemoveResult = {
 export type CartQueryResult = {
   cart: ShopifyCart | null;
 };
+
+export type ShopifyMetaobjectImageField = {
+  reference: { image: ShopifyImage } | null;
+} | null;
+
+export type ShopifyHomeBannerNode = {
+  id: string;
+  handle: string;
+  image: ShopifyMetaobjectImageField;
+  link: { value: string } | null;
+};
+
+export type HomeBannersResult = {
+  metaobjects: { edges: { node: ShopifyHomeBannerNode }[] };
+};

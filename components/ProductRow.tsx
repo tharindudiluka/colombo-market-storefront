@@ -17,7 +17,9 @@ export function ProductRow({
 
       <div className="no-scrollbar snap-row mt-4 flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible lg:grid-cols-6">
         {products.map((product) => (
-          <ProductTile key={product.id} product={product} className="w-40 shrink-0 sm:w-auto" />
+          <div key={product.id} className="w-40 shrink-0 sm:w-auto">
+            <ProductTile product={product} />
+          </div>
         ))}
       </div>
     </section>

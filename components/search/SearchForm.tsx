@@ -19,17 +19,13 @@ export function SearchForm({ className }: { className?: string }) {
     <form
       role="search"
       onSubmit={handleSubmit}
-      className={`flex items-center rounded-full border border-black/10 bg-brand-cream px-4 py-2 ${className ?? ""}`}
+      className={`group flex items-center gap-2.5 rounded-full bg-neutral-100 px-4 py-2.5 transition-all focus-within:bg-white focus-within:shadow-sm focus-within:ring-2 focus-within:ring-brand-teal/30 ${className ?? ""}`}
     >
-      <input
-        type="search"
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        placeholder={t("searchPlaceholder")}
+      <button
+        type="submit"
         aria-label={t("searchPlaceholder")}
-        className="w-full bg-transparent text-sm text-brand-teal-dark placeholder:text-brand-teal-dark/50 focus:outline-none"
-      />
-      <button type="submit" aria-label={t("searchPlaceholder")} className="shrink-0 text-brand-teal-dark/70">
+        className="shrink-0 text-neutral-400 transition-colors group-focus-within:text-brand-teal-dark"
+      >
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -42,6 +38,14 @@ export function SearchForm({ className }: { className?: string }) {
           <path d="m21 21-4.3-4.3" />
         </svg>
       </button>
+      <input
+        type="search"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder={t("searchPlaceholder")}
+        aria-label={t("searchPlaceholder")}
+        className="w-full bg-transparent text-sm text-brand-teal-dark placeholder:text-neutral-400 focus:outline-none"
+      />
     </form>
   );
 }

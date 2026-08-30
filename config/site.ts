@@ -7,6 +7,9 @@
 export const site = {
   name: "Colombo Market",
   wordmark: "COLOMBO MARKET",
+  // Store logo, pulled from the Shopify theme (config/settings_data.json →
+  // shopify://shop_images/Untitled_design_3.png) and vendored into public/.
+  logo: "/colombo-market-logo.png",
   domain: "colombomarket.de",
   address: {
     street: "Herrenstraße 30",

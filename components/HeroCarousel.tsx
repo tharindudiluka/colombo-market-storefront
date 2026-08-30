@@ -1,56 +1,55 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
+import { shopifyFetch } from "@/lib/shopify/client";
+import { homeBannersQuery } from "@/lib/shopify/queries/home-banners";
+import { toUiBanner, type UiBanner } from "@/lib/shopify/mappers";
 import { heroSlideMeta } from "@/lib/content/homepage";
+import type { HomeBannersResult, LanguageCode } from "@/lib/shopify/types";
+import { HeroCarouselClient, type HeroItem } from "@/components/HeroCarouselClient";
 
 type HeroSlideText = { eyebrow: string; title: string; body: string; cta: string };
 
-export function HeroCarousel() {
-  const t = useTranslations("hero");
-  const slideTexts = t.raw("slides") as HeroSlideText[];
-  const slides = heroSlideMeta.map((meta, i) => ({ ...meta, ...slideTexts[i] }));
-  const [active, setActive] = useState(0);
+async function getBanners(language: LanguageCode): Promise<UiBanner[]> {
+  try {
+    const data = await shopifyFetch<HomeBannersResult>({
+      query: homeBannersQuery,
+      variables: { language },
+      tags: ["homepage"],
+    });
+    return data.metaobjects.edges
+      .map((edge) => toUiBanner(edge.node))
+      .filter((banner): banner is UiBanner => banner !== null);
+  } catch {
+    // Metaobject not defined / storefront access not granted — fall back below.
+    return [];
+  }
+}
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((i) => (i + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+export async function HeroCarousel() {
+  const locale = await getLocale();
+  const language = locale.toUpperCase() as LanguageCode;
+  const t = await getTranslations("hero");
 
-  const slide = slides[active];
+  const banners = await getBanners(language);
 
-  return (
-    <div
-      className={`relative flex h-56 flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-br p-6 text-white sm:h-72 sm:p-8 ${slide.accent}`}
-    >
-      <p className="text-xs font-semibold uppercase tracking-wide text-white/80">
-        {slide.eyebrow}
-      </p>
-      <h2 className="font-heading mt-2 max-w-xs text-2xl font-extrabold leading-tight sm:text-3xl">
-        {slide.title}
-      </h2>
-      <p className="mt-2 max-w-sm text-sm text-white/90">{slide.body}</p>
-      <a
-        href={slide.href}
-        className="mt-4 w-fit rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-teal-dark"
-      >
-        {slide.cta}
-      </a>
+  const items: HeroItem[] =
+    banners.length > 0
+      ? banners.map((banner) => ({
+          kind: "image",
+          id: banner.id,
+          url: banner.image.url,
+          alt: banner.image.alt,
+          href: banner.href,
+        }))
+      : heroSlideMeta.map((meta, i) => {
+          const text = (t.raw("slides") as HeroSlideText[])[i];
+          return {
+            kind: "content",
+            id: meta.id,
+            href: meta.href,
+            accent: meta.accent,
+            ...text,
+          };
+        });
 
-      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-1.5">
-        {slides.map((s, i) => (
-          <button
-            key={s.id}
-            aria-label={t("slideLabel", { number: i + 1 })}
-            onClick={() => setActive(i)}
-            className={`h-1.5 rounded-full transition-all ${
-              i === active ? "w-5 bg-white" : "w-1.5 bg-white/50"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
+  return <HeroCarouselClient items={items} />;
 }

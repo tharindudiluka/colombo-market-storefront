@@ -6,7 +6,8 @@
   "announcementBar": {
     "rating": "4.7 (1,840 reviews)",
     "pickup": "In-store pickup in Ravensburg",
-    "freeDelivery": "Free delivery from {threshold}"
+    "freeDelivery": "Free delivery from {threshold}",
+    "region": "Announcements"
   },
   "header": {
     "searchPlaceholder": "What are you looking for?",

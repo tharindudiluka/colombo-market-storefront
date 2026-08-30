@@ -3,16 +3,18 @@
 /*
  * Brand tokens — keep in sync with config/theme.ts (the canonical TS source; Tailwind
  * v4's CSS-first config can't import TS values directly, so this block mirrors them by
- * hand). Matches the spice_clone reference UI's original teal/gold/terracotta theme.
+ * hand). "Garden Frost" theme: fresh-produce green primary, sprout-green pop, and a
+ * deep-carrot warm accent kept for badges/CTAs. The existing brand-* token names are
+ * retained so components need no changes — only the values move.
  */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-brand-teal: #0f5c4c;
-  --color-brand-teal-dark: #0a3f34;
-  --color-brand-gold: #c9971f;
-  --color-brand-terracotta: #d9531e;
-  --color-brand-cream: #faf6ee;
+  --background: #f4f8f3;
+  --foreground: #16281a;
+  --color-brand-teal: #3f7d3a;
+  --color-brand-teal-dark: #2e5e2b;
+  --color-brand-gold: #8cc63f;
+  --color-brand-terracotta: #b4531f;
+  --color-brand-cream: #d6efd9;
   --layout-max-width: 1400px;
 }
 
@@ -34,6 +36,231 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ==========================================================================
+ * GLASS + GRADIENT LAYER — experimental, sits on top of the flat Garden Frost
+ * palette above. Self-contained: delete everything between this banner and the
+ * "END GLASS + GRADIENT LAYER" banner (or restore
+ * scratchpad/theme-backup-flat-garden-frost/globals.css) to return to the flat
+ * theme. No component files depend on it.
+ * ======================================================================== */
+:root {
+  /* frosted-glass surface recipe */
+  --glass-fill: rgba(255, 255, 255, 0.5);
+  --glass-fill-strong: rgba(255, 255, 255, 0.66);
+  --glass-rim: rgba(255, 255, 255, 0.85);
+  --glass-edge: rgba(47, 94, 43, 0.1);
+  --glass-blur: blur(26px) saturate(165%);
+  --glass-shadow: 0 22px 55px -16px rgba(31, 58, 35, 0.28),
+    0 6px 18px -10px rgba(31, 58, 35, 0.18);
+  --glass-shadow-lift: 0 34px 70px -18px rgba(31, 58, 35, 0.32);
+  --radius-glass: 26px;
+
+  /* the flowing page ground — mint top-left, warm blush bottom-right */
+  --gradient-ground:
+    radial-gradient(120% 78% at 0% 0%, #a9ddc8 0%, rgba(169, 221, 200, 0) 55%),
+    radial-gradient(110% 70% at 100% 3%, #d6efe0 0%, rgba(214, 239, 224, 0) 52%),
+    radial-gradient(130% 85% at 100% 100%, #f7ead7 0%, rgba(247, 234, 215, 0) 55%),
+    radial-gradient(120% 80% at 0% 100%, #e7f1d9 0%, rgba(231, 241, 217, 0) 55%),
+    linear-gradient(165deg, #d9efe3 0%, #e9f3ea 45%, #f4eee1 100%);
+  --gradient-primary: linear-gradient(135deg, #4e9a46 0%, #3f7d3a 55%, #2e5e2b 100%);
+  --gradient-warm: linear-gradient(135deg, #e27d3a 0%, #b4531f 100%);
+  --gradient-sprout: linear-gradient(120deg, #a8d85a 0%, #8cc63f 45%, #63a83a 100%);
+  --gradient-mint: linear-gradient(135deg, #d0eadd 0%, #a7d7c1 55%, #8ec9af 100%);
+  --gradient-header: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(244, 248, 243, 0.28) 100%);
+  --gradient-footer: linear-gradient(180deg, #2e5e2b 0%, #1f3f23 100%);
+  --gradient-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%);
+  --orb: radial-gradient(circle at 32% 28%, #e2f4e6 0%, #8fcea9 42%, #3f7d3a 100%);
+}
+
+/* let the flowing ground show through every route wrapper */
+html {
+  background-color: #e8f3ea;
+}
+body {
+  background: transparent;
+}
+.min-h-full.bg-white {
+  background-color: transparent;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--gradient-ground);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* reusable frosted surface */
+.glass {
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  border-radius: var(--radius-glass);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-rim),
+    inset 0 -1px 0 var(--glass-edge);
+}
+
+/* --- chrome: sticky header floats over the ground ---
+ * NOTE: backdrop-filter makes an element the containing block for its
+ * position:fixed descendants. The mobile menu drawer (a fixed inset-0 overlay)
+ * lives inside <header>, so blurring the header itself would clip the drawer to
+ * the header's ~64px box. The drawer is md:hidden, so we only blur the header at
+ * >=768px, where the drawer isn't rendered. Below that the header stays a plain
+ * translucent bar. */
+header.sticky.top-0 {
+  background-color: rgba(250, 253, 249, 0.86);
+  background-image: var(--gradient-header);
+  border-bottom: 1px solid var(--glass-rim);
+  box-shadow: 0 10px 30px -18px rgba(31, 58, 35, 0.25);
+}
+@media (min-width: 768px) {
+  header.sticky.top-0 {
+    background-color: transparent;
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+  }
+}
+
+/* --- search field: tall frosted pill --- */
+form[role="search"] {
+  background-color: var(--glass-fill-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-shadow);
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+form[role="search"]:focus-within {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- desktop nav + category chips --- */
+nav.border-b {
+  background-color: transparent;
+  background-image: none;
+  border-bottom-color: transparent;
+}
+nav.border-b a:not(.bg-brand-terracotta) {
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-rim);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+  /* keep the shadow tight — the chip row is an overflow-x-auto scroller and
+   * clips anything bleeding past its vertical padding */
+  box-shadow: 0 2px 8px -3px rgba(31, 58, 35, 0.28);
+}
+nav.border-b a[aria-current="page"] {
+  background-image: var(--gradient-primary);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* --- announcement bar: sprout gradient --- */
+.bg-brand-gold {
+  background-image: var(--gradient-sprout);
+}
+
+/* --- warm fills (help button, cart badge, offers pill) --- */
+.bg-brand-terracotta {
+  background-image: var(--gradient-warm);
+}
+
+/* --- primary fills (promo modal card, teal buttons) --- */
+.bg-brand-teal {
+  background-image: var(--gradient-primary);
+}
+
+/* --- modal / drawer scrims get a blur --- */
+.bg-black\/50 {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* --- mint gradient behind product imagery + soft bands --- */
+.bg-brand-cream {
+  background-image: var(--gradient-mint);
+}
+
+/* --- footer: deep green gradient --- */
+footer.bg-brand-teal-dark {
+  background-image: var(--gradient-footer);
+}
+
+/* --- hero / flash-sale card: bold gradient + glossy orb --- */
+.overflow-hidden.rounded-2xl:not(.bg-brand-cream) {
+  border-radius: 28px;
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.overflow-hidden.rounded-2xl:not(.bg-brand-cream)::after {
+  content: "";
+  position: absolute;
+  right: -44px;
+  bottom: -48px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: var(--orb);
+  box-shadow: 0 24px 55px rgba(31, 58, 35, 0.35),
+    inset 0 -22px 44px rgba(0, 0, 0, 0.16),
+    inset 0 16px 34px rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  z-index: 1;
+}
+@media (max-width: 640px) {
+  .overflow-hidden.rounded-2xl:not(.bg-brand-cream)::after {
+    width: 128px;
+    height: 128px;
+    right: -40px;
+    bottom: -40px;
+  }
+}
+
+/* --- promo tiles: rounder, softer --- */
+.rounded-2xl.p-3 {
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* --- product cards: frosted, rounded, lift on hover --- */
+a.rounded-xl.bg-white {
+  background-color: var(--glass-fill-strong);
+  background-image: var(--gradient-sheen);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  border-radius: var(--radius-glass);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+a.rounded-xl.bg-white:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-lift);
+}
+
+/* --- category circles --- */
+.rounded-full.bg-brand-cream {
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-shadow);
+}
+
+/* --- floating help button --- */
+button.fixed.rounded-full {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 20px 44px -12px rgba(180, 83, 31, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.rounded-xl.bg-white {
+    transition: none;
+  }
+}
+/* ================= END GLASS + GRADIENT LAYER ================= */
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

@@ -2,6 +2,7 @@ import type {
   ShopifyCart,
   ShopifyCollection,
   ShopifyCollectionDetail,
+  ShopifyHomeBannerNode,
   ShopifyProductDetail,
   ShopifyProductNode,
   ShopifyProductVariant,
@@ -216,6 +217,33 @@ export function toUiCart(cart: ShopifyCart): UiCart {
       },
       availableForSale: node.merchandise.availableForSale,
     })),
+  };
+}
+
+export type UiBanner = {
+  id: string;
+  image: { url: string; alt: string; width: number | null; height: number | null };
+  href: string | null;
+};
+
+/**
+ * `home_banners` metaobject → UI banner. Entries with no image reference resolve to
+ * null so the caller can filter them out. `href` comes from the optional `link` field
+ * (a path like `/collections/x` or an absolute URL); blank/missing → null.
+ */
+export function toUiBanner(node: ShopifyHomeBannerNode): UiBanner | null {
+  const image = node.image?.reference?.image;
+  if (!image) return null;
+  const href = node.link?.value?.trim();
+  return {
+    id: node.id,
+    image: {
+      url: image.url,
+      alt: image.altText ?? "",
+      width: image.width ?? null,
+      height: image.height ?? null,
+    },
+    href: href ? href : null,
   };
 }
 

@@ -6,7 +6,8 @@
   "announcementBar": {
     "rating": "4,7 (1.840 Bewertungen)",
     "pickup": "Abholung im Markt in Ravensburg",
-    "freeDelivery": "Kostenloser Versand ab {threshold}"
+    "freeDelivery": "Kostenloser Versand ab {threshold}",
+    "region": "Ankündigungen"
   },
   "header": {
     "searchPlaceholder": "Wonach suchst du?",

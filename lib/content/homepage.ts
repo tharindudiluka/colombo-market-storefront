@@ -4,13 +4,15 @@
  * messages/de.json + messages/en.json under "hero.slides" / "promo.tiles" — same order,
  * zipped together by index in HeroCarousel.tsx / PromoTiles.tsx.
  */
+// Garden Frost — green gradient accents (was wine/magenta). Zipped by index
+// with hero.slides / promo.tiles copy in messages/*.json.
 export const heroSlideMeta = [
-  { id: "welcome", href: "/collections/angebote", accent: "from-[#3d081b] to-[#910f3f]" },
-  { id: "spices", href: "/collections/gewurze", accent: "from-[#910f3f] to-[#3d081b]" },
-  { id: "angebote", href: "/collections/angebote", accent: "from-[#5a1024] to-[#910f3f]" },
+  { id: "welcome", href: "/collections/angebote", accent: "from-[#2e5e2b] to-[#4e9a46]" },
+  { id: "spices", href: "/collections/gewurze", accent: "from-[#3f7d3a] to-[#1f3f23]" },
+  { id: "angebote", href: "/collections/angebote", accent: "from-[#4e9a46] to-[#2e5e2b]" },
 ] as const;
 
 export const promoTileMeta = [
-  { id: "vegetables", href: "/collections/frisches-gemuse", accent: "bg-[#4d6b2f]" },
-  { id: "tea", href: "/collections/tee-und-kekse", accent: "bg-[#3d081b]" },
+  { id: "vegetables", href: "/collections/frisches-gemuse", accent: "bg-gradient-to-br from-[#5a8f3a] to-[#2e5e2b]" },
+  { id: "tea", href: "/collections/tee-und-kekse", accent: "bg-gradient-to-br from-[#3f7d3a] to-[#173218]" },
 ] as const;
