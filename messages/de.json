@@ -14,6 +14,11 @@
     "accountLabel": "Konto",
     "cartLabel": "Warenkorb"
   },
+  "languageSwitcher": {
+    "label": "Sprache",
+    "de": "DE",
+    "en": "EN"
+  },
   "nav": {
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
@@ -81,7 +86,25 @@
   "breadcrumbs": {
     "home": "Start"
   },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Schreib uns, wenn du Fragen zu Produkten, deiner Bestellung oder unserem Markt in Ravensburg hast.",
+    "formTitle": "Wie können wir helfen?",
+    "formDescription": "Wir melden uns so schnell wie möglich bei dir.",
+    "name": "Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer (optional)",
+    "message": "Nachricht",
+    "messagePlaceholder": "Womit können wir dir helfen?",
+    "submit": "Nachricht senden",
+    "requiredHint": "Pflichtfeld",
+    "locationTitle": "Besuche uns im Markt",
+    "locationDescription": "Entdecke sri-lankische, indische und internationale Lebensmittel direkt vor Ort.",
+    "directions": "Route planen",
+    "nativeFormHint": "Nach dem Absenden wird deine Nachricht sicher über unseren Shopify-Shop verarbeitet."
+  },
   "collection": {
+    "allTitle": "Alle Kategorien",
     "productCount": "{count, plural, one {# Produkt} other {# Produkte}}",
     "sortLabel": "Sortieren nach:",
     "sortFeatured": "Empfohlen",
@@ -134,7 +157,8 @@
     "company": ["Über uns", "Karriere", "Herkunft", "Blog"],
     "copyright": "Alle Rechte vorbehalten.",
     "privacyPolicy": "Datenschutz",
-    "termsOfService": "AGB"
+    "termsOfService": "AGB",
+    "imprint": "Impressum"
   },
   "promoModal": {
     "close": "Schließen",
@@ -151,6 +175,33 @@
   },
   "helpButton": {
     "ariaLabel": "Chat mit uns"
+  },
+  "wishlist": {
+    "title": "Gespeicherte Artikel",
+    "subtitle": "Behalte deine Favoriten für später im Blick.",
+    "headerLabel": "Gespeicherte Artikel ({count})",
+    "save": "{title} speichern",
+    "remove": "{title} aus gespeicherten Artikeln entfernen",
+    "emptyTitle": "Deine Liste gespeicherter Artikel ist leer",
+    "emptyBody": "Tippe bei einem Produkt auf das Herz, um es hier zu speichern.",
+    "continueShopping": "Produkte entdecken"
+  },
+  "routeState": {
+    "loading": {
+      "label": "Seite wird geladen"
+    },
+    "notFound": {
+      "title": "Diese Seite konnten wir nicht finden",
+      "body": "Sie wurde möglicherweise verschoben oder entfernt, oder die Adresse ist nicht korrekt.",
+      "home": "Zur Startseite",
+      "collections": "Kategorien ansehen"
+    },
+    "error": {
+      "title": "Etwas ist schiefgelaufen",
+      "body": "Diese Seite konnte gerade nicht geladen werden. Bitte versuche es erneut.",
+      "retry": "Erneut versuchen",
+      "home": "Zur Startseite"
+    }
   },
   "product": {
     "unitPrice": "{price} / {unit}",
@@ -195,5 +246,58 @@
     "resultsFor": "Suchergebnisse für „{query}“",
     "prompt": "Gib einen Suchbegriff ein, um Produkte zu finden.",
     "noResults": "Keine Produkte für „{query}“ gefunden. Versuche einen anderen Suchbegriff."
+  },
+  "account": {
+    "nav": {
+      "profile": "Profil",
+      "orders": "Bestellungen",
+      "addresses": "Adressen",
+      "logout": "Abmelden"
+    },
+    "profile": {
+      "title": "Dein Profil",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "save": "Änderungen speichern",
+      "saving": "Wird gespeichert…",
+      "saved": "Profil aktualisiert.",
+      "error": "Profil konnte nicht aktualisiert werden. Bitte versuche es erneut."
+    },
+    "orders": {
+      "title": "Bestellhistorie",
+      "empty": "Du hast noch keine Bestellungen aufgegeben.",
+      "loadMore": "Mehr laden",
+      "subtotal": "Zwischensumme",
+      "shipping": "Versand",
+      "total": "Gesamt",
+      "shippingAddress": "Lieferadresse"
+    },
+    "addresses": {
+      "title": "Adressen",
+      "empty": "Du hast noch keine gespeicherten Adressen.",
+      "add": "Adresse hinzufügen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "deleteConfirm": "Diese Adresse löschen?",
+      "setDefault": "Als Standard festlegen",
+      "default": "Standard",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "address1": "Adresse",
+      "address2": "Wohnung, Suite usw. (optional)",
+      "city": "Stadt",
+      "postalCode": "Postleitzahl",
+      "province": "Bundesland",
+      "country": "Land",
+      "phone": "Telefon",
+      "save": "Adresse speichern",
+      "saving": "Wird gespeichert…",
+      "error": "Adresse konnte nicht gespeichert werden. Bitte versuche es erneut."
+    },
+    "errors": {
+      "authFailed": "Beim Anmelden ist etwas schiefgelaufen. Bitte versuche es erneut.",
+      "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an."
+    }
   }
 }

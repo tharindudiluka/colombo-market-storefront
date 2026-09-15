@@ -135,7 +135,7 @@ export function HeroCarouselClient({ items }: { items: HeroItem[] }) {
   if (count === 0) return null;
 
   return (
-    <div className="relative aspect-[2/1] w-full overflow-hidden rounded-2xl md:aspect-[4/1]">
+    <div className="relative aspect-[5/2] w-full overflow-hidden rounded-2xl">
       <div
         ref={scrollerRef}
         onMouseEnter={pause}

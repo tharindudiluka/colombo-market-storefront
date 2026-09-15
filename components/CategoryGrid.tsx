@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Icon } from "@/components/Icon";
 import { categoryIcons } from "@/lib/content/categories";
 import type { UiCategory } from "@/lib/shopify/mappers";
@@ -15,7 +16,7 @@ export async function CategoryGrid({ categories }: { categories: UiCategory[] })
 
       <div className="no-scrollbar mt-4 flex gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:overflow-visible lg:grid-cols-7">
         {categories.map((cat) => (
-          <a
+          <Link
             key={cat.handle}
             href={`/collections/${cat.handle}`}
             className="flex w-20 shrink-0 flex-col items-center gap-2 text-center sm:w-full"
@@ -30,7 +31,7 @@ export async function CategoryGrid({ categories }: { categories: UiCategory[] })
             <span className="text-xs font-semibold text-brand-teal-dark">
               {cat.title || t(`nav.${cat.handle}`)}
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

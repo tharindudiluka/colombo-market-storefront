@@ -61,7 +61,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       <main className="flex-1">
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-[2fr_1fr]">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
             <HeroCarousel />
             <PromoTiles />
           </div>

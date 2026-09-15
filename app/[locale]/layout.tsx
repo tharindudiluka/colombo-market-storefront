@@ -6,7 +6,10 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { AccountProvider } from "@/components/account/AccountProvider";
+import { WishlistProvider } from "@/components/wishlist/WishlistProvider";
 import { getCart } from "@/lib/cart/actions";
+import { getCurrentCustomer } from "@/lib/customer/actions";
 import type { LanguageCode } from "@/lib/shopify/types";
 import "../globals.css";
 
@@ -54,7 +57,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const language = locale.toUpperCase() as LanguageCode;
-  const initialCart = await getCart(language);
+  const [initialCart, initialCustomer] = await Promise.all([getCart(language), getCurrentCustomer()]);
 
   return (
     <html
@@ -63,10 +66,14 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
-          <CartProvider initialCart={initialCart} language={language}>
-            {children}
-            <CartDrawer />
-          </CartProvider>
+          <WishlistProvider>
+            <CartProvider initialCart={initialCart} language={language}>
+              <AccountProvider initialCustomer={initialCustomer}>
+                {children}
+                <CartDrawer />
+              </AccountProvider>
+            </CartProvider>
+          </WishlistProvider>
         </NextIntlClientProvider>
       </body>
     </html>

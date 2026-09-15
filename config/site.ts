@@ -11,11 +11,16 @@ export const site = {
   // shopify://shop_images/Untitled_design_3.png) and vendored into public/.
   logo: "/colombo-market-logo.png",
   domain: "colombomarket.de",
+  // Full origin, used server-side to build OAuth redirect/logout URIs for the Shopify
+  // Customer Account API. Override per-environment via SITE_URL (staging vs. prod).
+  url: process.env.SITE_URL ?? "http://localhost:3000",
   address: {
     street: "Herrenstraße 30",
     postalCode: "88212",
     city: "Ravensburg",
     country: "Germany",
+    mapsUrl:
+      "https://www.google.com/maps/place//data=!4m2!3m1!1s0x479baf9ce6fb37e5:0x3499ac08ecb1dfa?sa=X&ved=1t:8290&ictx=111",
   },
   social: {
     instagram: "https://instagram.com/colombo_market",

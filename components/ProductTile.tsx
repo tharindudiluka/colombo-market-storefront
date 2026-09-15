@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { UiProduct } from "@/lib/shopify/mappers";
+import { WishlistToggle } from "@/components/wishlist/WishlistToggle";
 
 function formatMoney(amount: number, currencyCode: string, locale: string) {
   return new Intl.NumberFormat(locale, { style: "currency", currency: currencyCode }).format(amount);
@@ -69,55 +70,63 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid" }: Pro
           Angebot
         </span>
       )}
-      {variant === "grid" && <div className="absolute bottom-2 right-2">{addButton}</div>}
     </div>
   );
 
   if (variant === "list") {
     return (
-      <Link
-        href={`/products/${product.handle}`}
-        className="flex min-w-0 items-center gap-4 py-3 transition-colors hover:bg-brand-cream/50"
-      >
-        {image}
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-brand-teal-dark sm:text-base">{product.title}</p>
-          {product.compareAtPrice && (
-            <span className="mt-1 inline-block rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-              Angebot
-            </span>
-          )}
-          {!product.availableForSale && (
-            <p className="mt-1 text-xs text-brand-teal-dark/50">Ausverkauft</p>
-          )}
+      <div className="flex min-w-0 items-center gap-3 py-3 transition-colors hover:bg-brand-cream/50">
+        <Link href={`/products/${product.handle}`} className="flex min-w-0 flex-1 items-center gap-4">
+          {image}
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold text-brand-teal-dark sm:text-base">{product.title}</p>
+            {product.compareAtPrice && (
+              <span className="mt-1 inline-block rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                Angebot
+              </span>
+            )}
+            {!product.availableForSale && (
+              <p className="mt-1 text-xs text-brand-teal-dark/50">Ausverkauft</p>
+            )}
+          </div>
+          <div className="flex shrink-0 flex-col items-end gap-0.5">
+            <p className="text-sm font-bold text-brand-teal-dark sm:text-base">{price}</p>
+            {compareAtPrice && <p className="text-xs text-brand-teal-dark/40 line-through">{compareAtPrice}</p>}
+          </div>
+        </Link>
+        <div className="flex shrink-0 items-center gap-1">
+          {addButton}
+          <WishlistToggle item={product} className="shrink-0" />
         </div>
-        <div className="flex shrink-0 flex-col items-end gap-0.5">
-          <p className="text-sm font-bold text-brand-teal-dark sm:text-base">{price}</p>
-          {compareAtPrice && <p className="text-xs text-brand-teal-dark/40 line-through">{compareAtPrice}</p>}
-        </div>
-        {addButton}
-      </Link>
+      </div>
     );
   }
 
   return (
-    <Link
-      href={`/products/${product.handle}`}
-      className="flex w-full min-w-0 flex-col overflow-hidden rounded-xl border border-black/5 bg-white transition-colors hover:border-black/15"
-    >
-      {image}
-      <div className="flex flex-1 flex-col gap-1 p-3">
-        <p className="line-clamp-2 min-h-[2.5em] text-xs font-semibold leading-tight text-brand-teal-dark sm:text-sm">
-          {product.title}
-        </p>
-        <div className="flex flex-wrap items-baseline gap-x-2">
-          <p className="text-sm font-bold text-brand-teal-dark sm:text-base">{price}</p>
-          {compareAtPrice && <p className="text-xs text-brand-teal-dark/40 line-through">{compareAtPrice}</p>}
+    <div className="relative flex w-full min-w-0 flex-col overflow-hidden rounded-xl border border-black/5 bg-white transition-colors hover:border-black/15">
+      <div className="relative">
+        <Link href={`/products/${product.handle}`} className="block">
+          {image}
+        </Link>
+        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+          <WishlistToggle item={product} />
+          {addButton}
         </div>
-        {!product.availableForSale && (
-          <p className="text-[11px] text-brand-teal-dark/50">Ausverkauft</p>
-        )}
       </div>
-    </Link>
+      <Link href={`/products/${product.handle}`} className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col gap-1 p-3">
+          <p className="line-clamp-2 min-h-[2.5em] text-xs font-semibold leading-tight text-brand-teal-dark sm:text-sm">
+            {product.title}
+          </p>
+          <div className="flex flex-wrap items-baseline gap-x-2">
+            <p className="text-sm font-bold text-brand-teal-dark sm:text-base">{price}</p>
+            {compareAtPrice && <p className="text-xs text-brand-teal-dark/40 line-through">{compareAtPrice}</p>}
+          </div>
+          {!product.availableForSale && (
+            <p className="text-[11px] text-brand-teal-dark/50">Ausverkauft</p>
+          )}
+        </div>
+      </Link>
+    </div>
   );
 }

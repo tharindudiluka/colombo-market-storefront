@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { useCart } from "@/components/cart/CartProvider";
+import { WishlistToggle } from "@/components/wishlist/WishlistToggle";
 import type { UiProductDetail, UiProductVariant } from "@/lib/shopify/mappers";
 
 function formatMoney(amount: number, currencyCode: string, locale: string) {
@@ -62,9 +63,21 @@ export function BuyBox({ product }: { product: UiProductDetail }) {
       {product.vendor && (
         <p className="text-xs font-bold uppercase tracking-wide text-brand-terracotta">{product.vendor}</p>
       )}
-      <h1 className="font-heading mt-1 text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">
-        {product.title}
-      </h1>
+      <div className="mt-1 flex items-start justify-between gap-4">
+        <h1 className="font-heading text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">{product.title}</h1>
+        <WishlistToggle
+          item={{
+            id: product.id,
+            handle: product.handle,
+            title: product.title,
+            image: product.images[0] ?? null,
+            price: product.price,
+            compareAtPrice: product.compareAtPrice,
+            availableForSale: product.availableForSale,
+          }}
+          className="shrink-0"
+        />
+      </div>
 
       <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="text-2xl font-bold text-brand-teal-dark sm:text-3xl">

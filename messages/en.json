@@ -14,6 +14,11 @@
     "accountLabel": "Account",
     "cartLabel": "Cart"
   },
+  "languageSwitcher": {
+    "label": "Language",
+    "de": "DE",
+    "en": "EN"
+  },
   "nav": {
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -81,7 +86,25 @@
   "breadcrumbs": {
     "home": "Home"
   },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Send us a message with questions about products, your order, or our Ravensburg store.",
+    "formTitle": "How can we help?",
+    "formDescription": "We’ll get back to you as soon as we can.",
+    "name": "Name",
+    "email": "Email address",
+    "phone": "Phone number (optional)",
+    "message": "Message",
+    "messagePlaceholder": "How can we help?",
+    "submit": "Send message",
+    "requiredHint": "Required field",
+    "locationTitle": "Visit us in store",
+    "locationDescription": "Discover Sri Lankan, Indian and international groceries in person.",
+    "directions": "Get directions",
+    "nativeFormHint": "After submission, your message is securely processed through our Shopify store."
+  },
   "collection": {
+    "allTitle": "All collections",
     "productCount": "{count, plural, one {# product} other {# products}}",
     "sortLabel": "Sort by:",
     "sortFeatured": "Featured",
@@ -134,7 +157,8 @@
     "company": ["About Us", "Careers", "Sourcing", "Blog"],
     "copyright": "All rights reserved.",
     "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service"
+    "termsOfService": "Terms of Service",
+    "imprint": "Imprint"
   },
   "promoModal": {
     "close": "Close",
@@ -151,6 +175,33 @@
   },
   "helpButton": {
     "ariaLabel": "Chat with us"
+  },
+  "wishlist": {
+    "title": "Saved Items",
+    "subtitle": "Keep your favourites close for later.",
+    "headerLabel": "Saved items ({count})",
+    "save": "Save {title}",
+    "remove": "Remove {title} from saved items",
+    "emptyTitle": "Your saved items list is empty",
+    "emptyBody": "Tap the heart on any product to save it here.",
+    "continueShopping": "Explore products"
+  },
+  "routeState": {
+    "loading": {
+      "label": "Loading page"
+    },
+    "notFound": {
+      "title": "We couldn’t find that page",
+      "body": "It may have moved, been removed, or the address may be incorrect.",
+      "home": "Back to home",
+      "collections": "Browse collections"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "body": "We couldn’t load this page right now. Please try again.",
+      "retry": "Try again",
+      "home": "Back to home"
+    }
   },
   "product": {
     "unitPrice": "{price} / {unit}",
@@ -195,5 +246,58 @@
     "resultsFor": "Search results for “{query}”",
     "prompt": "Enter a search term to find products.",
     "noResults": "No products found for “{query}”. Try a different search term."
+  },
+  "account": {
+    "nav": {
+      "profile": "Profile",
+      "orders": "Orders",
+      "addresses": "Addresses",
+      "logout": "Log Out"
+    },
+    "profile": {
+      "title": "Your Profile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "save": "Save Changes",
+      "saving": "Saving…",
+      "saved": "Profile updated.",
+      "error": "Couldn't update your profile. Please try again."
+    },
+    "orders": {
+      "title": "Order History",
+      "empty": "You haven't placed any orders yet.",
+      "loadMore": "Load More",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total",
+      "shippingAddress": "Shipping Address"
+    },
+    "addresses": {
+      "title": "Addresses",
+      "empty": "You don't have any saved addresses yet.",
+      "add": "Add Address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this address?",
+      "setDefault": "Set as default",
+      "default": "Default",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc. (optional)",
+      "city": "City",
+      "postalCode": "Postal Code",
+      "province": "State / Province",
+      "country": "Country",
+      "phone": "Phone",
+      "save": "Save Address",
+      "saving": "Saving…",
+      "error": "Couldn't save this address. Please try again."
+    },
+    "errors": {
+      "authFailed": "Something went wrong signing you in. Please try again.",
+      "sessionExpired": "Your session has expired. Please sign in again."
+    }
   }
 }

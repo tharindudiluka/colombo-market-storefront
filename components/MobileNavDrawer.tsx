@@ -5,12 +5,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Icon } from "@/components/Icon";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { site } from "@/config/site";
-import { navHandles } from "@/lib/content/nav";
 import { categoryIcons } from "@/lib/content/categories";
+import type { ShopifyCollection } from "@/lib/shopify/types";
 
-export function MobileNavDrawer() {
+export function MobileNavDrawer({ collections }: { collections: ShopifyCollection[] }) {
   const t = useTranslations("nav");
+  const tLanguage = useTranslations("languageSwitcher");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -70,12 +72,12 @@ export function MobileNavDrawer() {
               {t("menuTitle")}
             </p>
             <ul className="flex flex-col gap-0.5">
-              {navHandles.map((handle) => {
-                const href = `/collections/${handle}`;
+              {collections.map((collection) => {
+                const href = `/collections/${collection.handle}`;
                 const isActive = pathname === href;
 
                 return (
-                  <li key={handle}>
+                  <li key={collection.id}>
                     <Link
                       href={href}
                       onClick={() => setOpen(false)}
@@ -91,9 +93,9 @@ export function MobileNavDrawer() {
                           isActive ? "bg-white text-brand-teal" : "bg-brand-cream/60 text-brand-teal"
                         }`}
                       >
-                        <Icon name={categoryIcons[handle] ?? "leaf"} className="h-5 w-5" />
+                        <Icon name={categoryIcons[collection.handle] ?? "leaf"} className="h-5 w-5" />
                       </span>
-                      <span className="flex-1">{t(handle)}</span>
+                      <span className="flex-1">{collection.title}</span>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-4 w-4 opacity-30">
                         <path d="M9 6l6 6-6 6" />
                       </svg>
@@ -103,6 +105,10 @@ export function MobileNavDrawer() {
               })}
             </ul>
           </nav>
+          <div className="border-t border-black/5 px-5 py-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-teal-dark/40">{tLanguage("label")}</p>
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </>

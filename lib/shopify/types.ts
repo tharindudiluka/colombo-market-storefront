@@ -44,9 +44,27 @@ export type CollectionProductsResult = {
   } | null;
 };
 
+export type CollectionsIndexResult = {
+  collections: { nodes: ShopifyCollection[] };
+};
+
 export type ShopifySEO = {
   title: string | null;
   description: string | null;
+};
+
+export type ShopifyPage = {
+  id: string;
+  handle: string;
+  title: string;
+  body: string;
+  bodySummary: string;
+  bodyHtml: string;
+  seo: ShopifySEO;
+};
+
+export type PageByHandleResult = {
+  page: ShopifyPage | null;
 };
 
 export type ShopifyCollectionDetail = {
@@ -180,4 +198,93 @@ export type ShopifyHomeBannerNode = {
 
 export type HomeBannersResult = {
   metaobjects: { edges: { node: ShopifyHomeBannerNode }[] };
+};
+
+// --- Customer Account API ---------------------------------------------------------
+// Separate schema from the Storefront API above (no @inContext, different ID scoping).
+
+export type ShopifyCustomer = {
+  id: string;
+  firstName: string | null;
+  lastName: string | null;
+  emailAddress: { emailAddress: string } | null;
+  phoneNumber: { phoneNumber: string } | null;
+};
+
+export type CustomerUserError = { field: string[] | null; message: string };
+
+export type CustomerQueryResult = {
+  customer: ShopifyCustomer | null;
+};
+
+export type CustomerUpdateResult = {
+  customerUpdate: { customer: ShopifyCustomer | null; userErrors: CustomerUserError[] };
+};
+
+export type ShopifyCustomerAddress = {
+  id: string;
+  firstName: string | null;
+  lastName: string | null;
+  address1: string | null;
+  address2: string | null;
+  city: string | null;
+  zip: string | null;
+  provinceCode: string | null;
+  countryCode: string | null;
+  phoneNumber: string | null;
+};
+
+export type ShopifyOrderLineItem = {
+  title: string;
+  quantity: number;
+  image: ShopifyImage | null;
+  price?: ShopifyMoney;
+};
+
+export type ShopifyOrder = {
+  id: string;
+  name: string;
+  number: number;
+  processedAt: string;
+  financialStatus: string | null;
+  fulfillments: { edges: { node: { status: string } }[] };
+  totalPrice: ShopifyMoney;
+  subtotal?: ShopifyMoney;
+  totalShipping?: ShopifyMoney;
+  totalTax?: ShopifyMoney;
+  lineItems: { edges: { node: ShopifyOrderLineItem }[] };
+  shippingAddress?: ShopifyCustomerAddress | null;
+};
+
+export type CustomerOrdersResult = {
+  customer: {
+    orders: {
+      edges: { node: ShopifyOrder }[];
+      pageInfo: { hasNextPage: boolean; endCursor: string | null };
+    };
+  } | null;
+};
+
+export type CustomerOrderResult = {
+  order: ShopifyOrder | null;
+};
+
+export type CustomerAddressesResult = {
+  customer: {
+    defaultAddress: { id: string } | null;
+    addresses: { edges: { node: ShopifyCustomerAddress }[] };
+  } | null;
+};
+
+export type CustomerAddressCreateResult = {
+  customerAddressCreate: { customerAddress: { id: string } | null; userErrors: CustomerUserError[] };
+};
+export type CustomerAddressUpdateResult = {
+  customerAddressUpdate: { customerAddress: { id: string } | null; userErrors: CustomerUserError[] };
+};
+export type CustomerAddressDeleteResult = {
+  customerAddressDelete: { deletedAddressId: string | null; userErrors: CustomerUserError[] };
+};
+export type CustomerDefaultAddressUpdateResult = {
+  customerDefaultAddressUpdate: { customer: { id: string } | null; userErrors: CustomerUserError[] };
 };

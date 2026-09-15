@@ -1,14 +1,32 @@
 import { getTranslations } from "next-intl/server";
-import { navHandles } from "@/lib/content/nav";
+import { getLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { site } from "@/config/site";
+import { pageHandles, pageHref } from "@/config/pages";
+import { getNavigationCollections } from "@/lib/shopify/navigation";
 
 export async function Footer() {
   const t = await getTranslations();
-  const shopLinks = navHandles
-    .slice(0, 4)
-    .map((handle) => ({ label: t(`nav.${handle}`), href: `/collections/${handle}` }));
+  const locale = await getLocale();
+  const collections = await getNavigationCollections(locale.toUpperCase() as "DE" | "EN");
+  const shopLinks = collections.slice(0, 4).map((collection) => ({
+    label: collection.title,
+    href: `/collections/${collection.handle}`,
+  }));
   const supportLinks = t.raw("footer.support") as string[];
   const companyLinks = t.raw("footer.company") as string[];
+  const supportHrefs = [
+    pageHref(pageHandles.deliveryInfo),
+    pageHref(pageHandles.returnsRefunds),
+    "/account/orders",
+    "/contact",
+  ];
+  const companyHrefs = [
+    pageHref(pageHandles.about),
+    pageHref(pageHandles.careers),
+    pageHref(pageHandles.sourcing),
+    pageHref(pageHandles.blog),
+  ];
 
   return (
     <footer className="bg-brand-teal-dark text-white">
@@ -41,11 +59,11 @@ export async function Footer() {
               {t("footer.supportTitle")}
             </p>
             <ul className="mt-3 flex flex-col gap-2">
-              {supportLinks.map((label) => (
+              {supportLinks.map((label, index) => (
                 <li key={label}>
-                  <a href="#" className="text-sm text-white/80 hover:text-white">
+                  <Link href={supportHrefs[index]} className="text-sm text-white/80 hover:text-white">
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -56,11 +74,11 @@ export async function Footer() {
               {t("footer.companyTitle")}
             </p>
             <ul className="mt-3 flex flex-col gap-2">
-              {companyLinks.map((label) => (
+              {companyLinks.map((label, index) => (
                 <li key={label}>
-                  <a href="#" className="text-sm text-white/80 hover:text-white">
+                  <Link href={companyHrefs[index]} className="text-sm text-white/80 hover:text-white">
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -72,12 +90,15 @@ export async function Footer() {
             © {new Date().getFullYear()} {site.name}. {t("footer.copyright")}
           </p>
           <div className="flex gap-3 text-xs text-white/50">
-            <a href="#" className="hover:text-white">
+            <Link href={pageHref(pageHandles.privacy)} className="hover:text-white">
               {t("footer.privacyPolicy")}
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+            <Link href={pageHref(pageHandles.terms)} className="hover:text-white">
               {t("footer.termsOfService")}
-            </a>
+            </Link>
+            <Link href={pageHref(pageHandles.imprint)} className="hover:text-white">
+              {t("footer.imprint")}
+            </Link>
           </div>
         </div>
       </div>

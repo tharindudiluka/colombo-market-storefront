@@ -2,7 +2,10 @@ import type {
   ShopifyCart,
   ShopifyCollection,
   ShopifyCollectionDetail,
+  ShopifyCustomer,
+  ShopifyCustomerAddress,
   ShopifyHomeBannerNode,
+  ShopifyOrder,
   ShopifyProductDetail,
   ShopifyProductNode,
   ShopifyProductVariant,
@@ -278,5 +281,103 @@ export function toUiCollectionDetail(collection: ShopifyCollectionDetail): UiCol
       : null,
     seo: { title: collection.seo.title, description: collection.seo.description },
     products: collection.products.edges.map((edge) => toUiProduct(edge.node)),
+  };
+}
+
+// --- Customer Account API ---------------------------------------------------------
+
+export type UiCustomer = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string | null;
+  phone: string | null;
+};
+
+export function toUiCustomer(node: ShopifyCustomer): UiCustomer {
+  return {
+    id: node.id,
+    firstName: node.firstName ?? "",
+    lastName: node.lastName ?? "",
+    email: node.emailAddress?.emailAddress ?? null,
+    phone: node.phoneNumber?.phoneNumber ?? null,
+  };
+}
+
+export type UiAddress = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2: string | null;
+  city: string;
+  postalCode: string;
+  province: string | null;
+  country: string | null;
+  phone: string | null;
+  isDefault: boolean;
+};
+
+export function toUiAddress(node: ShopifyCustomerAddress, defaultAddressId?: string | null): UiAddress {
+  return {
+    id: node.id,
+    firstName: node.firstName ?? "",
+    lastName: node.lastName ?? "",
+    address1: node.address1 ?? "",
+    address2: node.address2 ?? null,
+    city: node.city ?? "",
+    postalCode: node.zip ?? "",
+    province: node.provinceCode ?? null,
+    country: node.countryCode ?? null,
+    phone: node.phoneNumber ?? null,
+    isDefault: defaultAddressId ? node.id === defaultAddressId : false,
+  };
+}
+
+export type UiOrderLineItem = {
+  title: string;
+  quantity: number;
+  image: { url: string; alt: string } | null;
+  price: { amount: number; currencyCode: string } | null;
+};
+
+export type UiOrder = {
+  id: string;
+  name: string;
+  number: number;
+  date: string;
+  financialStatus: string | null;
+  fulfillmentStatus: string | null;
+  total: { amount: number; currencyCode: string };
+  subtotal: { amount: number; currencyCode: string } | null;
+  shipping: { amount: number; currencyCode: string } | null;
+  tax: { amount: number; currencyCode: string } | null;
+  lineItems: UiOrderLineItem[];
+  shippingAddress: UiAddress | null;
+};
+
+export function toUiOrder(node: ShopifyOrder): UiOrder {
+  return {
+    id: node.id,
+    name: node.name,
+    number: node.number,
+    date: node.processedAt,
+    financialStatus: node.financialStatus,
+    fulfillmentStatus: node.fulfillments.edges[0]?.node.status ?? null,
+    total: { amount: Number(node.totalPrice.amount), currencyCode: node.totalPrice.currencyCode },
+    subtotal: node.subtotal
+      ? { amount: Number(node.subtotal.amount), currencyCode: node.subtotal.currencyCode }
+      : null,
+    shipping: node.totalShipping
+      ? { amount: Number(node.totalShipping.amount), currencyCode: node.totalShipping.currencyCode }
+      : null,
+    tax: node.totalTax ? { amount: Number(node.totalTax.amount), currencyCode: node.totalTax.currencyCode } : null,
+    lineItems: node.lineItems.edges.map(({ node: item }) => ({
+      title: item.title,
+      quantity: item.quantity,
+      image: item.image ? { url: item.image.url, alt: item.image.altText ?? item.title } : null,
+      price: item.price ? { amount: Number(item.price.amount), currencyCode: item.price.currencyCode } : null,
+    })),
+    shippingAddress: node.shippingAddress ? toUiAddress(node.shippingAddress) : null,
   };
 }
