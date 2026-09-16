@@ -6,7 +6,6 @@ import { NavMenu } from "@/components/NavMenu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionBrowser } from "@/components/CollectionBrowser";
 import { Footer } from "@/components/Footer";
-import { HelpButton } from "@/components/HelpButton";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { searchProductsQuery } from "@/lib/shopify/queries/search-products";
 import { toUiProduct } from "@/lib/shopify/mappers";
@@ -76,7 +75,6 @@ export default async function SearchPage({
       </main>
 
       <Footer />
-      <HelpButton />
     </div>
   );
 }

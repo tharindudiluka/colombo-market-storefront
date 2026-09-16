@@ -4,14 +4,12 @@ import { Header } from "@/components/Header";
 import { NavMenu } from "@/components/NavMenu";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { PromoTiles } from "@/components/PromoTiles";
-import { PromoModal } from "@/components/PromoModal";
 import { ProductRow } from "@/components/ProductRow";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { BrandStrip } from "@/components/BrandStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { SeoContent } from "@/components/SeoContent";
 import { Footer } from "@/components/Footer";
-import { HelpButton } from "@/components/HelpButton";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionProductsQuery } from "@/lib/shopify/queries/collection-products";
 import { buildHomeCollectionsQuery } from "@/lib/shopify/queries/collections";
@@ -57,7 +55,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <AnnouncementBar />
       <Header />
       <NavMenu />
-      <PromoModal />
 
       <main className="flex-1">
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
@@ -94,7 +91,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       </main>
 
       <Footer />
-      <HelpButton />
     </div>
   );
 }

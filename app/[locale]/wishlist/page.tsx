@@ -3,7 +3,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { HelpButton } from "@/components/HelpButton";
 import { NavMenu } from "@/components/NavMenu";
 import { WishlistPageClient } from "@/components/wishlist/WishlistPageClient";
 
@@ -26,7 +25,6 @@ export default async function WishlistPage() {
         </section>
       </main>
       <Footer />
-      <HelpButton />
     </div>
   );
 }

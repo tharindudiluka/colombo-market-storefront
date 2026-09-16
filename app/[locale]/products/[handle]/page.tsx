@@ -11,7 +11,6 @@ import { TrustBadges } from "@/components/TrustBadges";
 import { ProductDetailsAccordion } from "@/components/ProductDetailsAccordion";
 import { ProductRow } from "@/components/ProductRow";
 import { Footer } from "@/components/Footer";
-import { HelpButton } from "@/components/HelpButton";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { productByHandleQuery } from "@/lib/shopify/queries/product-by-handle";
 import { productRecommendationsQuery } from "@/lib/shopify/queries/product-recommendations";
@@ -136,7 +135,6 @@ export default async function ProductPage({
       </main>
 
       <Footer />
-      <HelpButton />
     </div>
   );
 }

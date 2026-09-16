@@ -38,12 +38,9 @@ export function CartDrawer() {
         {lines.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-5 text-center">
             <p className="text-sm text-brand-teal-dark/70">{t("empty")}</p>
-            <button
-              onClick={closeCart}
-              className="rounded-full bg-brand-teal px-5 py-2.5 text-sm font-bold text-white hover:bg-brand-teal-dark"
-            >
+            <Link href="/collections" onClick={closeCart} className="rounded-full bg-brand-teal px-5 py-2.5 text-sm font-bold text-white hover:bg-brand-teal-dark">
               {t("continueShopping")}
-            </button>
+            </Link>
           </div>
         ) : (
           <>
@@ -101,6 +98,7 @@ export function CartDrawer() {
             </ul>
 
             <div className="border-t border-black/10 px-5 py-4">
+              <Link href="/cart" onClick={closeCart} className="mb-3 block text-center text-sm font-semibold text-brand-teal underline">{t("viewCart")}</Link>
               <div className="mb-3 flex items-center justify-between text-sm font-semibold text-brand-teal-dark">
                 <span>{t("subtotal")}</span>
                 <span>{cart && formatMoney(cart.subtotal.amount, cart.subtotal.currencyCode, locale)}</span>

@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { NavMenu } from "@/components/NavMenu";
 import { Footer } from "@/components/Footer";
-import { HelpButton } from "@/components/HelpButton";
 import { Link } from "@/i18n/navigation";
 import { getCurrentCustomer } from "@/lib/customer/actions";
 
@@ -61,7 +60,6 @@ export default async function AccountLayout({
       </main>
 
       <Footer />
-      <HelpButton />
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { HelpButton } from "@/components/HelpButton";
 import { NavMenu } from "@/components/NavMenu";
 import { site } from "@/config/site";
 
@@ -145,7 +144,6 @@ export default async function ContactPage() {
         </section>
       </main>
       <Footer />
-      <HelpButton />
     </div>
   );
 }

@@ -37,6 +37,23 @@ export type ShopInfo = {
   };
 };
 
+export type ShopifyShopPolicy = {
+  title: string;
+  body: string;
+  handle: string;
+};
+
+export type ShopPoliciesResult = {
+  shop: {
+    privacyPolicy: ShopifyShopPolicy | null;
+    contactInformation: ShopifyShopPolicy | null;
+    refundPolicy: ShopifyShopPolicy | null;
+    termsOfService: ShopifyShopPolicy | null;
+    shippingPolicy: ShopifyShopPolicy | null;
+    legalNotice: ShopifyShopPolicy | null;
+  };
+};
+
 export type CollectionProductsResult = {
   collection: {
     title: string;
@@ -46,6 +63,18 @@ export type CollectionProductsResult = {
 
 export type CollectionsIndexResult = {
   collections: { nodes: ShopifyCollection[] };
+};
+
+export type ShopifyMenuItem = {
+  id: string;
+  title: string;
+  url: string | null;
+  type: string;
+  items?: ShopifyMenuItem[];
+};
+
+export type NavigationMenuResult = {
+  menu: { title: string; items: ShopifyMenuItem[] } | null;
 };
 
 export type ShopifySEO = {
@@ -74,7 +103,17 @@ export type ShopifyCollectionDetail = {
   descriptionHtml: string;
   seo: ShopifySEO;
   image: ShopifyImage | null;
-  products: { edges: { node: ShopifyProductNode }[] };
+  products: {
+    edges: { node: ShopifyProductNode }[];
+    filters: ShopifyProductFilter[];
+  };
+};
+
+export type ShopifyProductFilter = {
+  id: string;
+  label: string;
+  type: string;
+  values: { id: string; label: string; count: number; input: unknown }[];
 };
 
 export type CollectionByHandleResult = {

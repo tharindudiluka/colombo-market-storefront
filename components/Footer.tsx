@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/config/site";
-import { pageHandles, pageHref } from "@/config/pages";
+import { pageHandles, pageHref, policyHandles, policyHref } from "@/config/pages";
 import { getNavigationCollections } from "@/lib/shopify/navigation";
 
 export async function Footer() {
@@ -15,17 +15,15 @@ export async function Footer() {
   }));
   const supportLinks = t.raw("footer.support") as string[];
   const companyLinks = t.raw("footer.company") as string[];
-  const supportHrefs = [
-    pageHref(pageHandles.deliveryInfo),
-    pageHref(pageHandles.returnsRefunds),
-    "/account/orders",
-    "/contact",
-  ];
-  const companyHrefs = [
-    pageHref(pageHandles.about),
-    pageHref(pageHandles.careers),
-    pageHref(pageHandles.sourcing),
-    pageHref(pageHandles.blog),
+  const supportHrefs = ["/account/orders", "/contact"];
+  const companyHrefs = [pageHref(pageHandles.about)];
+  const legalLinks = [
+    { label: t("footer.privacyPolicy"), href: policyHref(policyHandles.privacy) },
+    { label: t("footer.contactInformation"), href: policyHref(policyHandles.contact) },
+    { label: t("footer.refundPolicy"), href: policyHref(policyHandles.refund) },
+    { label: t("footer.termsOfService"), href: policyHref(policyHandles.terms) },
+    { label: t("footer.shippingPolicy"), href: policyHref(policyHandles.shipping) },
+    { label: t("footer.imprint"), href: policyHref(policyHandles.legalNotice) },
   ];
 
   return (
@@ -89,16 +87,12 @@ export async function Footer() {
           <p className="text-xs text-white/50">
             © {new Date().getFullYear()} {site.name}. {t("footer.copyright")}
           </p>
-          <div className="flex gap-3 text-xs text-white/50">
-            <Link href={pageHref(pageHandles.privacy)} className="hover:text-white">
-              {t("footer.privacyPolicy")}
-            </Link>
-            <Link href={pageHref(pageHandles.terms)} className="hover:text-white">
-              {t("footer.termsOfService")}
-            </Link>
-            <Link href={pageHref(pageHandles.imprint)} className="hover:text-white">
-              {t("footer.imprint")}
-            </Link>
+          <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-white/50">
+            {legalLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-white">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

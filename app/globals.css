@@ -16,6 +16,7 @@
   --color-brand-terracotta: #b4531f;
   --color-brand-cream: #d6efd9;
   --layout-max-width: 1400px;
+  --layout-drawer-width: 500px;
 }
 
 @theme inline {
@@ -80,6 +81,30 @@ html {
 body {
   background: transparent;
 }
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-cream) 15%,
+    rgba(255, 255, 255, 0.92) 45%,
+    var(--color-brand-cream) 75%
+  );
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+  }
+}
+
 .min-h-full.bg-white {
   background-color: transparent;
 }
@@ -146,7 +171,8 @@ nav.border-b {
   background-image: none;
   border-bottom-color: transparent;
 }
-nav.border-b a:not(.bg-brand-terracotta) {
+nav.border-b > div > .desktop-nav-link:not(.bg-brand-terracotta),
+nav.border-b > div > details > .desktop-nav-link:not(.bg-brand-terracotta) {
   background-color: var(--glass-fill-strong);
   border: 1px solid var(--glass-rim);
   -webkit-backdrop-filter: blur(10px) saturate(150%);
@@ -155,7 +181,7 @@ nav.border-b a:not(.bg-brand-terracotta) {
    * clips anything bleeding past its vertical padding */
   box-shadow: 0 2px 8px -3px rgba(31, 58, 35, 0.28);
 }
-nav.border-b a[aria-current="page"] {
+nav.border-b > div > .desktop-nav-link[aria-current="page"] {
   background-image: var(--gradient-primary);
   border-color: transparent;
   color: #fff;

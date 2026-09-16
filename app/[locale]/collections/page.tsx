@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { HelpButton } from "@/components/HelpButton";
 import { NavMenu } from "@/components/NavMenu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { shopifyFetch } from "@/lib/shopify/client";
@@ -46,7 +45,6 @@ export default async function CollectionsIndexPage({
         <CategoryGrid categories={categories} />
       </main>
       <Footer />
-      <HelpButton />
     </div>
   );
 }

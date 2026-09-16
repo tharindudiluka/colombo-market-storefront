@@ -8,15 +8,15 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { WishlistHeaderButton } from "@/components/wishlist/WishlistHeaderButton";
 import { site } from "@/config/site";
 import { getLocale } from "next-intl/server";
-import { getNavigationCollections } from "@/lib/shopify/navigation";
+import { getNavigationEntries } from "@/lib/shopify/navigation";
 
 export async function Header() {
   const locale = await getLocale();
-  const collections = await getNavigationCollections(locale.toUpperCase() as "DE" | "EN");
+  const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
   return (
     <header className="sticky top-0 z-40 bg-white shadow-sm">
       <div className="mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6">
-        <MobileNavDrawer collections={collections} />
+        <MobileNavDrawer entries={entries} />
 
         <Link href="/" className="shrink-0" aria-label={site.name}>
           <Image
@@ -34,7 +34,7 @@ export async function Header() {
         </div>
 
         <div className="ml-auto flex items-center gap-1 sm:ml-0">
-          <LanguageSwitcher className="hidden sm:flex" />
+          <LanguageSwitcher />
           <AccountButton />
           <WishlistHeaderButton />
           <CartButton />

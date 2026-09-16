@@ -1,5 +1,12 @@
 export const collectionByHandleQuery = /* GraphQL */ `
-  query CollectionByHandle($handle: String!, $first: Int!, $language: LanguageCode)
+  query CollectionByHandle(
+    $handle: String!
+    $first: Int!
+    $language: LanguageCode
+    $filters: [ProductFilter!]
+    $sortKey: ProductCollectionSortKeys!
+    $reverse: Boolean!
+  )
   @inContext(country: DE, language: $language) {
     collection(handle: $handle) {
       id
@@ -16,7 +23,18 @@ export const collectionByHandleQuery = /* GraphQL */ `
         width
         height
       }
-      products(first: $first) {
+      products(first: $first, filters: $filters, sortKey: $sortKey, reverse: $reverse) {
+        filters {
+          id
+          label
+          type
+          values {
+            id
+            label
+            count
+            input
+          }
+        }
         edges {
           node {
             id
