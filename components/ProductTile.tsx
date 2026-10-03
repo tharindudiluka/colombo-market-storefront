@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import type { UiProduct } from "@/lib/shopify/mappers";
 import { WishlistToggle } from "@/components/wishlist/WishlistToggle";
@@ -10,6 +11,7 @@ function formatMoney(amount: number, currencyCode: string, locale: string) {
 }
 
 type ProductTileProps = {
+  addControl?: ReactNode;
   product: UiProduct;
   locale?: string;
   /** "grid" is the vertical card used in scroll rows/grids; "list" is a horizontal row. */
@@ -24,13 +26,13 @@ type ProductTileProps = {
  * in source order, so a caller that needs a fixed width (ProductRow's horizontal scroll
  * row) wraps the tile in its own sizing `<div>` instead of fighting this one.
  */
-export function ProductTile({ product, locale = "de-DE", variant = "grid" }: ProductTileProps) {
+export function ProductTile({ product, locale = "de-DE", variant = "grid", addControl }: ProductTileProps) {
   const price = formatMoney(product.price.amount, product.price.currencyCode, locale);
   const compareAtPrice = product.compareAtPrice
     ? formatMoney(product.compareAtPrice.amount, product.compareAtPrice.currencyCode, locale)
     : null;
 
-  const addButton = (
+  const addButton = addControl ?? (
     <button
       type="button"
       aria-label="Add to bag"

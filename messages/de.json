@@ -74,6 +74,9 @@
   },
   "productRow": {
     "weeklySpecials": {
+      "viewAll": "Alle Angebote ansehen",
+      "chooseOptions": "Optionen auswählen",
+      "empty": "Neue Angebote sind unterwegs. Schau bald wieder vorbei.",
       "title": "Angebote der Woche",
       "subtitle": "Frische Highlights, saisonale Favoriten und zeitlich begrenzte Angebote."
     },

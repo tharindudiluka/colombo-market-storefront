@@ -13,6 +13,7 @@ export type ShopifyImage = {
 };
 
 export type ShopifyProductNode = {
+  variants?: { nodes: { id: string; availableForSale: boolean }[] };
   id: string;
   handle: string;
   title: string;

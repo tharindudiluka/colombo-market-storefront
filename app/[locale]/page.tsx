@@ -5,6 +5,7 @@ import { NavMenu } from "@/components/NavMenu";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { PromoTiles } from "@/components/PromoTiles";
 import { ProductRow } from "@/components/ProductRow";
+import { WeeklyOffers } from "@/components/WeeklyOffers";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { BrandStrip } from "@/components/BrandStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -17,10 +18,10 @@ import { toUiCategory, toUiProduct } from "@/lib/shopify/mappers";
 import type { CollectionProductsResult, LanguageCode, ShopifyCollection } from "@/lib/shopify/types";
 import { categoryHandles, collectionHandles } from "@/config/collections";
 
-async function getCollectionProducts(handle: string, language: LanguageCode, first = 6) {
+async function getCollectionProducts(handle: string, language: LanguageCode, first = 6, includeQuickAdd = false) {
   const data = await shopifyFetch<CollectionProductsResult>({
     query: collectionProductsQuery,
-    variables: { handle, first, language },
+    variables: { handle, first, language, includeQuickAdd },
     tags: ["collection", handle],
   });
   return (data.collection?.products.edges ?? []).map((edge) => toUiProduct(edge.node));
@@ -44,7 +45,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const t = await getTranslations("productRow");
 
   const [weeklySpecials, freshVegetables, pantryPicks, categories] = await Promise.all([
-    getCollectionProducts(collectionHandles.weeklySpecials, language),
+    getCollectionProducts(collectionHandles.weeklySpecials, language, 6, true),
     getCollectionProducts(collectionHandles.freshVegetables, language),
     getCollectionProducts(collectionHandles.pantryPicks, language),
     getHomeCategories(language),
@@ -64,11 +65,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
 
-        <ProductRow
-          title={t("weeklySpecials.title")}
-          subtitle={t("weeklySpecials.subtitle")}
-          products={weeklySpecials}
-        />
+        <WeeklyOffers products={weeklySpecials} />
 
         <CategoryGrid categories={categories} />
 

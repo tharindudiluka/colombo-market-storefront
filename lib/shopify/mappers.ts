@@ -17,6 +17,7 @@ import type {
  * decoupled from the Storefront API's GraphQL shape.
  */
 export type UiProduct = {
+  quickAddVariantId?: string | null;
   id: string;
   handle: string;
   title: string;
@@ -38,6 +39,7 @@ export function toUiProduct(node: ShopifyProductNode): UiProduct {
   const isOnSale = compareAtAmount !== undefined && Number(compareAtAmount) > Number(priceAmount);
 
   return {
+    quickAddVariantId: node.variants?.nodes.length === 1 && node.variants.nodes[0].availableForSale ? node.variants.nodes[0].id : null,
     id: node.id,
     handle: node.handle,
     title: node.title,
