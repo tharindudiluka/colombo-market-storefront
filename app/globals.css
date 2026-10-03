@@ -17,6 +17,14 @@
   --color-brand-cream: #d6efd9;
   --layout-max-width: 1400px;
   --layout-drawer-width: 500px;
+  --layout-page-padding: 50px;
+  --layout-nav-height: 44px;
+  --layout-menu-width: 250px;
+  --layout-menu-row-height: 32px;
+  --layout-menu-nested-offset: 8px;
+  --layout-announcement-padding: 7px;
+  --layout-header-height: 88px;
+  --layout-header-padding: 20px;
 }
 
 @theme inline {
@@ -30,6 +38,7 @@
   --font-sans: var(--font-geist-sans);
   --font-heading: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-navigation: var(--font-nunito);
 }
 
 body {

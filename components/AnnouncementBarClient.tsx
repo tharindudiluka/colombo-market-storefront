@@ -155,7 +155,7 @@ export function AnnouncementBarClient({
               {items.map((text, i) => (
                 <span
                   key={i}
-                  className="flex items-center whitespace-nowrap py-2"
+                  className="flex items-center whitespace-nowrap py-2 sm:py-[var(--layout-announcement-padding)]"
                 >
                   <span aria-hidden className="px-3 opacity-40">
                     •

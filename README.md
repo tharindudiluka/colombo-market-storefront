@@ -1,8 +1,12 @@
 # Colombo Market — Headless Storefront
 
-A Next.js headless frontend for the Colombo Market Shopify store (colombomarket.de), backed
-by the Shopify Storefront API. Bilingual (German default, English secondary). Currently
-scoped to the home page only — cart, checkout, product pages, and search are future work.
+A Next.js headless storefront for Colombo Market (colombomarket.de), backed by the Shopify
+Storefront API. It is bilingual (German default, English secondary) and includes catalogue,
+product, cart, search, contact, wish-list, and customer-account flows.
+
+Non-technical owner? Start with [CLIENT_HANDOVER.md](CLIENT_HANDOVER.md). It explains how
+to clone, configure, run, safely change, and review this project with GitHub Desktop and
+ChatGPT/Codex.
 
 ## Setup
 
@@ -20,7 +24,9 @@ scoped to the home page only — cart, checkout, product pages, and search are f
    2. **Create an app**, name it e.g. "Colombo Frontend (Headless)".
    3. **Configuration → Storefront API scopes** → grant at least
       `unauthenticated_read_product_listings`, `unauthenticated_read_product_inventory`,
-      `unauthenticated_read_collection_listings`.
+      `unauthenticated_read_collection_listings`, `unauthenticated_read_metaobjects`,
+      `unauthenticated_read_content`, `unauthenticated_read_checkouts`, and
+      `unauthenticated_write_checkouts`.
    4. **Install app** → **API credentials** → copy the Storefront API access token.
    5. The `*.myshopify.com` handle is shown in the Admin URL bar or under
       **Settings → Domains** (primary/original domain).

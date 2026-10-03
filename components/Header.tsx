@@ -15,7 +15,7 @@ export async function Header() {
   const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
   return (
     <header className="sticky top-0 z-40 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6">
+      <div className="mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6 lg:h-[var(--layout-header-height)] lg:px-[var(--layout-page-padding)] lg:py-[var(--layout-header-padding)]">
         <MobileNavDrawer entries={entries} />
 
         <Link href="/" className="shrink-0" aria-label={site.name}>
@@ -25,7 +25,7 @@ export async function Header() {
             width={1024}
             height={1024}
             priority
-            className="h-11 w-auto sm:h-14"
+            className="h-11 w-auto sm:h-14 lg:h-12"
           />
         </Link>
 

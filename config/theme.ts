@@ -19,11 +19,20 @@ export const theme = {
   fonts: {
     heading: "Geist",
     body: "Geist",
+    navigation: "Nunito",
   },
   layout: {
     maxWidth: "1400px",
     drawerWidth: "500px",
     buttonRadius: "9999px",
+    pagePadding: "50px",
+    navHeight: "44px",
+    menuWidth: "250px",
+    menuRowHeight: "32px",
+    menuNestedOffset: "8px",
+    announcementPadding: "7px",
+    headerHeight: "88px",
+    headerPadding: "20px",
   },
 
   /* ----------------------------------------------------------------------
