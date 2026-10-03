@@ -34,6 +34,9 @@ export const theme = {
     announcementPadding: "7px",
     headerHeight: "88px",
     headerPadding: "20px",
+    desktopHeaderHeight: "112px",
+    desktopLogoHeight: "80px",
+    desktopNavHeight: "56px",
   },
 
   /* ----------------------------------------------------------------------

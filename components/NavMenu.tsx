@@ -4,6 +4,6 @@ import { NavMenuClient } from "@/components/NavMenuClient";
 
 export async function NavMenu() {
   const locale = await getLocale();
-  const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
+  const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN", true);
   return <NavMenuClient entries={entries} />;
 }

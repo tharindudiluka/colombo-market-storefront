@@ -85,8 +85,8 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
 function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: string }) {
   const active = containsPath(entry, pathname);
   const hasChildren = entry.children.length > 0;
-  const itemClassName = `flex h-[var(--layout-menu-row-height)] items-center gap-2 px-4 font-navigation text-[15px] font-medium leading-6 uppercase whitespace-nowrap transition-colors hover:text-neutral-500 ${
-    active ? "text-neutral-500" : "text-black"
+  const itemClassName = `flex h-full items-center gap-2 border-b-2 px-6 font-navigation text-sm font-bold leading-6 whitespace-nowrap transition-colors hover:border-brand-teal hover:bg-brand-cream/40 hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-brand-teal ${
+    active ? "border-brand-teal text-brand-teal-dark" : "border-transparent text-brand-teal-dark"
   }`;
 
   return (
@@ -102,10 +102,10 @@ function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: 
           {hasChildren && <DownCaret />}
         </Link>
       ) : (
-        <span className={itemClassName}>
+        <button type="button" aria-haspopup={hasChildren ? "menu" : undefined} className={itemClassName}>
           <span>{entry.title}</span>
           {hasChildren && <DownCaret />}
-        </span>
+        </button>
       )}
 
       {hasChildren && (
@@ -145,9 +145,9 @@ export function NavMenuClient({ entries = [] }: { entries?: NavigationEntry[] })
   };
 
   return (
-    <nav className="relative z-30 hidden h-[var(--layout-nav-height)] bg-white lg:block" aria-label={t("desktopMenuLabel")}>
+    <nav className="storefront-nav relative z-30 hidden h-[var(--layout-nav-height)] bg-white lg:block" aria-label={t("desktopMenuLabel")}>
       <div className="mx-auto flex h-full max-w-[var(--layout-max-width)] items-center overflow-visible px-[var(--layout-page-padding)]">
-        <ul className="-mx-4 flex h-full min-w-0 flex-nowrap items-center overflow-visible">
+        <ul className="flex h-full min-w-0 flex-wrap items-center overflow-visible">
           {entries.map((entry) => (
             <TopLevelEntry key={entry.id} entry={entry} pathname={pathname} />
           ))}

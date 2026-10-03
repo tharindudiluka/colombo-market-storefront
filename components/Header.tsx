@@ -15,7 +15,7 @@ export async function Header() {
   const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
   return (
     <header className="sticky top-0 z-40 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6 lg:h-[var(--layout-header-height)] lg:px-[var(--layout-page-padding)] lg:py-[var(--layout-header-padding)]">
+      <div className="storefront-header-row mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6 lg:h-[var(--layout-header-height)] lg:px-[var(--layout-page-padding)] lg:py-[var(--layout-header-padding)]">
         <MobileNavDrawer entries={entries} />
 
         <Link href="/" className="shrink-0" aria-label={site.name}>
@@ -25,15 +25,15 @@ export async function Header() {
             width={1024}
             height={1024}
             priority
-            className="h-11 w-auto sm:h-14 lg:h-12"
+            className="storefront-logo h-11 w-auto sm:h-14 lg:h-12"
           />
         </Link>
 
-        <div className="hidden flex-1 items-center sm:flex">
+        <div className="storefront-header-search hidden flex-1 items-center sm:flex">
           <SearchForm className="w-full" />
         </div>
 
-        <div className="ml-auto flex items-center gap-1 sm:ml-0">
+        <div className="storefront-header-actions ml-auto flex items-center gap-1 sm:ml-0">
           <LanguageSwitcher />
           <AccountButton />
           <WishlistHeaderButton />

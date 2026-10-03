@@ -20,19 +20,20 @@ function localizeMenuUrl(url: string | null): string | null {
   }
 }
 
-function mapMenuItem(item: ShopifyMenuItem, validHandles?: Set<string>): NavigationEntry | null {
+function mapMenuItem(item: ShopifyMenuItem, validHandles?: Set<string>, includeContentLinks = false): NavigationEntry | null {
   const href = localizeMenuUrl(item.url) ?? "";
   const children = (item.items ?? [])
-    .map((child) => mapMenuItem(child, validHandles))
+    .map((child) => mapMenuItem(child, validHandles, includeContentLinks))
     .filter((child): child is NavigationEntry => child !== null);
-  // Keep only store-internal collection links; skip stale/external/non-catalog menu targets.
+  // Mobile retains catalog entries; desktop can also show existing store content links.
   const collectionHandle = href.match(/^\/collections\/([^/?]+)\/?$/)?.[1];
   const isCollection = collectionHandle !== undefined && (!validHandles || validHandles.has(collectionHandle));
-  if (!isCollection && children.length === 0) return null;
-  return { id: item.id, title: item.title, href: isCollection ? href.replace(/\/$/, "") : "", children };
+  const isContentLink = includeContentLinks && ((href === "/" && !item.url?.includes("#")) || /^\/pages\/[^/?]+\/?$/.test(href) || href === "/contact");
+  if (!isCollection && !isContentLink && children.length === 0) return null;
+  return { id: item.id, title: item.title, href: isCollection || isContentLink ? (href === "/" ? href : href.replace(/\/$/, "")) : "", children };
 }
 
-export async function getNavigationEntries(language: LanguageCode): Promise<NavigationEntry[]> {
+export async function getNavigationEntries(language: LanguageCode, includeContentLinks = false): Promise<NavigationEntry[]> {
   const [menuResult, collectionsResult] = await Promise.allSettled([
     shopifyFetch<NavigationMenuResult>({
       query: navigationMenuQuery,
@@ -51,7 +52,7 @@ export async function getNavigationEntries(language: LanguageCode): Promise<Navi
       ? new Set(collectionsResult.value.collections.nodes.map((collection) => collection.handle))
       : undefined;
     const entries = menuResult.value.menu.items
-      .map((item) => mapMenuItem(item, validHandles))
+      .map((item) => mapMenuItem(item, validHandles, includeContentLinks))
       .filter((entry): entry is NavigationEntry => entry !== null);
     if (entries.length) return entries;
   }
