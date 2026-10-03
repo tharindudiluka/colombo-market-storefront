@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 /**
@@ -43,6 +43,7 @@ function HeroImageSlide({
   priority: boolean;
 }) {
   const t = useTranslations("hero.mainBanner");
+  const locale = useLocale();
   const className = "relative block h-full w-full shrink-0 snap-center";
   const image = (
     <Image
@@ -67,7 +68,7 @@ function HeroImageSlide({
           <h1 className="font-heading font-extrabold tracking-tight">{t("heading")}</h1>
           <p>{t("body")}</p>
           <Link href="/collections" className="w-fit rounded-full bg-brand-teal font-bold text-white transition-colors hover:bg-brand-teal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-dark">
-            {t("cta")}
+            {locale === "de" ? <><span className="hero-cta-desktop">{t("cta")}</span><span className="hero-cta-mobile">{t("mobileCta")}</span></> : t("cta")}
           </Link>
         </div>
       </div>

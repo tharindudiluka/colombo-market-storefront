@@ -46,7 +46,8 @@
     "mainBanner": {
       "heading": "Sri-lankische & südasiatische Lebensmittel",
       "body": "Reis, Gewürze, Snacks, Tiefkühlprodukte und mehr.",
-      "cta": "Alle Kategorien entdecken"
+      "cta": "Alle Kategorien entdecken",
+      "mobileCta": "Kategorien entdecken"
     },
     "slideLabel": "Zu Folie {number} wechseln",
     "slides": [
