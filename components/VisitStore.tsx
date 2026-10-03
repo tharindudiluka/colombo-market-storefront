@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { site } from "@/config/site";
+import { BotanicalAccents } from "@/components/BotanicalAccents";
 
 export async function VisitStore() {
   const t = await getTranslations("visitStore");
 
   return (
-    <section className="bg-brand-cream/70 py-10 sm:py-12 lg:py-16">
-      <div className="mx-auto grid max-w-[var(--layout-max-width)] items-center gap-8 px-4 lg:grid-cols-2 lg:gap-12">
+    <section className="relative isolate bg-brand-cream/70 py-10 sm:py-12 lg:py-16">
+      <BotanicalAccents variant="store" />
+      <div className="relative z-10 mx-auto grid max-w-[var(--layout-max-width)] items-center gap-8 px-4 lg:grid-cols-2 lg:gap-12">
         <Image
           src={site.storefrontImage.src}
           width={site.storefrontImage.width}

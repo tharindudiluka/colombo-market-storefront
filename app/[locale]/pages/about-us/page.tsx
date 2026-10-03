@@ -20,6 +20,7 @@ export async function generateMetadata({
 
 export default async function AboutUsPage() {
   const t = await getTranslations("about");
+  const storeImage = await getTranslations("visitStore");
   const address = `${site.address.street}, ${site.address.postalCode} ${site.address.city}`;
 
   return (
@@ -55,7 +56,17 @@ export default async function AboutUsPage() {
         </section>
 
         <section className="mx-auto grid max-w-[var(--layout-max-width)] gap-8 px-4 py-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start sm:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-terracotta">{t("storyEyebrow")}</p>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-terracotta">{t("storyEyebrow")}</p>
+            <Image
+              src={site.storefrontImage.src}
+              width={site.storefrontImage.width}
+              height={site.storefrontImage.height}
+              alt={storeImage("imageAlt")}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="mt-6 h-auto w-full rounded-xl object-cover"
+            />
+          </div>
           <div>
             <h2 className="max-w-3xl font-heading text-3xl font-extrabold tracking-tight text-brand-teal-dark sm:text-5xl">
               {t("storyTitle")}

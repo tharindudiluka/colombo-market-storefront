@@ -6,8 +6,9 @@ import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Icon } from "@/components/Icon";
+import { HomepageCategoryIcon } from "@/components/HomepageCategoryIcon";
+import { mobileNavigationIcons } from "@/config/mobile-navigation";
 import { site } from "@/config/site";
-import { categoryIcons } from "@/lib/content/categories";
 import type { NavigationEntry } from "@/lib/shopify/navigation";
 
 function filterEntries(entries: NavigationEntry[], query: string, locale: string): NavigationEntry[] {
@@ -18,12 +19,14 @@ function filterEntries(entries: NavigationEntry[], query: string, locale: string
   });
 }
 
-function MobileEntry({ entry, pathname, searching, onNavigate }: {
-  entry: NavigationEntry; pathname: string; searching: boolean; onNavigate: () => void;
+function MobileEntry({ entry, pathname, searching, onNavigate, depth = 0 }: {
+  entry: NavigationEntry; pathname: string; searching: boolean; onNavigate: () => void; depth?: number;
 }) {
   const t = useTranslations("nav");
-  const handle = entry.href.split("/").filter(Boolean).at(-1) ?? "";
-  const title = <><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-cream/60 text-brand-teal"><Icon name={categoryIcons[handle] ?? "leaf"} className="h-5 w-5" /></span><span className="min-w-0 flex-1">{entry.title}</span></>;
+  const icon = mobileNavigationIcons[entry.id] ?? "store";
+  const title = <>{depth === 0 && <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-cream/60 text-brand-teal">
+    {icon === "mortar" || icon === "candy" ? <HomepageCategoryIcon name={icon} className="h-5 w-5" /> : <Icon name={icon} className="h-5 w-5" />}
+  </span>}<span className="min-w-0 flex-1">{entry.title}</span></>;
   const linkClass = "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-brand-teal-dark/80 hover:bg-brand-cream/60";
   return (
     <li>
@@ -34,7 +37,7 @@ function MobileEntry({ entry, pathname, searching, onNavigate }: {
           </summary>
           <ul className="ml-4 border-l border-brand-teal/15 py-1 pl-2">
             {entry.href !== "#" && <li><Link href={entry.href} onClick={onNavigate} className="block rounded-lg px-3 py-2 text-sm font-semibold text-brand-teal hover:bg-brand-cream/50">{t("viewAllCategory", {category:entry.title})}</Link></li>}
-            {entry.children.map(child => <MobileEntry key={child.id} entry={child} pathname={pathname} searching={searching} onNavigate={onNavigate} />)}
+            {entry.children.map(child => <MobileEntry key={child.id} entry={child} pathname={pathname} searching={searching} onNavigate={onNavigate} depth={depth + 1} />)}
           </ul>
         </details>
       ) : entry.href === "#" ? (

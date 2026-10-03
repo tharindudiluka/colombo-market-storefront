@@ -40,7 +40,7 @@ export default async function CollectionsIndexPage({
             {t("allTitle")}
           </h1>
         </div>
-        <CategoryGrid categories={categories} />
+        <CategoryGrid categories={categories} variant="catalog" />
       </main>
       <Footer />
     </div>

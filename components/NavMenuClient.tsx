@@ -85,7 +85,7 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
 function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: string }) {
   const active = containsPath(entry, pathname);
   const hasChildren = entry.children.length > 0;
-  const itemClassName = `flex h-full items-center gap-2 border-b-2 px-6 font-navigation text-sm font-bold leading-6 whitespace-nowrap transition-colors hover:border-brand-teal hover:bg-brand-cream/40 hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-brand-teal ${
+  const itemClassName = `flex h-full items-center gap-2 border-b-2 px-6 font-navigation text-sm font-medium leading-5 tracking-[0.02em] antialiased [text-rendering:optimizeLegibility] whitespace-nowrap transition-colors hover:border-brand-teal hover:bg-brand-cream/40 hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-brand-teal ${
     active ? "border-brand-teal text-brand-teal-dark" : "border-transparent text-brand-teal-dark"
   }`;
 

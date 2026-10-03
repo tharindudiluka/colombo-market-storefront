@@ -25,7 +25,7 @@ export function BrandStripClient({ brands }: { brands: UiHomepageBrand[] }) {
       <div className="flex items-end justify-between gap-4">
         <div>
           <h2 id="brands-title" className="font-heading text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">{t("title")}</h2>
-          <p className="mt-2 text-sm text-brand-teal-dark/70">{t("subtitle")}</p>
+          <p className="mt-2 text-sm text-brand-teal-dark/70 lg:text-base lg:leading-6">{t("subtitle")}</p>
         </div>
         {(position.previous || position.next) && <div className="flex gap-2">
           {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button type="button" key={key} aria-label={t(key)} aria-controls="brand-cards" disabled={!position[key]} onClick={() => track.current?.scrollBy({ left: direction * track.current.clientWidth })} className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}

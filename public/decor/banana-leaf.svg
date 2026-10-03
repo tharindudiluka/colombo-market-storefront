@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 340">
+  <defs>
+    <mask id="veins">
+      <path fill="white" d="M78 326C20 292 2 236 12 160S48 41 85 9c40 41 66 106 64 172s-27 112-71 145Z"/>
+      <g fill="none" stroke="black" stroke-width="2" opacity=".65">
+        <path d="M85 20 78 325M83 67 42 96M83 97 27 134M82 130 17 170M81 165 15 207M80 202 22 243M79 240 38 278M79 279 57 303M84 67l34 29M83 97l48 38M82 130l59 42M81 165l63 43M80 202l58 42M79 240l45 40M79 279l25 24"/>
+      </g>
+    </mask>
+  </defs>
+  <path fill="white" mask="url(#veins)" d="M0 0h160v340H0z"/>
+  <path fill="none" stroke="white" stroke-width="3" stroke-linecap="round" d="M78 319 77 337"/>
+</svg>

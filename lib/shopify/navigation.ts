@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { localMenuPageHrefs } from "@/config/pages";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { navigationCollectionsQuery } from "@/lib/shopify/queries/navigation-collections";
 import { navigationMenuQuery } from "@/lib/shopify/queries/navigation-menu";
@@ -34,7 +35,7 @@ function mapMenuItem(item: ShopifyMenuItem): NavigationEntry {
   return {
     id: item.id,
     title: item.title,
-    href: localizeMenuUrl(item.url),
+    href: localMenuPageHrefs[item.id] ?? localizeMenuUrl(item.url),
     children: (item.items ?? []).map(mapMenuItem),
   };
 }

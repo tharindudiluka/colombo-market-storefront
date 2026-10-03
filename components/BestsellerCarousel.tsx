@@ -43,7 +43,7 @@ export function BestsellerCarousel({ products }: { products: UiProduct[] }) {
         <div className="flex items-end justify-between gap-4">
           <div>
             <h2 id="bestsellers-title" className="font-heading text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">{t("title")}</h2>
-            <p className="mt-2 text-sm text-brand-teal-dark/70">{t("subtitle")}</p>
+            <p className="mt-2 text-sm text-brand-teal-dark/70 lg:text-base lg:leading-6">{t("subtitle")}</p>
           </div>
           {(position.previous || position.next) && <div className="flex gap-2">
             {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button key={key} type="button" aria-label={t(key)} aria-controls="bestseller-products" disabled={!position[key]} onClick={() => move(direction)} className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}

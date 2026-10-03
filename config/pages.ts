@@ -10,6 +10,12 @@ export const pageHandles = {
 
 export const pageHref = (handle: string) => `/pages/${handle}` as const;
 
+// Local frontend-authored page destinations for existing Shopify menu items.
+// Menu IDs stay the same across locales; hierarchy and labels remain in Shopify.
+export const localMenuPageHrefs: Partial<Record<string, string>> = {
+  "gid://shopify/MenuItem/808947941723": pageHref(pageHandles.about),
+};
+
 export const policyHandles = {
   privacy: "privacy-policy",
   contact: "contact-information",

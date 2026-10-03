@@ -13,7 +13,11 @@ export type IconName =
   | "snowflake"
   | "jar"
   | "rice"
-  | "tag";
+  | "tag"
+  | "store"
+  | "cookie"
+  | "bottle"
+  | "package";
 
 export function Icon({ name, className }: { name: IconName; className?: string }) {
   const props = {
@@ -27,6 +31,14 @@ export function Icon({ name, className }: { name: IconName; className?: string }
   };
 
   switch (name) {
+    case "cookie":
+      return <svg {...props}><circle cx="12" cy="12" r="9" /><circle cx="8" cy="9" r="1" /><circle cx="15" cy="8" r="1" /><circle cx="12" cy="14" r="1" /><circle cx="7" cy="16" r="1" /><circle cx="17" cy="15" r="1" /></svg>;
+    case "bottle":
+      return <svg {...props}><path d="M9 3h6v5l3 4v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-7l3-4V3ZM9 6h6M6 13h12M6 17h12" /></svg>;
+    case "package":
+      return <svg {...props}><path d="m3 7 9-4 9 4v10l-9 4-9-4V7Zm0 0 9 4 9-4M12 11v10M7.5 5l9 4" /></svg>;
+    case "store":
+      return <svg {...props}><path d="M4 10v10h16V10M3 10l2-6h14l2 6M3 10c0 2 3 2 3 0 0 2 3 2 3 0 0 2 3 2 3 0 0 2 3 2 3 0 0 2 3 2 3 0 0 2 3 2 3 0M9 20v-6h6v6" /></svg>;
     case "fish":
       return <svg {...props}><path d="M4 12c4-7 11-7 15 0-4 7-11 7-15 0Z" /><path d="m19 12 3-4v8l-3-4M9 7c2 3 2 7 0 10" /><circle cx="6.5" cy="11" r="0.5" fill="currentColor" /></svg>;
     case "snowflake":

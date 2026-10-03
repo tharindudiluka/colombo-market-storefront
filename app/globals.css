@@ -21,6 +21,7 @@
   --color-category-terracotta: #eedbd2;
   --color-category-teal: #d5e8e4;
   --color-category-peach: #f5e7dc;
+  --color-botanical-chili: #a3483b;
   --color-kumaio-gold: #e7d398;
   --color-kumaio-cream: #f0e5c9;
   --color-kumaio-green: #0b332b;
@@ -260,7 +261,7 @@
   --font-sans: var(--font-geist-sans);
   --font-heading: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-navigation: var(--font-nunito);
+  --font-navigation: var(--font-geist-sans);
 }
 
 /* Shared desktop chrome; mobile and tablet retain their existing controls. */
@@ -314,7 +315,7 @@
   .storefront-nav {
     height: auto;
     min-height: var(--layout-desktop-nav-height);
-    border-top: 1px solid var(--glass-edge);
+    border-top: 0;
   }
 }
 
@@ -426,9 +427,30 @@ header.sticky.top-0 {
 }
 @media (min-width: 1024px) {
   header.sticky.top-0 {
-    background-color: var(--background);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
+    background-color: white;
+    background-image: none;
+    border-bottom: 0;
+    box-shadow: 0 3px 12px -6px rgba(31, 58, 35, 0.16);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .storefront-header-row,
+  .storefront-nav {
+    background-color: white;
+  }
+
+  .storefront-header form[role="search"] {
+    background-color: var(--color-neutral-100);
+    border-color: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .storefront-header form[role="search"]:focus-within {
+    background-color: var(--color-neutral-100);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand-teal) 30%, transparent);
   }
 }
 
@@ -570,3 +592,102 @@ button.fixed.rounded-full {
 @media (min-width: 640px) { .brand-track { --brand-card-width: calc((100% - 3rem) / 4); } }
 @media (min-width: 1280px) { .brand-track { --brand-card-width: calc((100% - 5rem) / 6); } }
 @media (prefers-reduced-motion: reduce) { .brand-track { scroll-behavior: auto; } }
+
+/* One clipped background layer per section; never sits above interactive content. */
+.botanical-accents {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.botanical-accents > span {
+  position: absolute;
+  display: block;
+  background: var(--color-brand-teal);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Use the existing breathing room below the banners, without adding layout space. */
+.botanical-accents--hero { bottom: -1.5rem; }
+
+.botanical-leaf {
+  width: clamp(7rem, 14vw, 18rem);
+  aspect-ratio: 8 / 17;
+  mask-image: url('/decor/banana-leaf.svg');
+  opacity: 0.12;
+}
+
+.botanical-leaf--first {
+  top: -7rem;
+  left: -3rem;
+  transform: rotate(-40deg);
+}
+
+.botanical-leaf--second {
+  right: -4rem;
+  bottom: -9rem;
+  transform: rotate(42deg);
+}
+
+.botanical-curry {
+  width: clamp(5rem, 10vw, 11rem);
+  aspect-ratio: 3 / 4;
+  mask-image: url('/decor/curry-leaf.svg');
+  left: -2rem;
+  bottom: -2rem;
+  transform: rotate(30deg);
+  opacity: 0.16;
+}
+
+.botanical-accents > .botanical-chili {
+  width: clamp(4rem, 7vw, 8rem);
+  aspect-ratio: 9 / 5;
+  background: var(--color-botanical-chili);
+  mask-image: url('/decor/chili.svg');
+  left: 60%;
+  bottom: -0.75rem;
+  transform: rotate(-20deg);
+  opacity: 0.2;
+}
+
+.botanical-accents--hero .botanical-chili {
+  width: 3.5rem;
+  left: 58%;
+  bottom: 0;
+  transform: rotate(-8deg);
+}
+
+.botanical-accents--faq .botanical-leaf--first {
+  top: -9rem;
+  left: auto;
+  right: -3rem;
+  transform: rotate(35deg);
+  opacity: 0.055;
+}
+
+.botanical-accents--faq .botanical-leaf--second { display: none; }
+.botanical-accents--faq .botanical-curry { opacity: 0.07; }
+
+.botanical-accents--store .botanical-leaf--first { opacity: 0.18; }
+.botanical-accents--store .botanical-leaf--second { display: none; }
+.botanical-accents--store .botanical-curry {
+  left: auto;
+  right: -1rem;
+  transform: rotate(-25deg);
+  opacity: 0.18;
+}
+.botanical-accents--store .botanical-chili { left: auto; right: 5%; bottom: 0.5rem; opacity: 0.14; }
+
+@media (max-width: 767px) {
+  .botanical-leaf--first { top: -5rem; left: -3rem; opacity: 0.07; }
+  .botanical-accents .botanical-leaf--second,
+  .botanical-accents .botanical-chili,
+  .botanical-accents--hero .botanical-curry,
+  .botanical-accents--faq { display: none; }
+  .botanical-accents--store .botanical-leaf--first { opacity: 0.1; }
+  .botanical-accents--store .botanical-curry { width: 5rem; opacity: 0.1; }
+}

@@ -21,6 +21,7 @@ export const theme = {
     categoryTerracotta: "#eedbd2",
     categoryTeal: "#d5e8e4",
     categoryPeach: "#f5e7dc",
+    botanicalChili: "#a3483b",
     kumaioGold: "#e7d398",
     kumaioCream: "#f0e5c9",
     kumaioGreen: "#0b332b",
@@ -31,7 +32,7 @@ export const theme = {
   fonts: {
     heading: "Geist",
     body: "Geist",
-    navigation: "Nunito",
+    navigation: "Geist",
   },
   layout: {
     maxWidth: "1400px",

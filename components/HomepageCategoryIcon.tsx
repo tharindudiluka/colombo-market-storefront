@@ -1,6 +1,6 @@
 import { Icon, type IconName } from "@/components/Icon";
 
-export type HomepageCategoryIconName = Extract<IconName, "rice" | "dal" | "ghee" | "jar" | "snowflake" | "tea" | "leaf"> | "bread" | "mortar" | "vegetables" | "candy" | "wheatFree";
+export type HomepageCategoryIconName = IconName | "bread" | "mortar" | "vegetables" | "candy" | "wheatFree";
 
 /** Food-specific homepage additions use the existing icon system's line style. */
 export function HomepageCategoryIcon({ name, className }: { name: HomepageCategoryIconName; className?: string }) {

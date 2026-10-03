@@ -7,6 +7,7 @@ import { CategoryGrid } from "@/components/CategoryGrid";
 import { BrandStrip } from "@/components/BrandStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { VisitStore } from "@/components/VisitStore";
+import { BotanicalAccents } from "@/components/BotanicalAccents";
 import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionProductsQuery } from "@/lib/shopify/queries/collection-products";
@@ -52,10 +53,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Header />
 
       <main className="flex-1">
-        <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
-          <div className="hero-grid grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
-            <HeroCarousel />
-            <PromoTiles />
+        <div className="relative isolate">
+          <BotanicalAccents variant="hero" />
+          <div className="relative z-10 mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
+            <div className="hero-grid grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
+              <HeroCarousel />
+              <PromoTiles />
+            </div>
           </div>
         </div>
 

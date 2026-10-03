@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
+import { BotanicalAccents } from "@/components/BotanicalAccents";
 
 type FaqItem = { q: string; a: string };
 
@@ -12,8 +13,9 @@ export function FaqAccordion() {
   const accordionId = useId();
 
   return (
-    <section className="bg-white py-10 sm:py-12">
-      <div className="mx-auto max-w-[var(--layout-max-width)] px-4">
+    <section className="relative isolate bg-white py-10 sm:py-12">
+      <BotanicalAccents variant="faq" />
+      <div className="relative z-10 mx-auto max-w-[var(--layout-max-width)] px-4">
         <h2 className="font-heading text-xl font-extrabold text-brand-teal-dark sm:text-2xl">
           {t("title")}
         </h2>
@@ -47,7 +49,7 @@ export function FaqAccordion() {
                   </svg>
                 </button>
                 <div id={panelId} role="region" aria-labelledby={questionId} hidden={!isOpen}>
-                  <p className="px-4 pb-4 text-sm leading-relaxed text-brand-teal-dark/80">{item.a}</p>
+                  <p className="px-4 pb-4 text-sm leading-relaxed text-brand-teal-dark/80 lg:text-base">{item.a}</p>
                 </div>
               </div>
             );
