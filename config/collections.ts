@@ -10,22 +10,28 @@
  */
 export const collectionHandles = {
   weeklySpecials: "angebote",
+  bestsellers: "bestseller",
   freshVegetables: "frisches-gemuse",
   pantryPicks: "reis-und-mehl",
 } as const;
 
+export const promoCollectionHandles = {
+  dailyDelight: "daily-delight-tiefkuhlprodukte",
+  kumaio: "kumaio-bio-produkte-aus-sri-lanka",
+} as const;
+
+// Homepage category selection. Titles and translations come from Shopify.
 export const categoryHandles: readonly { handle: string; labelKey: string }[] = [
-  { handle: "angebote", labelKey: "angebote" },
-  { handle: "gewurze", labelKey: "gewurze" },
-  { handle: "reis-und-mehl", labelKey: "reisUndMehl" },
-  { handle: "frisches-gemuse", labelKey: "frischesGemuse" },
-  { handle: "linsen-und-bohnen", labelKey: "linsenUndBohnen" },
-  { handle: "tee-und-kekse", labelKey: "teeUndKekse" },
-  { handle: "ayurvedische-produkte", labelKey: "ayurvedischeProdukte" },
-  { handle: "gefrorenes-fleisch-und-fisch", labelKey: "gefrorenesFleischUndFisch" },
-  { handle: "tiefkuhlprodukte", labelKey: "tiefkuhlprodukte" },
-  { handle: "mehl-produkte", labelKey: "mehlProdukte" },
-  { handle: "pickles-und-chutneys", labelKey: "picklesUndChutneys" },
-  { handle: "snacks", labelKey: "snacks" },
-  { handle: "bio-produkte", labelKey: "bioProdukte" },
+  { handle: "reis", labelKey: "rice" },
+  { handle: "mehl-asiatische-fladenbrote", labelKey: "bread" },
+  { handle: "linsen-und-bohnen", labelKey: "pulses" },
+  { handle: "gewuerze", labelKey: "spices" },
+  { handle: "ghee-kochzutaten", labelKey: "cooking" },
+  { handle: "pickles-wurzmittel", labelKey: "pickles" },
+  { handle: "frozen-food", labelKey: "frozen" },
+  { handle: "frisches-gemuse", labelKey: "vegetables" },
+  { handle: "sweets-sussigkeiten", labelKey: "sweets" },
+  { handle: "tee-kaffee", labelKey: "tea" },
+  { handle: "bio-producte", labelKey: "organic" },
+  { handle: "glutenfrei", labelKey: "glutenFree" },
 ];

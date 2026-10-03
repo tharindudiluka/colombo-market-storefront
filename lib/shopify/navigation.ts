@@ -1,3 +1,4 @@
+import { site } from "@/config/site";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { navigationCollectionsQuery } from "@/lib/shopify/queries/navigation-collections";
 import { navigationMenuQuery } from "@/lib/shopify/queries/navigation-menu";
@@ -10,65 +11,44 @@ export type NavigationEntry = {
   children: NavigationEntry[];
 };
 
-function localizeMenuUrl(url: string | null): string | null {
-  if (!url) return null;
+function localizeMenuUrl(url: string | null): string {
+  if (!url || url === "#") return "#";
   try {
     const parsed = new URL(url, "https://shopify.local");
-    return parsed.pathname.startsWith("/") ? `${parsed.pathname}${parsed.search}` : null;
+    const internalHosts = ["shopify.local", site.domain, process.env.SHOPIFY_STORE_DOMAIN];
+    if (!internalHosts.includes(parsed.hostname)) return parsed.href;
+    // Shopify resource URLs can already include a locale. Our Link applies it.
+    const segments = parsed.pathname.split("/");
+    if (site.locale.supported.some((locale) => locale === segments[1])) {
+      segments.splice(1, 1);
+    }
+    const pathname = segments.join("/") || "/";
+    if (pathname === "/" && url.endsWith("#")) return "#";
+    return `${pathname}${parsed.search}${parsed.hash}`;
   } catch {
-    return null;
+    return "#";
   }
 }
 
-function mapMenuItem(item: ShopifyMenuItem, validHandles?: Set<string>, includeContentLinks = false): NavigationEntry | null {
-  const href = localizeMenuUrl(item.url) ?? "";
-  const children = (item.items ?? [])
-    .map((child) => mapMenuItem(child, validHandles, includeContentLinks))
-    .filter((child): child is NavigationEntry => child !== null);
-  // Mobile retains catalog entries; desktop can also show existing store content links.
-  const collectionHandle = href.match(/^\/collections\/([^/?]+)\/?$/)?.[1];
-  const isCollection = collectionHandle !== undefined && (!validHandles || validHandles.has(collectionHandle));
-  const isContentLink = includeContentLinks && ((href === "/" && !item.url?.includes("#")) || /^\/pages\/[^/?]+\/?$/.test(href) || href === "/contact");
-  if (!isCollection && !isContentLink && children.length === 0) return null;
-  return { id: item.id, title: item.title, href: isCollection || isContentLink ? (href === "/" ? href : href.replace(/\/$/, "")) : "", children };
+function mapMenuItem(item: ShopifyMenuItem): NavigationEntry {
+  return {
+    id: item.id,
+    title: item.title,
+    href: localizeMenuUrl(item.url),
+    children: (item.items ?? []).map(mapMenuItem),
+  };
 }
 
-export async function getNavigationEntries(language: LanguageCode, includeContentLinks = false): Promise<NavigationEntry[]> {
-  const [menuResult, collectionsResult] = await Promise.allSettled([
-    shopifyFetch<NavigationMenuResult>({
-      query: navigationMenuQuery,
-      variables: { handle: "main-menu", language },
-      tags: ["navigation", "main-menu"],
-    }),
-    shopifyFetch<CollectionsIndexResult>({
-      query: navigationCollectionsQuery,
-      variables: { first: 250, language },
-      tags: ["collection"],
-    }),
-  ]);
-
-  if (menuResult.status === "fulfilled" && menuResult.value.menu?.items.length) {
-    const validHandles = collectionsResult.status === "fulfilled"
-      ? new Set(collectionsResult.value.collections.nodes.map((collection) => collection.handle))
-      : undefined;
-    const entries = menuResult.value.menu.items
-      .map((item) => mapMenuItem(item, validHandles, includeContentLinks))
-      .filter((entry): entry is NavigationEntry => entry !== null);
-    if (entries.length) return entries;
-  }
-
-  // If the Storefront token can't read menus, retain live Shopify collections as a safe fallback.
-  if (collectionsResult.status === "fulfilled") {
-    return collectionsResult.value.collections.nodes.map((collection) => ({
-      id: collection.id,
-      title: collection.title,
-      href: `/collections/${collection.handle}`,
-      children: [],
-    }));
-  }
-  return [];
+export async function getNavigationEntries(language: LanguageCode): Promise<NavigationEntry[]> {
+  const data = await shopifyFetch<NavigationMenuResult>({
+    query: navigationMenuQuery,
+    variables: { handle: "main-menu", language },
+    tags: ["navigation", "main-menu"],
+    // Menu edits are immediately visible locally; production retains the existing cache.
+    revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
+  });
+  return (data.menu?.items ?? []).map(mapMenuItem);
 }
-
 export async function getNavigationCollections(language: LanguageCode): Promise<ShopifyCollection[]> {
   try {
     const data = await shopifyFetch<CollectionsIndexResult>({

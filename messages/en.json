@@ -4,9 +4,8 @@
     "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup."
   },
   "announcementBar": {
-    "rating": "4.7 (1,840 reviews)",
-    "pickup": "In-store pickup in Ravensburg",
-    "freeDelivery": "Free delivery from {threshold}",
+    "pickup": "Free pickup at our Ravensburg store",
+    "freeDelivery": "Free shipping from {threshold}",
     "region": "Announcements"
   },
   "header": {
@@ -44,6 +43,11 @@
     "bio-produkte": "Organic Products"
   },
   "hero": {
+    "mainBanner": {
+      "heading": "Sri Lankan & South Asian Groceries",
+      "body": "Rice, spices, snacks, frozen foods and more.",
+      "cta": "Explore all categories"
+    },
     "slideLabel": "Go to slide {number}",
     "slides": [
       {
@@ -67,12 +71,30 @@
     ]
   },
   "promo": {
+    "dailyDelight": {
+      "heading": "Daily Delight – A Taste of Home",
+      "body": "Popular frozen favourites, quick and easy to enjoy.",
+      "cta": "Discover Daily Delight"
+    },
+    "kumaio": {
+      "heading": "Kumaio – Naturally from Sri Lanka",
+      "body": "Selected organic specialties with authentic flavour.",
+      "cta": "Discover Kumaio"
+    },
     "tiles": [
       { "title": "Fresh Vegetables & Fruit", "subtitle": "Hand-picked & guaranteed fresh" },
       { "title": "Discover Tea & Biscuits", "subtitle": "For your coffee break" }
     ]
   },
   "productRow": {
+    "bestsellers": {
+      "title": "Best Sellers",
+      "subtitle": "Our most popular products at a glance.",
+      "previous": "Previous products",
+      "next": "Next products",
+      "empty": "No best sellers are available right now.",
+      "variant": "Variant for {title}"
+    },
     "weeklySpecials": {
       "viewAll": "View all offers",
       "chooseOptions": "Choose options",
@@ -180,26 +202,33 @@
     "aboutFallback": "Shop {title} online at Colombo Market — {count, plural, one {# product} other {# products}} picked for everyday cooking, pantry restocking and family meals. Order online for delivery across Germany or pick up in-store in Ravensburg."
   },
   "brandStrip": {
-    "title": "Trusted Brands"
+    "title": "Brands We Love",
+    "subtitle": "Discover popular brands from our range.",
+    "previous": "Previous brands",
+    "next": "Next brands"
   },
   "faq": {
     "title": "Frequently Asked Questions",
     "items": [
       {
         "q": "How long does delivery take?",
-        "a": "Most orders arrive within 1–3 business days across Germany. In-store pickup in Ravensburg is also available."
+        "a": "Orders are usually processed within 1–3 business days. Estimated delivery then takes a further 2–5 business days."
       },
       {
-        "q": "Do you guarantee the freshness of vegetables?",
-        "a": "Yes — fresh produce is sourced a few times a week and any item that arrives below our freshness standard is refunded or replaced, no questions asked."
+        "q": "Can I pick up my order in Ravensburg?",
+        "a": "Yes. If pickup is offered at checkout, you can collect your order free of charge from our store at Herrenstraße 30, 88212 Ravensburg. Please wait for your pickup confirmation before visiting the store."
       },
       {
-        "q": "Can you source a specific product for me?",
-        "a": "If you're after a brand or item we don't currently stock, send us a message and our buying team will look into adding it."
+        "q": "When is shipping free?",
+        "a": "Shipping within Germany is free for orders of €59.99 or more. Available shipping options are shown at checkout."
       },
       {
-        "q": "How can I get in touch?",
-        "a": "Use the chat bubble in the corner of the site, or email our support team — we typically reply within one business day."
+        "q": "Can I return products?",
+        "a": "Contact us within 14 days of receiving your order. Returns generally need to be unused, unopened and in their original packaging. Exceptions apply to opened food products and perishable goods. Please contact us before sending anything back."
+      },
+      {
+        "q": "How can I contact Colombo Market?",
+        "a": "For questions about orders, products, delivery or pickup, contact us by email at colombomarket.rv@gmail.com."
       }
     ]
   },
@@ -218,10 +247,13 @@
     "shippingPolicy": "Shipping Policy",
     "imprint": "Imprint"
   },
-  "seoContent": {
-    "title": "Sri Lankan, Indian & International Shopping, Made Simple",
-    "paragraph1": "Colombo Market brings authentic spices, rice, lentils and specialty foods from Sri Lanka, India and around the world to Ravensburg — for everyday cooking and special occasions alike.",
-    "paragraph2": "Categories are organised the way home cooks actually shop, with clear unit pricing on every product. Orders can be picked up at our Ravensburg store or delivered to your door."
+  "visitStore": {
+    "eyebrow": "SHOP LOCALLY IN RAVENSBURG",
+    "title": "Visit Colombo Market in Ravensburg",
+    "body": "Discover a wide selection of Sri Lankan, Indian and international groceries in our local store. Find rice, spices, pulses, snacks, frozen foods and many more specialties for your kitchen.",
+    "storeName": "Colombo Market",
+    "address": "Herrenstraße 30, 88212 Ravensburg",
+    "imageAlt": "Colombo Market storefront in Ravensburg"
   },
   "wishlist": {
     "title": "Saved Items",
@@ -265,14 +297,13 @@
       "deliveryTitle": "Delivery & Pickup",
       "deliveryBody": "Pick up in-store in Ravensburg or get it delivered — free from {threshold}.",
       "returnsTitle": "Returns & Contact",
-      "returnsBody": "Questions about this product? Message us via chat — we typically reply within one business day."
+      "returnsBody": "For questions about returns, contact us by email at colombomarket.rv@gmail.com."
     },
     "relatedProducts": {
       "title": "You May Also Like"
     },
     "trust": {
-      "rating": "4.7 (1,840 reviews)",
-      "delivery": "Free delivery from {threshold}",
+      "delivery": "Free shipping from {threshold}",
       "pickup": "In-store pickup in Ravensburg"
     }
   },

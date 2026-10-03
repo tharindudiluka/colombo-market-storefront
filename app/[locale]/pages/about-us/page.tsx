@@ -5,7 +5,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/config/site";
 
@@ -27,7 +26,6 @@ export default async function AboutUsPage() {
     <div className="flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
       <main className="flex-1 pb-12 sm:pb-16">
         <Breadcrumbs items={[{ label: t("title") }]} />
 

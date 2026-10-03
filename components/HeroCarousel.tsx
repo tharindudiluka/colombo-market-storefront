@@ -14,6 +14,7 @@ async function getBanners(language: LanguageCode): Promise<UiBanner[]> {
       query: homeBannersQuery,
       variables: { language },
       tags: ["homepage"],
+      revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
     });
     return data.metaobjects.edges
       .map((edge) => toUiBanner(edge.node))

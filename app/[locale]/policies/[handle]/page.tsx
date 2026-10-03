@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { getShopPolicy, isPolicyHandle } from "@/lib/shopify/policies";
 import type { LanguageCode } from "@/lib/shopify/types";
 
@@ -40,7 +39,6 @@ export default async function PolicyPage({
     <div className="flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
       <main className="flex-1 pb-12 sm:pb-16">
         <Breadcrumbs items={[{ label: policy.title }]} />
         <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14">

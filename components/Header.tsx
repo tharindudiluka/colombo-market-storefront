@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { NavMenuClient } from "@/components/NavMenuClient";
 import { Link } from "@/i18n/navigation";
 import { MobileNavDrawer } from "@/components/MobileNavDrawer";
 import { AccountButton } from "@/components/account/AccountButton";
@@ -14,7 +15,7 @@ export async function Header() {
   const locale = await getLocale();
   const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
   return (
-    <header className="sticky top-0 z-40 bg-white shadow-sm">
+    <header className="storefront-header sticky top-0 z-40 bg-white shadow-sm">
       <div className="storefront-header-row mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6 lg:h-[var(--layout-header-height)] lg:px-[var(--layout-page-padding)] lg:py-[var(--layout-header-padding)]">
         <MobileNavDrawer entries={entries} />
 
@@ -44,6 +45,7 @@ export async function Header() {
       <div className="px-4 pb-3 sm:hidden">
         <SearchForm />
       </div>
+      <NavMenuClient entries={entries} />
     </header>
   );
 }

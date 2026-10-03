@@ -1,15 +1,12 @@
-import { getTranslations } from "next-intl/server";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { PromoTiles } from "@/components/PromoTiles";
-import { ProductRow } from "@/components/ProductRow";
-import { WeeklyOffers } from "@/components/WeeklyOffers";
+import { BestsellerCarousel } from "@/components/BestsellerCarousel";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { BrandStrip } from "@/components/BrandStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { SeoContent } from "@/components/SeoContent";
+import { VisitStore } from "@/components/VisitStore";
 import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionProductsQuery } from "@/lib/shopify/queries/collection-products";
@@ -23,6 +20,7 @@ async function getCollectionProducts(handle: string, language: LanguageCode, fir
     query: collectionProductsQuery,
     variables: { handle, first, language, includeQuickAdd },
     tags: ["collection", handle],
+    revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
   });
   return (data.collection?.products.edges ?? []).map((edge) => toUiProduct(edge.node));
 }
@@ -42,12 +40,9 @@ async function getHomeCategories(language: LanguageCode) {
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const language = locale.toUpperCase() as LanguageCode;
-  const t = await getTranslations("productRow");
 
-  const [weeklySpecials, freshVegetables, pantryPicks, categories] = await Promise.all([
-    getCollectionProducts(collectionHandles.weeklySpecials, language, 6, true),
-    getCollectionProducts(collectionHandles.freshVegetables, language),
-    getCollectionProducts(collectionHandles.pantryPicks, language),
+  const [bestsellers, categories] = await Promise.all([
+    getCollectionProducts(collectionHandles.bestsellers, language, 250, true),
     getHomeCategories(language),
   ]);
 
@@ -55,36 +50,23 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <div className="homepage flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
 
       <main className="flex-1">
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
+          <div className="hero-grid grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
             <HeroCarousel />
             <PromoTiles />
           </div>
         </div>
 
-        <WeeklyOffers products={weeklySpecials} />
+        <BestsellerCarousel products={bestsellers} />
 
         <CategoryGrid categories={categories} />
 
-        <ProductRow
-          title={t("freshVegetables.title")}
-          subtitle={t("freshVegetables.subtitle")}
-          products={freshVegetables}
-        />
-
         <BrandStrip />
 
-        <ProductRow
-          title={t("pantryPicks.title")}
-          subtitle={t("pantryPicks.subtitle")}
-          products={pantryPicks}
-        />
-
         <FaqAccordion />
-        <SeoContent />
+        <VisitStore />
       </main>
 
       <Footer />

@@ -16,3 +16,7 @@ export const promoTileMeta = [
   { id: "vegetables", href: "/collections/frisches-gemuse", accent: "bg-gradient-to-br from-[#5a8f3a] to-[#2e5e2b]" },
   { id: "tea", href: "/collections/tee-und-kekse", accent: "bg-gradient-to-br from-[#3f7d3a] to-[#173218]" },
 ] as const;
+
+// Stable Shopify entry identity: artwork updates keep the Kumaio presentation.
+export const kumaioBannerId = "gid://shopify/Metaobject/518376653147";
+export const dailyDelightBannerId = "gid://shopify/Metaobject/518391628123";

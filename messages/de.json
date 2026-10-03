@@ -4,8 +4,7 @@
     "description": "Colombo Market in Ravensburg — Gewürze, Reis, frisches Gemüse und mehr, online bestellen mit Abholung im Markt."
   },
   "announcementBar": {
-    "rating": "4,7 (1.840 Bewertungen)",
-    "pickup": "Abholung im Markt in Ravensburg",
+    "pickup": "Kostenlose Abholung im Markt in Ravensburg",
     "freeDelivery": "Kostenloser Versand ab {threshold}",
     "region": "Ankündigungen"
   },
@@ -44,6 +43,11 @@
     "bio-produkte": "Bio Produkte"
   },
   "hero": {
+    "mainBanner": {
+      "heading": "Sri-lankische & südasiatische Lebensmittel",
+      "body": "Reis, Gewürze, Snacks, Tiefkühlprodukte und mehr.",
+      "cta": "Alle Kategorien entdecken"
+    },
     "slideLabel": "Zu Folie {number} wechseln",
     "slides": [
       {
@@ -67,12 +71,30 @@
     ]
   },
   "promo": {
+    "dailyDelight": {
+      "heading": "Daily Delight – Geschmack wie zuhause",
+      "body": "Beliebte Tiefkühl-Klassiker schnell und einfach genießen.",
+      "cta": "Daily Delight entdecken"
+    },
+    "kumaio": {
+      "heading": "Kumaio – Natürlich aus Sri Lanka",
+      "body": "Ausgewählte Bio-Spezialitäten mit authentischem Geschmack.",
+      "cta": "Kumaio entdecken"
+    },
     "tiles": [
       { "title": "Frisches Gemüse & Obst", "subtitle": "Handverlesen und garantiert frisch" },
       { "title": "Tee & Gebäck entdecken", "subtitle": "Für die Pause zwischendurch" }
     ]
   },
   "productRow": {
+    "bestsellers": {
+      "title": "Bestseller",
+      "subtitle": "Unsere beliebtesten Produkte auf einen Blick.",
+      "previous": "Vorherige Produkte",
+      "next": "Weitere Produkte",
+      "empty": "Aktuell sind keine Bestseller verfügbar.",
+      "variant": "Variante für {title}"
+    },
     "weeklySpecials": {
       "viewAll": "Alle Angebote ansehen",
       "chooseOptions": "Optionen auswählen",
@@ -180,26 +202,33 @@
     "aboutFallback": "Kaufe {title} online bei Colombo Market — {count, plural, one {# Produkt} other {# Produkte}} für den täglichen Kochtopf, den Vorratsschrank und Familienessen. Bestelle online mit Lieferung in ganz Deutschland oder hol im Markt in Ravensburg ab."
   },
   "brandStrip": {
-    "title": "Vertrauenswürdige Marken"
+    "title": "Marken, die wir lieben",
+    "subtitle": "Entdecke beliebte Marken aus unserem Sortiment.",
+    "previous": "Vorherige Marken",
+    "next": "Weitere Marken"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
     "items": [
       {
         "q": "Wie lange dauert die Lieferung?",
-        "a": "Die meisten Bestellungen kommen innerhalb von 1–3 Werktagen in ganz Deutschland an. Abholung im Markt in Ravensburg ist ebenfalls möglich."
+        "a": "Bestellungen werden normalerweise innerhalb von 1–3 Werktagen bearbeitet. Die anschließende Lieferung dauert voraussichtlich weitere 2–5 Werktage."
       },
       {
-        "q": "Garantiert ihr die Frische von Gemüse?",
-        "a": "Ja — frisches Gemüse wird mehrmals wöchentlich bezogen. Artikel unter unserem Frischestandard werden ohne Rückfragen erstattet oder ersetzt."
+        "q": "Bietet ihr Abholung in Ravensburg an?",
+        "a": "Ja. Wenn die Abholung beim Checkout angeboten wird, kannst du deine Bestellung kostenlos in unserem Markt in der Herrenstraße 30, 88212 Ravensburg abholen. Bitte warte auf unsere Abholbestätigung, bevor du zum Markt kommst."
       },
       {
-        "q": "Könnt ihr ein bestimmtes Produkt für mich besorgen?",
-        "a": "Wenn du eine Marke oder ein Produkt suchst, das wir aktuell nicht führen, schreib uns — unser Einkaufsteam prüft die Aufnahme gerne."
+        "q": "Ab welchem Bestellwert ist der Versand kostenlos?",
+        "a": "Ab einem Bestellwert von 59,99 € ist der Versand innerhalb Deutschlands kostenlos. Die verfügbaren Versandoptionen werden beim Checkout angezeigt."
       },
       {
-        "q": "Wie kann ich euch erreichen?",
-        "a": "Nutze die Chat-Blase am Bildschirmrand oder schreib unserem Support-Team eine E-Mail — wir antworten in der Regel innerhalb eines Werktags."
+        "q": "Kann ich Produkte zurückgeben?",
+        "a": "Kontaktiere uns innerhalb von 14 Tagen nach Erhalt deiner Bestellung. Rückgaben müssen grundsätzlich unbenutzt, ungeöffnet und in der Originalverpackung sein. Für geöffnete Lebensmittel und verderbliche Waren gelten Ausnahmen. Bitte kontaktiere uns vor einer Rücksendung."
+      },
+      {
+        "q": "Wie kann ich Colombo Market kontaktieren?",
+        "a": "Bei Fragen zu Bestellungen, Produkten, Lieferung oder Abholung erreichst du uns per E-Mail unter colombomarket.rv@gmail.com."
       }
     ]
   },
@@ -218,10 +247,13 @@
     "shippingPolicy": "Versand",
     "imprint": "Impressum"
   },
-  "seoContent": {
-    "title": "Sri-lankisch, indisch und international einkaufen — ganz einfach",
-    "paragraph1": "Colombo Market bringt authentische Gewürze, Reis, Linsen und Feinkost aus Sri Lanka, Indien und aller Welt nach Ravensburg — für den täglichen Kochtopf und besondere Anlässe.",
-    "paragraph2": "Kategorien sind so sortiert, wie zu Hause tatsächlich eingekauft wird, mit klarer Preisangabe je Einheit. Bestellungen kannst du bequem im Markt in Ravensburg abholen oder dir liefern lassen."
+  "visitStore": {
+    "eyebrow": "LOKAL EINKAUFEN IN RAVENSBURG",
+    "title": "Besuchen Sie Colombo Market in Ravensburg",
+    "body": "Entdecken Sie eine vielfältige Auswahl an sri-lankischen, indischen und internationalen Lebensmitteln direkt in unserem Geschäft. Bei uns finden Sie Reis, Gewürze, Hülsenfrüchte, Snacks, Tiefkühlprodukte und viele weitere Spezialitäten für Ihre Küche.",
+    "storeName": "Colombo Market",
+    "address": "Herrenstraße 30, 88212 Ravensburg",
+    "imageAlt": "Außenansicht von Colombo Market in Ravensburg"
   },
   "wishlist": {
     "title": "Gespeicherte Artikel",
@@ -265,13 +297,12 @@
       "deliveryTitle": "Lieferung & Abholung",
       "deliveryBody": "Abholung im Markt in Ravensburg oder Lieferung nach Hause — kostenlos ab {threshold}.",
       "returnsTitle": "Rückgabe & Kontakt",
-      "returnsBody": "Fragen zu diesem Produkt? Schreib uns über den Chat — wir antworten in der Regel innerhalb eines Werktags."
+      "returnsBody": "Bei Fragen zu Rückgaben kontaktiere uns per E-Mail unter colombomarket.rv@gmail.com."
     },
     "relatedProducts": {
       "title": "Das könnte dir auch gefallen"
     },
     "trust": {
-      "rating": "4,7 (1.840 Bewertungen)",
       "delivery": "Kostenloser Versand ab {threshold}",
       "pickup": "Abholung im Markt in Ravensburg"
     }

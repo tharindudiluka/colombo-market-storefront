@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductGallery } from "@/components/ProductGallery";
 import { BuyBox } from "@/components/BuyBox";
@@ -104,7 +103,6 @@ export default async function ProductPage({
     <div className="flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
 
       <main className="flex-1">
         <Breadcrumbs

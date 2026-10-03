@@ -10,8 +10,8 @@ export const collectionProductsQuery = /* GraphQL */ `
             handle
             title
             availableForSale
-            variants(first: 2) @include(if: $includeQuickAdd) {
-              nodes { id availableForSale }
+            variants(first: 100) @include(if: $includeQuickAdd) {
+              nodes { id title availableForSale price { amount currencyCode } compareAtPrice { amount currencyCode } }
             }
             featuredImage {
               url

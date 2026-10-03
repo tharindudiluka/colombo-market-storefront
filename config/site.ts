@@ -1,5 +1,5 @@
 /**
- * Business facts, not translated prose. Components (Footer, AnnouncementBar, SeoContent)
+ * Business facts, not translated prose. Components (Footer, AnnouncementBar, VisitStore)
  * read these instead of hardcoding copy — keeps facts (address, delivery threshold) from
  * drifting out of sync with reality, and out of messages/*.json where they'd have to be
  * duplicated per locale.
@@ -10,6 +10,12 @@ export const site = {
   // Store logo, pulled from the Shopify theme (config/settings_data.json →
   // shopify://shop_images/Untitled_design_3.png) and vendored into public/.
   logo: "/colombo-market-logo.png",
+  // Original storefront photo used by the Shopify homepage image-with-text section.
+  storefrontImage: {
+    src: "https://cdn.shopify.com/s/files/1/0980/0404/2075/files/Banner.jpg?v=1783785135",
+    width: 5946,
+    height: 3418,
+  },
   domain: "colombomarket.de",
   // Full origin, used server-side to build OAuth redirect/logout URIs for the Shopify
   // Customer Account API. Override per-environment via SITE_URL (staging vs. prod).
@@ -27,7 +33,7 @@ export const site = {
     // facebook: add real handle here once confirmed
   },
   delivery: {
-    freeDeliveryThreshold: 39.99,
+    freeDeliveryThreshold: 59.99,
   },
   currency: "EUR",
   locale: {

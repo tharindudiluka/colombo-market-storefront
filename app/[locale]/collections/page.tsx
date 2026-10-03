@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionsIndexQuery } from "@/lib/shopify/queries/collections-index";
@@ -34,7 +33,6 @@ export default async function CollectionsIndexPage({
     <div className="flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
       <main className="flex-1">
         <Breadcrumbs items={[{ label: t("allTitle") }]} />
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-3">

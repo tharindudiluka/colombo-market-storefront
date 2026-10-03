@@ -27,7 +27,7 @@ const AUTO_ADVANCE_MS = 5000;
 const RESUME_DELAY_MS = 4000;
 
 /**
- * A merchant banner image, optionally clickable. Nothing is layered on the image —
+ * A merchant banner image, optionally clickable. The first image carries live copy;
  * the link (if any) comes from the metaobject's `link` field: an internal path
  * (`/collections/x`) routes client-side; anything else opens in a new tab.
  */
@@ -42,6 +42,7 @@ function HeroImageSlide({
   href: string | null;
   priority: boolean;
 }) {
+  const t = useTranslations("hero.mainBanner");
   const className = "relative block h-full w-full shrink-0 snap-center";
   const image = (
     <Image
@@ -53,6 +54,25 @@ function HeroImageSlide({
       className="object-cover"
     />
   );
+
+  if (priority) {
+    return (
+      <div className={className}>
+        {href ? href.startsWith("/") ? (
+          <Link href={href} className="absolute inset-0" aria-label={alt}>{image}</Link>
+        ) : (
+          <a href={href} target="_blank" rel="noopener noreferrer" className="absolute inset-0" aria-label={alt}>{image}</a>
+        ) : image}
+        <div className="hero-banner-copy absolute inset-y-0 flex flex-col justify-center text-brand-teal-dark">
+          <h1 className="font-heading font-extrabold tracking-tight">{t("heading")}</h1>
+          <p>{t("body")}</p>
+          <Link href="/collections" className="w-fit rounded-full bg-brand-teal font-bold text-white transition-colors hover:bg-brand-teal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal-dark">
+            {t("cta")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!href) return <div className={className}>{image}</div>;
   if (href.startsWith("/")) {

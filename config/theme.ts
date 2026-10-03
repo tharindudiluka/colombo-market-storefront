@@ -21,6 +21,12 @@ export const theme = {
     categoryTerracotta: "#eedbd2",
     categoryTeal: "#d5e8e4",
     categoryPeach: "#f5e7dc",
+    kumaioGold: "#e7d398",
+    kumaioCream: "#f0e5c9",
+    kumaioGreen: "#0b332b",
+    dailyDelightBlue: "#07578c",
+    dailyDelightBody: "#304c65",
+    dailyDelightCream: "#fff1bd",
   },
   fonts: {
     heading: "Geist",
@@ -40,9 +46,9 @@ export const theme = {
     announcementPadding: "7px",
     headerHeight: "88px",
     headerPadding: "20px",
-    desktopHeaderHeight: "112px",
-    desktopLogoHeight: "80px",
-    desktopNavHeight: "56px",
+    desktopHeaderHeight: "96px",
+    desktopLogoHeight: "72px",
+    desktopNavHeight: "48px",
   },
 
   /* ----------------------------------------------------------------------

@@ -13,7 +13,8 @@ export type ShopifyImage = {
 };
 
 export type ShopifyProductNode = {
-  variants?: { nodes: { id: string; availableForSale: boolean }[] };
+  vendor?: string;
+  variants?: { nodes: { id: string; title: string; availableForSale: boolean; price: { amount: string; currencyCode: string }; compareAtPrice: { amount: string; currencyCode: string } | null }[] };
   id: string;
   handle: string;
   title: string;
@@ -179,7 +180,7 @@ export type ProductRecommendationsResult = {
 };
 
 export type SearchProductsResult = {
-  products: { edges: { node: ShopifyProductNode }[] };
+  products: { edges: { node: ShopifyProductNode }[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } };
 };
 
 export type ShopifyCartMerchandise = {
@@ -327,4 +328,12 @@ export type CustomerAddressDeleteResult = {
 };
 export type CustomerDefaultAddressUpdateResult = {
   customerDefaultAddressUpdate: { customer: { id: string } | null; userErrors: CustomerUserError[] };
+};
+
+export type ShopifyHomepageBrand = {
+  id: string;
+  fields: { key: string; value: string | null; reference: { image?: ShopifyImage | null } | null }[];
+};
+export type HomepageBrandsResult = {
+  metaobjects: { nodes: ShopifyHomepageBrand[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } };
 };

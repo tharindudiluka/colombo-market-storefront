@@ -11,9 +11,8 @@ export async function AnnouncementBar() {
   }).format(site.delivery.freeDeliveryThreshold);
 
   const items = [
-    `★ ${t("rating")}`,
-    t("pickup"),
     t("freeDelivery", { threshold }),
+    t("pickup"),
   ];
 
   return <AnnouncementBarClient items={items} regionLabel={t("region")} />;

@@ -5,6 +5,7 @@ import type {
   ShopifyCustomer,
   ShopifyCustomerAddress,
   ShopifyHomeBannerNode,
+  ShopifyHomepageBrand,
   ShopifyOrder,
   ShopifyProductDetail,
   ShopifyProductNode,
@@ -18,6 +19,7 @@ import type {
  */
 export type UiProduct = {
   quickAddVariantId?: string | null;
+  quickAddVariants?: { id: string; title: string; availableForSale: boolean; price: UiProduct["price"]; compareAtPrice: UiProduct["compareAtPrice"] }[];
   id: string;
   handle: string;
   title: string;
@@ -40,6 +42,12 @@ export function toUiProduct(node: ShopifyProductNode): UiProduct {
 
   return {
     quickAddVariantId: node.variants?.nodes.length === 1 && node.variants.nodes[0].availableForSale ? node.variants.nodes[0].id : null,
+    quickAddVariants: node.variants?.nodes.map(variant => ({
+      id: variant.id, title: variant.title, availableForSale: variant.availableForSale,
+      price: { amount: Number(variant.price.amount), currencyCode: variant.price.currencyCode },
+      compareAtPrice: variant.compareAtPrice && Number(variant.compareAtPrice.amount) > Number(variant.price.amount)
+        ? { amount: Number(variant.compareAtPrice.amount), currencyCode: variant.compareAtPrice.currencyCode } : null,
+    })),
     id: node.id,
     handle: node.handle,
     title: node.title,
@@ -382,4 +390,20 @@ export function toUiOrder(node: ShopifyOrder): UiOrder {
     })),
     shippingAddress: node.shippingAddress ? toUiAddress(node.shippingAddress) : null,
   };
+}
+
+export type UiHomepageBrand = {
+  id: string; name: string; vendor: string; order: number;
+  logo: { url: string; alt: string; width?: number; height?: number };
+};
+
+export function toUiHomepageBrand(node: ShopifyHomepageBrand): UiHomepageBrand | null {
+  const fields = Object.fromEntries(node.fields.map(field => [field.key, field]));
+  const name = fields.brand_name?.value?.trim();
+  const vendor = fields.vendor?.value?.trim();
+  const image = fields.logo?.reference?.image;
+  if (fields.active?.value !== "true" || !name || !vendor || !image?.url) return null;
+  const order = Number(fields.display_order?.value);
+  return { id: node.id, name, vendor, order: Number.isFinite(order) ? order : Number.MAX_SAFE_INTEGER,
+    logo: { url: image.url, alt: image.altText || name, width: image.width, height: image.height } };
 }

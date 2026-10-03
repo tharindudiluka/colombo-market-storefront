@@ -51,7 +51,7 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
 
   return (
     <li className="group/submenu relative">
-      {entry.href ? (
+      {entry.href && entry.href !== "#" ? (
         <Link
           href={entry.href}
           aria-current={entry.href === pathname ? "page" : undefined}
@@ -62,10 +62,10 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
           {hasChildren && <RightCaret />}
         </Link>
       ) : (
-        <span className={itemClassName}>
+        <button type="button" className={itemClassName}>
           <span>{entry.title}</span>
           {hasChildren && <RightCaret />}
-        </span>
+        </button>
       )}
 
       {hasChildren && (
@@ -90,8 +90,8 @@ function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: 
   }`;
 
   return (
-    <li className="group/menu relative flex h-full items-center">
-      {entry.href ? (
+    <li className="group/menu relative flex h-[var(--layout-desktop-nav-height)] items-center">
+      {entry.href && entry.href !== "#" ? (
         <Link
           href={entry.href}
           aria-current={entry.href === pathname ? "page" : undefined}
@@ -124,34 +124,14 @@ function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: 
 export function NavMenuClient({ entries = [] }: { entries?: NavigationEntry[] }) {
   const pathname = usePathname();
   const t = useTranslations("nav");
-  const aboutEntry: NavigationEntry = {
-    id: "about-us",
-    title: t("aboutUs"),
-    href: "/pages/about-us",
-    children: [
-      {
-        id: "about-us-overview",
-        title: t("aboutUs"),
-        href: "/pages/about-us",
-        children: [],
-      },
-      {
-        id: "contact",
-        title: t("contact"),
-        href: "/contact",
-        children: [],
-      },
-    ],
-  };
-
   return (
-    <nav className="storefront-nav relative z-30 hidden h-[var(--layout-nav-height)] bg-white lg:block" aria-label={t("desktopMenuLabel")}>
+    <nav className="storefront-nav relative z-30 hidden h-[var(--layout-nav-height)] bg-transparent lg:block" aria-label={t("desktopMenuLabel")}>
       <div className="mx-auto flex h-full max-w-[var(--layout-max-width)] items-center overflow-visible px-[var(--layout-page-padding)]">
         <ul className="flex h-full min-w-0 flex-wrap items-center overflow-visible">
           {entries.map((entry) => (
             <TopLevelEntry key={entry.id} entry={entry} pathname={pathname} />
           ))}
-          <TopLevelEntry entry={aboutEntry} pathname={pathname} />
+
         </ul>
       </div>
     </nav>

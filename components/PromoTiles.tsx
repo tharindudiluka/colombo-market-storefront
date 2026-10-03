@@ -4,10 +4,32 @@ import { Link } from "@/i18n/navigation";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { homeSubBannersQuery } from "@/lib/shopify/queries/home-banners";
 import { toUiBanner, type UiBanner } from "@/lib/shopify/mappers";
-import { promoTileMeta } from "@/lib/content/homepage";
+import { dailyDelightBannerId, kumaioBannerId, promoTileMeta } from "@/lib/content/homepage";
+import { promoCollectionHandles } from "@/config/collections";
 import type { HomeBannersResult, LanguageCode } from "@/lib/shopify/types";
 
 type PromoTileText = { title: string; subtitle: string };
+
+function BrandPromoTile({ banner, copy, brand }: {
+  banner: UiBanner;
+  brand: "kumaio" | "dailyDelight";
+  copy: { heading: string; body: string; cta: string };
+}) {
+  return (
+    <div className={`kumaio-banner ${brand === "dailyDelight" ? "daily-delight-banner" : ""} relative col-span-2 overflow-hidden rounded-2xl md:col-span-1`}>
+      <div className="kumaio-artwork relative" style={{ aspectRatio: `${banner.image.width ?? 3} / ${banner.image.height ?? 1}` }}>
+        <Image src={banner.image.url} alt={banner.image.alt} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+      </div>
+      <div className="kumaio-copy">
+        <h2 className="font-heading font-bold">{copy.heading}</h2>
+        <p>{copy.body}</p>
+        <Link href={`/collections/${promoCollectionHandles[brand]}`} className="kumaio-cta inline-flex w-fit items-center justify-center rounded-full font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2">
+          {copy.cta}
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 async function getSubBanners(language: LanguageCode): Promise<UiBanner[]> {
   try {
@@ -15,6 +37,7 @@ async function getSubBanners(language: LanguageCode): Promise<UiBanner[]> {
       query: homeSubBannersQuery,
       variables: { language },
       tags: ["homepage"],
+      revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
     });
     return data.metaobjects.edges
       .map((edge) => toUiBanner(edge.node))
@@ -93,11 +116,17 @@ export async function PromoTiles() {
   const locale = await getLocale();
   const language = locale.toUpperCase() as LanguageCode;
   const banners = await getSubBanners(language);
+  const t = await getTranslations("promo.kumaio");
+  const daily = await getTranslations("promo.dailyDelight");
 
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-1">
+    <div className="promo-stack grid grid-cols-2 gap-3 md:grid-cols-1">
       {banners.length > 0 ? (
-        banners.map((banner) => (
+        banners.map((banner) => banner.id === kumaioBannerId ? (
+          <BrandPromoTile key={banner.id} brand="kumaio" banner={banner} copy={{ heading: t("heading"), body: t("body"), cta: t("cta") }} />
+        ) : banner.id === dailyDelightBannerId ? (
+          <BrandPromoTile key={banner.id} brand="dailyDelight" banner={banner} copy={{ heading: daily("heading"), body: daily("body"), cta: daily("cta") }} />
+        ) : (
           <PromoImageTile
             key={banner.id}
             url={banner.image.url}

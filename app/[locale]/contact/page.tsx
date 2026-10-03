@@ -4,7 +4,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { NavMenu } from "@/components/NavMenu";
 import { site } from "@/config/site";
 
 function getShopifyContactAction() {
@@ -34,7 +33,6 @@ export default async function ContactPage() {
     <div className="flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <NavMenu />
       <main className="flex-1 pb-12 sm:pb-16">
         <Breadcrumbs items={[{ label: t("title") }]} />
         <section className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6 sm:pt-10">
