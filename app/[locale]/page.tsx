@@ -51,7 +51,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   ]);
 
   return (
-    <div className="flex min-h-full flex-col bg-white">
+    <div className="homepage flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
       <NavMenu />

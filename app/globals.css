@@ -16,6 +16,7 @@
   --color-brand-terracotta: #b4531f;
   --color-brand-cream: #d6efd9;
   --layout-max-width: 1400px;
+  --layout-homepage-max-width: 1920px;
   --layout-drawer-width: 500px;
   --layout-page-padding: 50px;
   --layout-nav-height: 44px;
@@ -25,6 +26,47 @@
   --layout-announcement-padding: 7px;
   --layout-header-height: 88px;
   --layout-header-padding: 20px;
+}
+
+/* Homepage content shares the existing container system. Scope the wider token
+ * to the main content and chrome so other routes and the footer stay unchanged.
+ * Section backgrounds remain full width; only their centered content is inset. */
+.homepage {
+  --layout-homepage-padding: 1rem;
+}
+
+.homepage > main,
+.homepage > header,
+.homepage > nav {
+  --layout-max-width: var(--layout-homepage-max-width);
+}
+
+.homepage > main .mx-auto,
+.homepage > header > .mx-auto,
+.homepage > nav > .mx-auto {
+  max-width: var(--layout-max-width);
+  padding-inline: var(--layout-homepage-padding);
+}
+
+@media (min-width: 640px) {
+  .homepage {
+    --layout-homepage-padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage {
+    --layout-homepage-padding: 2rem;
+  }
+
+  /* On desktop the centered container's outside space supplies the gutters,
+   * keeping the usable content itself near full width without double insets. */
+  .homepage > main .mx-auto,
+  .homepage > header > .mx-auto,
+  .homepage > nav > .mx-auto {
+    width: calc(100% - 2 * var(--layout-homepage-padding));
+    padding-inline: 0;
+  }
 }
 
 @theme inline {

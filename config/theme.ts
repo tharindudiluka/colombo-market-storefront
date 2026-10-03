@@ -23,6 +23,7 @@ export const theme = {
   },
   layout: {
     maxWidth: "1400px",
+    homepageMaxWidth: "1920px",
     drawerWidth: "500px",
     buttonRadius: "9999px",
     pagePadding: "50px",
