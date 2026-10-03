@@ -90,6 +90,7 @@
     }
   },
   "categoryGrid": {
+    "viewAll": "Alle Kategorien ansehen",
     "title": "Nach Kategorie einkaufen"
   },
   "breadcrumbs": {

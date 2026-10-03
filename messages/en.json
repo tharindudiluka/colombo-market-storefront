@@ -90,6 +90,7 @@
     }
   },
   "categoryGrid": {
+    "viewAll": "View all categories",
     "title": "Shop by Category"
   },
   "breadcrumbs": {

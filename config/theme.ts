@@ -15,6 +15,12 @@ export const theme = {
     gold: "#8cc63f",
     terracotta: "#b4531f",
     cream: "#d6efd9",
+    categorySage: "#e3ede2",
+    categoryGreen: "#d5e5d6",
+    categoryTurmeric: "#f5e4bc",
+    categoryTerracotta: "#eedbd2",
+    categoryTeal: "#d5e8e4",
+    categoryPeach: "#f5e7dc",
   },
   fonts: {
     heading: "Geist",
