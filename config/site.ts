@@ -36,6 +36,10 @@ export const site = {
     freeDeliveryThreshold: 59.99,
   },
   currency: "EUR",
+  features: {
+    // Re-enable after Shopify Customer Account OAuth is configured and verified.
+    customerAccounts: false,
+  },
   locale: {
     default: "de",
     supported: ["de", "en"] as const,

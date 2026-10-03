@@ -57,9 +57,11 @@ export async function Footer() {
               {t("footer.supportTitle")}
             </p>
             <ul className="mt-3 flex flex-col gap-2">
-              {supportLinks.map((label, index) => (
+              {supportLinks.map((label, index) => ({ label, href: supportHrefs[index] }))
+                .filter(({ href }) => site.features.customerAccounts || href !== "/account/orders")
+                .map(({ label, href }) => (
                 <li key={label}>
-                  <Link href={supportHrefs[index]} className="text-sm text-white/80 hover:text-white">
+                  <Link href={href} className="text-sm text-white/80 hover:text-white">
                     {label}
                   </Link>
                 </li>

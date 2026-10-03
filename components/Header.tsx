@@ -36,7 +36,7 @@ export async function Header() {
 
         <div className="storefront-header-actions ml-auto flex items-center gap-1 sm:ml-0">
           <LanguageSwitcher />
-          <AccountButton />
+          {site.features.customerAccounts && <AccountButton />}
           <WishlistHeaderButton />
           <CartButton />
         </div>

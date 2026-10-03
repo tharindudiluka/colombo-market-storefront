@@ -24,8 +24,8 @@ export async function CategoryGrid({ categories }: { categories: UiCategory[] })
             href={`/collections/${cat.handle}`}
             className="group flex h-36 min-w-0 flex-col items-center justify-center gap-2 border-b border-r border-brand-teal/15 bg-white/90 px-3 py-3 text-center transition-colors hover:bg-brand-cream/40 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-teal sm:h-38 sm:px-4"
           >
-            <span aria-hidden className={`flex h-17 w-17 shrink-0 items-center justify-center rounded-full transition-transform group-hover:scale-105 ${homepageCategoryPresentation[cat.handle].tone}`}>
-              <HomepageCategoryIcon name={homepageCategoryPresentation[cat.handle].icon} className="h-10 w-10" />
+            <span aria-hidden className={`flex h-17 w-17 shrink-0 items-center justify-center rounded-full transition-transform group-hover:scale-105 ${homepageCategoryPresentation[cat.handle]?.tone ?? "bg-category-sage text-brand-teal-dark"}`}>
+              <HomepageCategoryIcon name={homepageCategoryPresentation[cat.handle]?.icon ?? "leaf"} className="h-10 w-10" />
             </span>
             <span className="min-h-10 max-w-full text-sm font-semibold leading-5 text-brand-teal-dark sm:text-base sm:leading-6">
               {cat.title}
