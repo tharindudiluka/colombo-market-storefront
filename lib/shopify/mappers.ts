@@ -1,3 +1,4 @@
+import { normalizeStorefrontUrl } from "@/lib/shopify/storefront-url";
 import type {
   ShopifyCart,
   ShopifyCollection,
@@ -69,6 +70,8 @@ export function toUiProduct(node: ShopifyProductNode): UiProduct {
 }
 
 export type UiProductVariant = {
+  sku: string | null;
+  barcode: string | null;
   id: string;
   title: string;
   availableForSale: boolean;
@@ -105,6 +108,8 @@ function toUiVariant(node: ShopifyProductVariant, fallbackAlt: string): UiProduc
   const isOnSale = compareAtAmount !== undefined && Number(compareAtAmount) > Number(priceAmount);
 
   return {
+    sku: node.sku || null,
+    barcode: node.barcode || null,
     id: node.id,
     title: node.title,
     availableForSale: node.availableForSale,
@@ -256,7 +261,7 @@ export function toUiBanner(node: ShopifyHomeBannerNode): UiBanner | null {
       width: image.width ?? null,
       height: image.height ?? null,
     },
-    href: href ? href : null,
+    href: href ? normalizeStorefrontUrl(href) : null,
   };
 }
 

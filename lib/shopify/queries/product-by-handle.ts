@@ -35,6 +35,8 @@ export const productByHandleQuery = /* GraphQL */ `
       variants(first: 25) {
         edges {
           node {
+            sku
+            barcode
             id
             title
             availableForSale

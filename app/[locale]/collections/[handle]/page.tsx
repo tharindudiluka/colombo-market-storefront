@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionByHandleQuery } from "@/lib/shopify/queries/collection-by-handle";
 import { toUiCollectionDetail } from "@/lib/shopify/mappers";
+import { canonicalMetadata } from "@/lib/seo";
 import type { CollectionByHandleResult, LanguageCode } from "@/lib/shopify/types";
 
 const sortOptions = {
@@ -73,6 +74,7 @@ export async function generateMetadata({
 
   const collection = toUiCollectionDetail(raw);
   return {
+    ...canonicalMetadata(locale, `/collections/${raw.handle}`),
     title: collection.seo.title || `${collection.title} — Colombo Market`,
     description: collection.seo.description || undefined,
     openGraph: collection.image ? { images: [collection.image.url] } : undefined,
@@ -106,7 +108,7 @@ export default async function CollectionPage({
       <Header />
 
       <main className="flex-1">
-        <Breadcrumbs items={[{ label: categoryLabel }]} />
+        <Breadcrumbs currentPath={`/collections/${handle}`} items={[{ label: categoryLabel }]} />
 
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pb-2 pt-3">
           <h1 className="font-heading text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">

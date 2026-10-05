@@ -74,6 +74,60 @@ data. It returns `{ ok: false, error: "..." }` with a clear message if credentia
 missing or wrong. Delete this route once you've confirmed it works, or leave it behind a
 dev-only guard.
 
+## Production checkout domain (Next.js on Vercel)
+
+The custom storefront domain and Shopify-hosted checkout must have separate hosts.
+`colombomarket.de` stays attached to Vercel. Shopify's **Online Store primary domain**
+must resolve to Shopify, not to this Next.js app.
+
+Diagnosis verified with fresh nonempty Storefront API carts on 2026-10-05:
+
+- Shopify reported `https://colombomarket.de` as its primary domain.
+- German `checkoutUrl` used `/cart/c/...`; English used `/en/cart/c/...` on that host.
+- Both reached Vercel and returned HTTP 404.
+- Using the existing `.myshopify.com` host for the same checkout path returned HTTP 301
+  back to the incorrectly configured primary domain, then HTTP 404.
+
+### Required Shopify configuration
+
+In Shopify Admin, **Settings → Domains**, set a Shopify-served domain as the primary
+domain for the **Online Store**. The smallest correction uses the existing shop domain
+`colombo-market-2.myshopify.com`, with no new DNS record. Alternatively, connect a dedicated
+checkout subdomain (for example `checkout.colombomarket.de`) to Shopify, wait for Shopify's
+domain/TLS verification, and make that the Online Store primary domain. Follow the DNS
+records Shopify supplies for that subdomain; do not repoint the storefront apex domain.
+
+Keep `colombomarket.de` on Vercel and retain production `SITE_URL=https://colombomarket.de`.
+Keep `SHOPIFY_STORE_DOMAIN=colombo-market-2.myshopify.com` for API requests. No additional
+checkout environment variable, Next.js redirect/rewrite, locale-prefix stripping, or
+frontend checkout-host substitution is required.
+
+The cart fragment requests Shopify's `checkoutUrl` for reads and every mutation; cart
+actions bypass caching, `toUiCart` preserves the URL, and both checkout controls use plain
+HTML anchors. Preserve this handoff, including Shopify's locale path and all query
+parameters. Cart keys are sensitive: do not log or paste complete checkout URLs.
+
+### Verify after changing the Shopify setting
+
+1. Query `shop.primaryDomain.url` and create a fresh cart with an available product in
+   each language context (`DE` and `EN`). Confirm each returned `checkoutUrl` uses the
+   Shopify-served primary domain.
+2. Open checkout from both the cart drawer and cart page in each storefront locale.
+   Confirm Shopify displays the correct product, quantity, price, and language without
+   redirecting back to the Vercel-hosted `/cart/c/...` route. Do not place a test order
+   unless separately authorized.
+3. Refresh any already-open cart UI so it fetches the current checkout URL rather than
+   retaining a URL from before the domain change. No application redeploy is required
+   for the domain setting alone.
+4. Review Shopify-generated links (notifications, discounts, checkout logo/continue
+   shopping) because changing Shopify's primary domain affects their host. Configure
+   storefront return navigation separately if needed; do not add a blanket redirect
+   that intercepts cart or checkout routes.
+
+Shopify references:
+[Cart API checkout handoff](https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/cart/manage)
+and [direct checkout traffic to a Shopify subdomain](https://shopify.dev/docs/storefronts/headless/hydrogen/migrate/redirect-traffic#direct-checkout-traffic-to-the-subdomain).
+
 ## Known limitation: locale vs. Shopify content language
 
 `@inContext(language: EN)` only returns translated product/collection titles if the

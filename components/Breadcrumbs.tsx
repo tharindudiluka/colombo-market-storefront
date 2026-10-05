@@ -1,12 +1,24 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { storefrontUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 export type BreadcrumbItem = { label: string; href?: string };
 
-export async function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+export async function Breadcrumbs({ items, currentPath }: { items: BreadcrumbItem[]; currentPath?: string }) {
   const t = await getTranslations();
+  const locale = await getLocale();
+  const realPath = currentPath && items.length > 0 && items.slice(0, -1).every(item => item.href);
 
   return (
+    <>
+    {realPath && <JsonLd data={{
+      "@context": "https://schema.org", "@type": "BreadcrumbList",
+      itemListElement: [{ label: t("breadcrumbs.home"), href: "/" }, ...items].map((item, index, path) => ({
+        "@type": "ListItem", position: index + 1, name: item.label,
+        item: storefrontUrl(locale, index === path.length - 1 ? currentPath! : item.href!),
+      })),
+    }} />}
     <nav
       aria-label="Breadcrumb"
       className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-4 text-xs text-brand-teal-dark/60 sm:text-sm"
@@ -39,5 +51,6 @@ export async function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         })}
       </ol>
     </nav>
+    </>
   );
 }

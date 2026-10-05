@@ -72,10 +72,12 @@ export type ShopifyMenuItem = {
   title: string;
   url: string | null;
   type: string;
+  resource?: { handle: string } | null;
   items?: ShopifyMenuItem[];
 };
 
 export type NavigationMenuResult = {
+  shop: { primaryDomain: { url: string } };
   menu: { title: string; items: ShopifyMenuItem[] } | null;
 };
 
@@ -141,6 +143,8 @@ export type ShopifyProductOption = {
 };
 
 export type ShopifyProductVariant = {
+  sku: string | null;
+  barcode: string | null;
   id: string;
   title: string;
   availableForSale: boolean;

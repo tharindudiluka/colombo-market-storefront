@@ -9,7 +9,7 @@ import { Header } from "@/components/Header";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "cart" });
-  return { title: t("title") };
+  return { title: t("title"), robots: { index: false, follow: true } };
 }
 
 export default async function CartPage() {

@@ -9,10 +9,17 @@ import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionsIndexQuery } from "@/lib/shopify/queries/collections-index";
 import { toUiCategory } from "@/lib/shopify/mappers";
 import type { CollectionsIndexResult, LanguageCode } from "@/lib/shopify/types";
+import { canonicalMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Collections — Colombo Market",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "collection" });
+  return { ...canonicalMetadata(locale, "/collections"), title: `${t("allTitle")} — Colombo Market` };
+}
 
 export default async function CollectionsIndexPage({
   params,
@@ -34,7 +41,7 @@ export default async function CollectionsIndexPage({
       <AnnouncementBar />
       <Header />
       <main className="flex-1">
-        <Breadcrumbs items={[{ label: t("allTitle") }]} />
+        <Breadcrumbs currentPath="/collections" items={[{ label: t("allTitle") }]} />
         <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-3">
           <h1 className="font-heading text-2xl font-extrabold text-brand-teal-dark sm:text-3xl">
             {t("allTitle")}

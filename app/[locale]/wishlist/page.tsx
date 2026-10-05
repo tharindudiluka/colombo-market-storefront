@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WishlistPageClient } from "@/components/wishlist/WishlistPageClient";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
 
 export default async function WishlistPage() {
   const t = await getTranslations("wishlist");

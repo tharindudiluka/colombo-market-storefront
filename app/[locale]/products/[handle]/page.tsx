@@ -15,6 +15,9 @@ import { productByHandleQuery } from "@/lib/shopify/queries/product-by-handle";
 import { productRecommendationsQuery } from "@/lib/shopify/queries/product-recommendations";
 import { collectionProductsQuery } from "@/lib/shopify/queries/collection-products";
 import { toUiProduct, toUiProductDetail } from "@/lib/shopify/mappers";
+import { canonicalMetadata } from "@/lib/seo";
+import { productStructuredData } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import type {
   CollectionProductsResult,
   LanguageCode,
@@ -72,6 +75,7 @@ export async function generateMetadata({
 
   const detail = toUiProductDetail(product);
   return {
+    ...canonicalMetadata(locale, `/products/${product.handle}`),
     title: detail.seo.title || `${detail.title} — Colombo Market`,
     description: detail.seo.description || detail.description.slice(0, 160),
     openGraph: detail.images[0] ? { images: [detail.images[0].url] } : undefined,
@@ -105,7 +109,9 @@ export default async function ProductPage({
       <Header />
 
       <main className="flex-1">
+        <JsonLd data={productStructuredData(product, locale)} />
         <Breadcrumbs
+          currentPath={`/products/${product.handle}`}
           items={[
             ...(product.breadcrumbCategory
               ? [

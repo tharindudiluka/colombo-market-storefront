@@ -12,6 +12,8 @@ import { getCart } from "@/lib/cart/actions";
 import { getCurrentCustomer } from "@/lib/customer/actions";
 import type { LanguageCode } from "@/lib/shopify/types";
 import "../globals.css";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationStructuredData } from "@/lib/structured-data";
 
 // Matches spice_clone's original font setup: Geist Sans feeds both the heading and
 // body tokens (spice_clone had no separate heading font), Geist Mono is exposed for
@@ -71,6 +73,7 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd data={organizationStructuredData()} />
         <NextIntlClientProvider messages={messages}>
           <WishlistProvider>
             <CartProvider initialCart={initialCart} language={language}>

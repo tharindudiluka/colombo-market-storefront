@@ -35,7 +35,10 @@ export async function generateMetadata({
   const { q, vendor: vendorParam } = await searchParams;
   const vendor = vendorParam?.trim();
   const query = vendor ? `vendor:${JSON.stringify(vendor)}` : (q ?? "").trim();
-  return { title: vendor ? `${vendor} — Colombo Market` : query ? `${query} — Colombo Market` : "Search — Colombo Market" };
+  return {
+    title: vendor ? `${vendor} — Colombo Market` : query ? `${query} — Colombo Market` : "Search — Colombo Market",
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function SearchPage({

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
@@ -5,6 +6,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "@/i18n/navigation";
 import { getCurrentCustomer } from "@/lib/customer/actions";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
 
 const navLinkClassName =
   "rounded-lg px-4 py-2.5 text-left text-sm font-semibold text-brand-teal-dark hover:bg-brand-cream whitespace-nowrap";

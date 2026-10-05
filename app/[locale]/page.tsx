@@ -15,6 +15,12 @@ import { buildHomeCollectionsQuery } from "@/lib/shopify/queries/collections";
 import { toUiCategory, toUiProduct } from "@/lib/shopify/mappers";
 import type { CollectionProductsResult, LanguageCode, ShopifyCollection } from "@/lib/shopify/types";
 import { categoryHandles, collectionHandles } from "@/config/collections";
+import { canonicalMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return canonicalMetadata(locale, "/");
+}
 
 async function getCollectionProducts(handle: string, language: LanguageCode, first = 6, includeQuickAdd = false) {
   const data = await shopifyFetch<CollectionProductsResult>({

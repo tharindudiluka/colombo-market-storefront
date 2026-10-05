@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/config/site";
+import { canonicalMetadata } from "@/lib/seo";
+import { pageHandles, pageHref } from "@/config/pages";
 
 export async function generateMetadata({
   params,
@@ -15,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return { ...canonicalMetadata(locale, pageHref(pageHandles.about)), title: t("metaTitle"), description: t("metaDescription") };
 }
 
 export default async function AboutUsPage() {
@@ -28,7 +30,7 @@ export default async function AboutUsPage() {
       <AnnouncementBar />
       <Header />
       <main className="flex-1 pb-12 sm:pb-16">
-        <Breadcrumbs items={[{ label: t("title") }]} />
+        <Breadcrumbs currentPath={pageHref(pageHandles.about)} items={[{ label: t("title") }]} />
 
         <section className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6 sm:pt-10">
           <div className="relative isolate min-h-[32rem] overflow-hidden rounded-2xl bg-brand-teal-dark sm:min-h-[37.5rem]">

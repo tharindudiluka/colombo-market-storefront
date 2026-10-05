@@ -1,4 +1,4 @@
-import { site } from "@/config/site";
+import { normalizeStorefrontUrl } from "@/lib/shopify/storefront-url";
 import { localMenuPageHrefs } from "@/config/pages";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { navigationCollectionsQuery } from "@/lib/shopify/queries/navigation-collections";
@@ -12,31 +12,16 @@ export type NavigationEntry = {
   children: NavigationEntry[];
 };
 
-function localizeMenuUrl(url: string | null): string {
-  if (!url || url === "#") return "#";
-  try {
-    const parsed = new URL(url, "https://shopify.local");
-    const internalHosts = ["shopify.local", site.domain, process.env.SHOPIFY_STORE_DOMAIN];
-    if (!internalHosts.includes(parsed.hostname)) return parsed.href;
-    // Shopify resource URLs can already include a locale. Our Link applies it.
-    const segments = parsed.pathname.split("/");
-    if (site.locale.supported.some((locale) => locale === segments[1])) {
-      segments.splice(1, 1);
-    }
-    const pathname = segments.join("/") || "/";
-    if (pathname === "/" && url.endsWith("#")) return "#";
-    return `${pathname}${parsed.search}${parsed.hash}`;
-  } catch {
-    return "#";
-  }
+export function localizeMenuUrl(item: ShopifyMenuItem, primaryDomain: string): string {
+  return item.url ? normalizeStorefrontUrl(item.url, primaryDomain) : "#";
 }
 
-function mapMenuItem(item: ShopifyMenuItem): NavigationEntry {
+function mapMenuItem(item: ShopifyMenuItem, primaryDomain: string): NavigationEntry {
   return {
     id: item.id,
     title: item.title,
-    href: localMenuPageHrefs[item.id] ?? localizeMenuUrl(item.url),
-    children: (item.items ?? []).map(mapMenuItem),
+    href: localMenuPageHrefs[item.id] ?? localizeMenuUrl(item, primaryDomain),
+    children: (item.items ?? []).map(child => mapMenuItem(child, primaryDomain)),
   };
 }
 
@@ -48,7 +33,7 @@ export async function getNavigationEntries(language: LanguageCode): Promise<Navi
     // Menu edits are immediately visible locally; production retains the existing cache.
     revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
   });
-  return (data.menu?.items ?? []).map(mapMenuItem);
+  return (data.menu?.items ?? []).map(item => mapMenuItem(item, data.shop.primaryDomain.url));
 }
 export async function getNavigationCollections(language: LanguageCode): Promise<ShopifyCollection[]> {
   try {

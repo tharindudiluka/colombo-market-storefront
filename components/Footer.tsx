@@ -44,9 +44,9 @@ export async function Footer() {
             <ul className="mt-3 flex flex-col gap-2">
               {shopLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/80 hover:text-white">
+                  <Link href={link.href} className="text-sm text-white/80 hover:text-white">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
