@@ -345,6 +345,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Let every route shell fill the body so its flex-growing main keeps the
+ * footer at the viewport bottom on short pages, in normal flow on long ones. */
+body > .flex.min-h-full.flex-col {
+  flex: 1 0 auto;
+}
+
 /* ==========================================================================
  * GLASS + GRADIENT LAYER — experimental, sits on top of the flat Garden Frost
  * palette above. Self-contained: delete everything between this banner and the
