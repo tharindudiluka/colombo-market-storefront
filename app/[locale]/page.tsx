@@ -15,11 +15,44 @@ import { buildHomeCollectionsQuery } from "@/lib/shopify/queries/collections";
 import { toUiCategory, toUiProduct } from "@/lib/shopify/mappers";
 import type { CollectionProductsResult, LanguageCode, ShopifyCollection } from "@/lib/shopify/types";
 import { categoryHandles, collectionHandles } from "@/config/collections";
-import { canonicalMetadata } from "@/lib/seo";
+import { canonicalMetadata, storefrontOrigin, storefrontUrl } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { site } from "@/config/site";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return canonicalMetadata(locale, "/");
+  const t = await getTranslations({ locale, namespace: "metadata.home" });
+  const title = t("title");
+  const description = t("description");
+  const image = {
+    url: new URL(site.logo, storefrontOrigin).href,
+    width: 1024,
+    height: 1024,
+    alt: site.name,
+  };
+
+  return {
+    ...canonicalMetadata(locale, "/"),
+    title,
+    description,
+    openGraph: {
+      type: "website",
+      url: storefrontUrl(locale, "/"),
+      siteName: site.name,
+      locale: locale === "en" ? "en_GB" : "de_DE",
+      alternateLocale: locale === "en" ? "de_DE" : "en_GB",
+      title,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+      images: [{ url: image.url, alt: image.alt }],
+    },
+  };
 }
 
 async function getCollectionProducts(handle: string, language: LanguageCode, first = 6, includeQuickAdd = false) {

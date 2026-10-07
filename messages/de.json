@@ -1,7 +1,11 @@
 {
   "metadata": {
     "title": "Colombo Market - Sri-lankische, indische & internationale Lebensmittel",
-    "description": "Colombo Market in Ravensburg — Gewürze, Reis, frisches Gemüse und mehr, online bestellen mit Abholung im Markt."
+    "description": "Colombo Market in Ravensburg — Gewürze, Reis, frisches Gemüse und mehr, online bestellen mit Abholung im Markt.",
+    "home": {
+      "title": "Colombo Market Ravensburg | Sri-lankische & asiatische Lebensmittel",
+      "description": "Sri-lankische, indische und asiatische Lebensmittel in Ravensburg. Reis, Gewürze, Snacks, Tiefkühlprodukte und mehr – online entdecken oder vor Ort einkaufen."
+    }
   },
   "announcementBar": {
     "pickup": "Kostenlose Abholung im Markt in Ravensburg",

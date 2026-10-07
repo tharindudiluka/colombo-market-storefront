@@ -1,7 +1,11 @@
 {
   "metadata": {
     "title": "Colombo Market - Sri Lankan, Indian & International Groceries",
-    "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup."
+    "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup.",
+    "home": {
+      "title": "Colombo Market Ravensburg | Sri Lankan & Asian Groceries",
+      "description": "Sri Lankan, Indian and Asian groceries in Ravensburg. Shop rice, spices, snacks, frozen foods and more online or visit our local store."
+    }
   },
   "announcementBar": {
     "pickup": "Free pickup at our Ravensburg store",
