@@ -87,8 +87,14 @@
       "cta": "Kumaio entdecken"
     },
     "tiles": [
-      { "title": "Frisches Gemüse & Obst", "subtitle": "Handverlesen und garantiert frisch" },
-      { "title": "Tee & Gebäck entdecken", "subtitle": "Für die Pause zwischendurch" }
+      {
+        "title": "Frisches Gemüse & Obst",
+        "subtitle": "Handverlesen und garantiert frisch"
+      },
+      {
+        "title": "Tee & Gebäck entdecken",
+        "subtitle": "Für die Pause zwischendurch"
+      }
     ]
   },
   "productRow": {
@@ -162,9 +168,18 @@
     "valuesEyebrow": "Was uns leitet",
     "valuesTitle": "Qualität, Authentizität und Frische.",
     "values": {
-      "care": { "title": "Qualität", "body": "Wir wählen Produkte aus, die wir auch für unsere eigene Familie auswählen würden." },
-      "discovery": { "title": "Authentizität", "body": "Traditionelle Zutaten und beliebte Lebensmittel aus der Heimat bringen vertraute Aromen auf Ihren Tisch." },
-      "community": { "title": "Guter Service", "body": "Ehrlichkeit, Freundlichkeit und Zuverlässigkeit sind für uns genauso wichtig wie gute Produkte." }
+      "care": {
+        "title": "Qualität",
+        "body": "Wir wählen Produkte aus, die wir auch für unsere eigene Familie auswählen würden."
+      },
+      "discovery": {
+        "title": "Authentizität",
+        "body": "Traditionelle Zutaten und beliebte Lebensmittel aus der Heimat bringen vertraute Aromen auf Ihren Tisch."
+      },
+      "community": {
+        "title": "Guter Service",
+        "body": "Ehrlichkeit, Freundlichkeit und Zuverlässigkeit sind für uns genauso wichtig wie gute Produkte."
+      }
     },
     "visitEyebrow": "Komm vorbei",
     "visitTitle": "Besuche uns in Ravensburg.",
@@ -238,19 +253,37 @@
     ]
   },
   "footer": {
-    "tagline": "Sri-lankische, indische und internationale Lebensmittel — mit Abholung im Markt in Ravensburg.",
+    "tagline": "Sri-lankische, indische und südasiatische Lebensmittel – online bestellen und deutschlandweit liefern lassen.",
     "shopTitle": "Shop",
     "supportTitle": "Support",
-    "companyTitle": "Unternehmen",
-    "support": ["Bestellung verfolgen", "Kontakt"],
-    "company": ["Über uns"],
+    "companyTitle": "Unternehmen & Rechtliches",
+    "support": [
+      "Bestellung verfolgen",
+      "Kontakt"
+    ],
+    "company": [
+      "Über uns"
+    ],
     "copyright": "Alle Rechte vorbehalten.",
     "privacyPolicy": "Datenschutz",
     "contactInformation": "Kontaktinformationen",
+    "followUs": "Folge uns",
+    "socialLinkLabel": "Colombo Market auf {platform} (öffnet in einem neuen Tab)",
     "refundPolicy": "Widerrufsrecht",
     "termsOfService": "AGB",
     "shippingPolicy": "Versand",
-    "imprint": "Impressum"
+    "imprint": "Impressum",
+    "pickupNote": "Oder persönlich in unserem Markt in Ravensburg abholen.",
+    "serviceTitle": "Service",
+    "allCategories": "Alle Kategorien",
+    "rice": "Reis",
+    "pulses": "Linsen & Bohnen",
+    "spices": "Gewürze",
+    "frozen": "Tiefkühlprodukte",
+    "offers": "Angebote",
+    "shippingService": "Deutschlandweiter Versand",
+    "pickupService": "Abholung in Ravensburg",
+    "homeLabel": "Colombo Market – Startseite"
   },
   "visitStore": {
     "eyebrow": "LOKAL EINKAUFEN IN RAVENSBURG",
@@ -382,6 +415,43 @@
     "errors": {
       "authFailed": "Beim Anmelden ist etwas schiefgelaufen. Bitte versuche es erneut.",
       "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an."
+    }
+  },
+  "collectionDiscovery": {
+    "eyebrow": "Colombo Market · Nach Abteilung einkaufen",
+    "title": "Alle Kategorien",
+    "intro": "Entdecke sri-lankische, indische und südasiatische Lebensmittel – von den Basics für deine Küche bis zu neuen Lieblingsprodukten.",
+    "jumpLabel": "Direkt zur Abteilung",
+    "viewDepartment": "Alle Produkte entdecken",
+    "viewGroup": "Alle ansehen",
+    "staples": {
+      "title": "Grundnahrungsmittel",
+      "intro": "Die Basis für sri-lankische und südasiatische Gerichte: Reis, Linsen, Mehl und Getreide. Finde die passende Sorte für deine Küche."
+    },
+    "spices": {
+      "title": "Gewürze",
+      "intro": "Ganze und gemahlene Gewürze sowie ausgewählte Mischungen für die indische und sri-lankische Küche."
+    },
+    "essentials": {
+      "title": "Essentials",
+      "intro": "Alles, was den Vorrat ergänzt: Currypasten, Saucen, Kokosprodukte und würzige Begleiter für den Alltag."
+    },
+    "frozen": {
+      "title": "Frisch & Tiefgekühlt",
+      "intro": "Entdecke unsere Tiefkühlprodukte: Fladenbrote, Gemüse, Snacks und Süßspeisen für deine Küche."
+    },
+    "snacks": {
+      "title": "Snacks & Süßigkeiten",
+      "intro": "Salzige Snacks, Kekse und süße Kleinigkeiten – für zwischendurch und zum Teilen."
+    },
+    "organic": {
+      "title": "Bio & Spezial",
+      "intro": "Ausgewählte Bio-Produkte und Spezialitäten, mit einem besonderen Blick auf die sri-lankischen Produkte von Kumaio."
+    },
+    "offers": {
+      "title": "Angebote",
+      "intro": "Entdecke die aktuellen Angebote aus unserem Sortiment.",
+      "action": "Zu den aktuellen Angeboten"
     }
   }
 }

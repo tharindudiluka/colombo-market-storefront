@@ -86,8 +86,14 @@
       "cta": "Discover Kumaio"
     },
     "tiles": [
-      { "title": "Fresh Vegetables & Fruit", "subtitle": "Hand-picked & guaranteed fresh" },
-      { "title": "Discover Tea & Biscuits", "subtitle": "For your coffee break" }
+      {
+        "title": "Fresh Vegetables & Fruit",
+        "subtitle": "Hand-picked & guaranteed fresh"
+      },
+      {
+        "title": "Discover Tea & Biscuits",
+        "subtitle": "For your coffee break"
+      }
     ]
   },
   "productRow": {
@@ -161,9 +167,18 @@
     "valuesEyebrow": "What guides us",
     "valuesTitle": "Quality, authenticity and freshness.",
     "values": {
-      "care": { "title": "Quality", "body": "We choose products that we would also choose for our own family." },
-      "discovery": { "title": "Authenticity", "body": "Traditional ingredients and beloved foods from home bring familiar flavours to your table." },
-      "community": { "title": "Good service", "body": "Honesty, friendliness and reliability matter to us just as much as good products." }
+      "care": {
+        "title": "Quality",
+        "body": "We choose products that we would also choose for our own family."
+      },
+      "discovery": {
+        "title": "Authenticity",
+        "body": "Traditional ingredients and beloved foods from home bring familiar flavours to your table."
+      },
+      "community": {
+        "title": "Good service",
+        "body": "Honesty, friendliness and reliability matter to us just as much as good products."
+      }
     },
     "visitEyebrow": "Come say hello",
     "visitTitle": "Visit us in Ravensburg.",
@@ -237,19 +252,37 @@
     ]
   },
   "footer": {
-    "tagline": "Sri Lankan, Indian and international groceries — with in-store pickup in Ravensburg.",
+    "tagline": "Sri Lankan, Indian and South Asian groceries – order online for delivery across Germany.",
     "shopTitle": "Shop",
     "supportTitle": "Support",
-    "companyTitle": "Company",
-    "support": ["Track Order", "Contact Us"],
-    "company": ["About Us"],
+    "companyTitle": "Company & legal",
+    "support": [
+      "Track Order",
+      "Contact Us"
+    ],
+    "company": [
+      "About Us"
+    ],
     "copyright": "All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "contactInformation": "Contact information",
+    "followUs": "Follow us",
+    "socialLinkLabel": "Colombo Market on {platform} (opens in a new tab)",
     "refundPolicy": "Refund Policy",
     "termsOfService": "Terms of Service",
     "shippingPolicy": "Shipping Policy",
-    "imprint": "Imprint"
+    "imprint": "Imprint",
+    "pickupNote": "Or collect your order from our store in Ravensburg.",
+    "serviceTitle": "Customer service",
+    "allCategories": "All categories",
+    "rice": "Rice",
+    "pulses": "Lentils & beans",
+    "spices": "Spices",
+    "frozen": "Frozen foods",
+    "offers": "Offers",
+    "shippingService": "Delivery across Germany",
+    "pickupService": "Pickup in Ravensburg",
+    "homeLabel": "Colombo Market – home"
   },
   "visitStore": {
     "eyebrow": "SHOP LOCALLY IN RAVENSBURG",
@@ -381,6 +414,43 @@
     "errors": {
       "authFailed": "Something went wrong signing you in. Please try again.",
       "sessionExpired": "Your session has expired. Please sign in again."
+    }
+  },
+  "collectionDiscovery": {
+    "eyebrow": "Colombo Market · Shop by department",
+    "title": "All categories",
+    "intro": "Explore Sri Lankan, Indian and South Asian groceries – from everyday kitchen staples to new favourites.",
+    "jumpLabel": "Jump to a department",
+    "viewDepartment": "Explore all products",
+    "viewGroup": "View all",
+    "staples": {
+      "title": "Staple foods",
+      "intro": "The foundations of Sri Lankan and South Asian cooking: rice, pulses, flour and grains. Find the right variety for your kitchen."
+    },
+    "spices": {
+      "title": "Spices",
+      "intro": "Whole spices, ground spices and selected blends for Indian and Sri Lankan cooking."
+    },
+    "essentials": {
+      "title": "Essentials",
+      "intro": "Everyday pantry essentials: curry pastes, sauces, coconut products and savoury accompaniments."
+    },
+    "frozen": {
+      "title": "Fresh & frozen",
+      "intro": "Explore our frozen range: flatbreads, vegetables, snacks and desserts for your kitchen."
+    },
+    "snacks": {
+      "title": "Snacks & sweets",
+      "intro": "Savoury snacks, biscuits and sweet treats for everyday snacking and sharing."
+    },
+    "organic": {
+      "title": "Organic & special",
+      "intro": "Selected organic products and specialties, with a focus on the Sri Lankan range from Kumaio."
+    },
+    "offers": {
+      "title": "Offers",
+      "intro": "Explore current offers from our range.",
+      "action": "Browse current offers"
     }
   }
 }

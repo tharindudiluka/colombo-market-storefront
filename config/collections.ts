@@ -20,6 +20,15 @@ export const promoCollectionHandles = {
   kumaio: "kumaio-bio-produkte-aus-sri-lanka",
 } as const;
 
+/** Stable high-level footer destinations; does not replicate the main menu. */
+export const footerCollectionHandles = {
+  rice: "reis",
+  pulses: "linsen-und-bohnen",
+  spices: "gewuerze",
+  frozen: "frozen-food",
+  offers: collectionHandles.weeklySpecials,
+} as const;
+
 // Homepage category selection. Titles and translations come from Shopify.
 export const categoryHandles: readonly { handle: string; labelKey: string }[] = [
   { handle: "reis", labelKey: "rice" },

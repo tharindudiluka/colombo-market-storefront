@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Collections discovery uses the approved wide grid without widening other pages. */
+.collection-discovery-inner {
+  width: calc(100% - 2rem);
+  max-width: var(--layout-homepage-max-width);
+  margin-inline: auto;
+  padding-block: 1rem 2rem;
+}
+.collection-discovery-tabs {
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-brand-teal-dark) 25%, transparent) transparent;
+}
+@media (min-width: 640px) {
+  .collection-discovery-inner { width: calc(100% - 3rem); }
+}
+@media (min-width: 1024px) {
+  .collection-discovery-inner { width: calc(100% - 4rem); }
+}
+
 /*
  * Brand tokens — keep in sync with config/theme.ts (the canonical TS source; Tailwind
  * v4's CSS-first config can't import TS values directly, so this block mirrors them by
@@ -545,6 +564,25 @@ nav.border-b > div > .desktop-nav-link[aria-current="page"] {
 /* --- footer: deep green gradient --- */
 footer.bg-brand-teal-dark {
   background-image: var(--gradient-footer);
+}
+footer.storefront-footer {
+  background-image: none;
+}
+.footer-group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 180ms ease;
+}
+.footer-group-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+@media (min-width: 768px) {
+  .footer-group-panel { grid-template-rows: 1fr; visibility: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-group-panel { transition: none; }
 }
 
 /* --- hero card: rounded frame only, no overlay decoration --- */
