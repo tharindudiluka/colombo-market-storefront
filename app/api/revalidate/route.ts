@@ -4,7 +4,7 @@ import { revalidateTag } from "next/cache";
 export const runtime = "nodejs";
 
 // Keep broad tags (such as "collection") unavailable to this targeted endpoint.
-const allowedTags = new Set(["ponni-reis"]);
+const allowedTags = new Set(["navigation", "main-menu", "ponni-reis"]);
 
 function json(body: Record<string, unknown>, status = 200) {
   return Response.json(body, {
@@ -15,7 +15,7 @@ function json(body: Record<string, unknown>, status = 200) {
 
 export async function POST(request: Request) {
   const secret = process.env.REVALIDATION_SECRET;
-  if (!secret || secret.length < 32 || secret.trim() !== secret) {
+  if (!secret || !secret.trim()) {
     return json({ ok: false, error: "Revalidation is not configured." }, 503);
   }
 
@@ -38,17 +38,30 @@ export async function POST(request: Request) {
   }
   if (
     !body || typeof body !== "object" || Array.isArray(body) ||
-    Object.keys(body).length !== 1 || !("tag" in body) ||
-    typeof body.tag !== "string" || !allowedTags.has(body.tag)
+    Object.keys(body).length !== 1
   ) {
     return json({ ok: false, error: "Unsupported tag or request body." }, 400);
   }
 
+  const requestedTags = "tag" in body && typeof body.tag === "string"
+    ? [body.tag]
+    : "tags" in body && Array.isArray(body.tags) ? body.tags : [];
+  if (
+    requestedTags.length === 0 || requestedTags.length > allowedTags.size ||
+    !requestedTags.every((tag): tag is string =>
+      typeof tag === "string" && allowedTags.has(tag))
+  ) {
+    return json({ ok: false, error: "Unsupported tag or request body." }, 400);
+  }
+  const tags = [...new Set(requestedTags)];
+
   try {
     // Expire every fetch variant carrying this tag, including DE and EN.
     // Data is refetched when those pages are next requested.
-    revalidateTag(body.tag, { expire: 0 });
-    return json({ ok: true, tag: body.tag });
+    for (const tag of tags) {
+      revalidateTag(tag, { expire: 0 });
+    }
+    return json("tag" in body ? { ok: true, tag: tags[0] } : { ok: true, tags });
   } catch {
     return json({ ok: false, error: "Revalidation failed." }, 500);
   }
