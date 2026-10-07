@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Local-only Admin API audit tooling (never part of the storefront deployment)
+/.shopify-admin-local/
+
 # vercel
 .vercel
 
