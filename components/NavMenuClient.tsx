@@ -45,8 +45,8 @@ function RightCaret() {
 function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: string }) {
   const active = containsPath(entry, pathname);
   const hasChildren = entry.children.length > 0;
-  const itemClassName = `flex h-[var(--layout-menu-row-height)] w-full items-center justify-between gap-1 px-5 text-left font-sans text-[15px] leading-6 transition-colors hover:bg-neutral-50 hover:text-black ${
-    active ? "text-black" : "text-neutral-600"
+  const itemClassName = `flex min-h-[var(--layout-menu-row-height)] w-full items-center justify-between gap-2 px-5 py-2 text-left font-sans text-[15px] leading-6 transition-colors duration-150 hover:bg-brand-teal-dark hover:text-white focus-visible:bg-brand-teal-dark focus-visible:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-teal ${
+    active ? "bg-brand-teal-dark text-white" : "text-neutral-600"
   }`;
 
   return (
@@ -58,12 +58,12 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
           aria-haspopup={hasChildren ? "menu" : undefined}
           className={itemClassName}
         >
-          <span>{entry.title}</span>
+          <span className="min-w-0 break-words">{entry.title}</span>
           {hasChildren && <RightCaret />}
         </Link>
       ) : (
         <button type="button" className={itemClassName}>
-          <span>{entry.title}</span>
+          <span className="min-w-0 break-words">{entry.title}</span>
           {hasChildren && <RightCaret />}
         </button>
       )}
@@ -85,8 +85,8 @@ function SubmenuEntry({ entry, pathname }: { entry: NavigationEntry; pathname: s
 function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: string }) {
   const active = containsPath(entry, pathname);
   const hasChildren = entry.children.length > 0;
-  const itemClassName = `flex h-full items-center gap-2 border-b-2 px-6 font-navigation text-sm font-medium leading-5 tracking-[0.02em] antialiased [text-rendering:optimizeLegibility] whitespace-nowrap transition-colors hover:border-brand-teal hover:bg-brand-cream/40 hover:text-brand-teal-dark focus-visible:outline-2 focus-visible:outline-brand-teal ${
-    active ? "border-brand-teal text-brand-teal-dark" : "border-transparent text-brand-teal-dark"
+  const itemClassName = `flex h-full items-center gap-2 border-b-2 px-6 font-navigation text-sm font-medium leading-5 tracking-[0.02em] antialiased [text-rendering:optimizeLegibility] whitespace-nowrap transition-colors duration-150 hover:border-brand-teal-dark hover:bg-brand-teal-dark hover:text-white focus-visible:bg-brand-teal-dark focus-visible:text-white focus-visible:outline-2 focus-visible:outline-brand-teal ${
+    active ? "border-brand-teal-dark bg-brand-teal-dark text-white" : "border-transparent text-brand-teal-dark"
   }`;
 
   return (
