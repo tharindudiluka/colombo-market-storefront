@@ -83,7 +83,52 @@ export type UiProductVariant = {
   unitPrice: { amount: number; currencyCode: string; referenceValue: number; referenceUnit: string } | null;
 };
 
+export type UiNutrientKey = "energy" | "fat" | "saturatedFat" | "carbohydrates" | "sugars" | "protein" | "fiber" | "salt";
+
+export type UiProductInformation = {
+  ingredients: string | null;
+  legalName: string | null;
+  storage: string | null;
+  origin: string | null;
+  manufacturerDistributor: string | null;
+  nutrition: { basis: string; rows: { key: UiNutrientKey; value: string }[] } | null;
+};
+
+function toUiProductInformation(node: ShopifyProductDetail): UiProductInformation {
+  function text(field: { type: string; value: string } | null | undefined): string | null {
+    if (!field || !["single_line_text_field", "multi_line_text_field"].includes(field.type)) return null;
+    return field.value.trim() || null;
+  }
+
+  let nutrition: UiProductInformation["nutrition"] = null;
+  if (node.nutrition?.type === "json") {
+    try {
+      const data: unknown = JSON.parse(node.nutrition.value);
+      if (data && typeof data === "object" && !Array.isArray(data)) {
+        const values = data as Record<string, unknown>;
+        const basis = typeof values.basis === "string" ? values.basis.trim() : "";
+        const keys: UiNutrientKey[] = ["energy", "fat", "saturatedFat", "carbohydrates", "sugars", "protein", "fiber", "salt"];
+        const rows = keys.flatMap((key) => {
+          const value = values[key];
+          // Values must include their verified units; never infer units from a number.
+          return typeof value === "string" && value.trim() ? [{ key, value: value.trim() }] : [];
+        });
+        if (basis && rows.length) nutrition = { basis, rows };
+      }
+    } catch {
+      // Incomplete/malformed optional merchant data must not break the product page.
+    }
+  }
+
+  return {
+    ingredients: text(node.ingredients), legalName: text(node.legalName),
+    storage: text(node.storage), origin: text(node.origin),
+    manufacturerDistributor: text(node.manufacturerDistributor), nutrition,
+  };
+}
+
 export type UiProductDetail = {
+  information: UiProductInformation;
   id: string;
   handle: string;
   title: string;
@@ -142,6 +187,7 @@ export function toUiProductDetail(node: ShopifyProductDetail): UiProductDetail {
   const breadcrumbEdge = node.collections.edges[0];
 
   return {
+    information: toUiProductInformation(node),
     id: node.id,
     handle: node.handle,
     title: node.title,

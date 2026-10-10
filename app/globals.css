@@ -755,3 +755,23 @@ button.fixed.rounded-full {
   .botanical-accents--store .botanical-leaf--first { opacity: 0.1; }
   .botanical-accents--store .botanical-curry { width: 5rem; opacity: 0.1; }
 }
+
+/* Product-only controls and merchant rich text; shared cart styles remain unchanged. */
+.product-page.min-h-full.bg-white { background-color: white; }
+.product-page .product-buy-box > section.overflow-hidden { box-shadow: none; }
+.product-quantity button { width: 2.75rem; height: 2.75rem; }
+.product-quantity button:focus-visible { outline: 2px solid var(--color-brand-teal); outline-offset: 2px; border-radius: 999px; }
+.product-rich-text { overflow-wrap: anywhere; line-height: 1.7; }
+.product-rich-text > :first-child { margin-top: 0; }
+.product-rich-text p, .product-rich-text ul, .product-rich-text ol, .product-rich-text blockquote { margin-block: 0.85em; }
+.product-rich-text ul, .product-rich-text ol { padding-inline-start: 1.35em; }
+.product-rich-text ul { list-style-type: disc; }
+.product-rich-text ol { list-style-type: decimal; }
+.product-rich-text li + li { margin-top: 0.35em; }
+.product-rich-text :is(h2, h3, h4, h5, h6) { margin-block: 1.25em 0.5em; font-size: 1em; font-weight: 600; color: var(--color-brand-teal-dark); }
+.product-rich-text strong, .product-rich-text b { font-weight: 600; }
+.product-rich-text a { color: var(--color-brand-teal-dark); text-decoration: underline; text-underline-offset: 0.2em; }
+.product-rich-text blockquote { border-inline-start: 2px solid var(--color-category-sage); padding-inline-start: 1em; }
+.product-rich-text img { max-width: 100%; height: auto; }
+.product-rich-text table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+.product-rich-text :is(th, td) { border: 1px solid var(--color-category-sage); padding: 0.5em; }

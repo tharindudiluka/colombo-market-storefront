@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductGallery } from "@/components/ProductGallery";
 import { BuyBox } from "@/components/BuyBox";
 import { TrustBadges } from "@/components/TrustBadges";
-import { ProductDetailsAccordion } from "@/components/ProductDetailsAccordion";
+import { productDescriptionHtml } from "@/lib/product-description";
 import { ProductRow } from "@/components/ProductRow";
 import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
@@ -104,7 +104,7 @@ export default async function ProductPage({
   );
 
   return (
-    <div className="flex min-h-full flex-col bg-white">
+    <div className="product-page flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
 
@@ -125,15 +125,16 @@ export default async function ProductPage({
           ]}
         />
 
-        <div className="mx-auto max-w-[var(--layout-max-width)] px-4 py-6 lg:grid lg:grid-cols-2 lg:gap-12 lg:py-10">
-          <ProductGallery images={product.images} title={product.title} />
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <BuyBox product={product} />
-            <TrustBadges />
+        <div className="product-detail-layout mx-auto grid max-w-[var(--layout-max-width)] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-10">
+          <div className="min-w-0 lg:sticky lg:top-48 lg:self-start">
+            <ProductGallery images={product.images} title={product.title} />
+          </div>
+          <div className="min-w-0">
+            <BuyBox product={product} descriptionHtml={productDescriptionHtml(product.descriptionHtml)}>
+              <TrustBadges />
+            </BuyBox>
           </div>
         </div>
-
-        <ProductDetailsAccordion product={product} />
 
         {related.length > 0 && <ProductRow title={t("relatedProducts.title")} products={related} />}
       </main>

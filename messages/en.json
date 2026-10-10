@@ -346,11 +346,35 @@
     "soldOut": "Sold Out",
     "onlyLeft": "Only {count} left",
     "details": {
-      "descriptionTitle": "Description",
-      "deliveryTitle": "Delivery & Pickup",
+      "descriptionTitle": "Product description",
+      "deliveryTitle": "Shipping & pickup",
       "deliveryBody": "Pick up in-store in Ravensburg or get it delivered — free from {threshold}.",
       "returnsTitle": "Returns & Contact",
-      "returnsBody": "For questions about returns, contact us by email at colombomarket.rv@gmail.com."
+      "returnsBody": "For questions about returns, contact us by email at colombomarket.rv@gmail.com.",
+      "informationTitle": "Product information",
+      "brand": "Brand",
+      "sku": "SKU",
+      "barcode": "Barcode / GTIN",
+      "availability": "Availability",
+      "inStock": "Available",
+      "outOfStock": "Unavailable",
+      "structured": {
+        "nutrition": "Nutrition",
+        "per": "per {basis}",
+        "energy": "Energy",
+        "fat": "Fat",
+        "saturatedFat": "Saturated fat",
+        "carbohydrates": "Carbohydrates",
+        "sugars": "Sugars",
+        "protein": "Protein",
+        "fiber": "Fiber",
+        "salt": "Salt",
+        "ingredients": "Ingredients",
+        "legalName": "Legal name",
+        "storage": "Storage",
+        "origin": "Origin",
+        "manufacturerDistributor": "Manufacturer / distributor"
+      }
     },
     "relatedProducts": {
       "title": "You May Also Like"
@@ -358,6 +382,10 @@
     "trust": {
       "delivery": "Free shipping from {threshold}",
       "pickup": "In-store pickup in Ravensburg"
+    },
+    "gallery": {
+      "label": "Product images",
+      "image": "{title}: image {number}"
     }
   },
   "cart": {

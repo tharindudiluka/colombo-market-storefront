@@ -10,6 +10,12 @@ export const productByHandleQuery = /* GraphQL */ `
       vendor
       productType
       tags
+      ingredients: metafield(namespace: "custom", key: "ingredients") { type value }
+      legalName: metafield(namespace: "custom", key: "legal_name") { type value }
+      storage: metafield(namespace: "custom", key: "storage") { type value }
+      origin: metafield(namespace: "custom", key: "origin") { type value }
+      manufacturerDistributor: metafield(namespace: "custom", key: "manufacturer_distributor") { type value }
+      nutrition: metafield(namespace: "custom", key: "nutrition") { type value }
       availableForSale
       seo {
         title

@@ -347,11 +347,35 @@
     "soldOut": "Ausverkauft",
     "onlyLeft": "Nur noch {count} verfügbar",
     "details": {
-      "descriptionTitle": "Beschreibung",
-      "deliveryTitle": "Lieferung & Abholung",
+      "descriptionTitle": "Produktbeschreibung",
+      "deliveryTitle": "Versand & Abholung",
       "deliveryBody": "Abholung im Markt in Ravensburg oder Lieferung nach Hause — kostenlos ab {threshold}.",
       "returnsTitle": "Rückgabe & Kontakt",
-      "returnsBody": "Bei Fragen zu Rückgaben kontaktiere uns per E-Mail unter colombomarket.rv@gmail.com."
+      "returnsBody": "Bei Fragen zu Rückgaben kontaktiere uns per E-Mail unter colombomarket.rv@gmail.com.",
+      "informationTitle": "Produktinformationen",
+      "brand": "Marke",
+      "sku": "SKU",
+      "barcode": "Barcode / GTIN",
+      "availability": "Verfügbarkeit",
+      "inStock": "Verfügbar",
+      "outOfStock": "Nicht verfügbar",
+      "structured": {
+        "nutrition": "Nährwerte",
+        "per": "pro {basis}",
+        "energy": "Energie",
+        "fat": "Fett",
+        "saturatedFat": "davon gesättigte Fettsäuren",
+        "carbohydrates": "Kohlenhydrate",
+        "sugars": "davon Zucker",
+        "protein": "Eiweiß",
+        "fiber": "Ballaststoffe",
+        "salt": "Salz",
+        "ingredients": "Zutaten",
+        "legalName": "Bezeichnung des Lebensmittels",
+        "storage": "Aufbewahrung",
+        "origin": "Herkunft",
+        "manufacturerDistributor": "Hersteller / Inverkehrbringer"
+      }
     },
     "relatedProducts": {
       "title": "Das könnte dir auch gefallen"
@@ -359,6 +383,10 @@
     "trust": {
       "delivery": "Kostenloser Versand ab {threshold}",
       "pickup": "Abholung im Markt in Ravensburg"
+    },
+    "gallery": {
+      "label": "Produktbilder",
+      "image": "{title}: Bild {number}"
     }
   },
   "cart": {

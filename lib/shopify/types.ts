@@ -156,7 +156,15 @@ export type ShopifyProductVariant = {
   unitPriceMeasurement: ShopifyUnitPriceMeasurement;
 };
 
+export type ShopifyProductInformationMetafield = { type: string; value: string };
+
 export type ShopifyProductDetail = {
+  ingredients?: ShopifyProductInformationMetafield | null;
+  legalName?: ShopifyProductInformationMetafield | null;
+  storage?: ShopifyProductInformationMetafield | null;
+  origin?: ShopifyProductInformationMetafield | null;
+  manufacturerDistributor?: ShopifyProductInformationMetafield | null;
+  nutrition?: ShopifyProductInformationMetafield | null;
   id: string;
   handle: string;
   title: string;
