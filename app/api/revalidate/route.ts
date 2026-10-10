@@ -6,6 +6,12 @@ export const runtime = "nodejs";
 // Keep broad tags (such as "collection") unavailable to this targeted endpoint.
 const allowedTags = new Set(["navigation", "main-menu", "ponni-reis"]);
 
+function isAllowedTag(tag: unknown): tag is string {
+  // Product handles only: no broad product tag, paths, query strings or other namespaces.
+  return typeof tag === "string" && tag.length <= 256 &&
+    (allowedTags.has(tag) || /^product:[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tag));
+}
+
 function json(body: Record<string, unknown>, status = 200) {
   return Response.json(body, {
     status,
@@ -48,8 +54,7 @@ export async function POST(request: Request) {
     : "tags" in body && Array.isArray(body.tags) ? body.tags : [];
   if (
     requestedTags.length === 0 || requestedTags.length > allowedTags.size ||
-    !requestedTags.every((tag): tag is string =>
-      typeof tag === "string" && allowedTags.has(tag))
+    !requestedTags.every(isAllowedTag)
   ) {
     return json({ ok: false, error: "Unsupported tag or request body." }, 400);
   }

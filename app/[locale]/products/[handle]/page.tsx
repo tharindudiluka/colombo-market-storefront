@@ -29,7 +29,7 @@ async function getProduct(handle: string, language: LanguageCode) {
   const data = await shopifyFetch<ProductByHandleResult>({
     query: productByHandleQuery,
     variables: { handle, language },
-    tags: ["product", handle],
+    tags: ["product", handle, `product:${handle}`],
   });
   return data.product;
 }
