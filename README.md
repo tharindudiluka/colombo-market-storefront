@@ -48,6 +48,35 @@ ChatGPT/Codex.
 
    Open [http://localhost:3000](http://localhost:3000) — German at `/`, English at `/en`.
 
+## Google Analytics 4
+
+Set `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-3PTYQWMWT1` in the local build environment
+and Vercel **Production** environment. This is a public measurement ID, not a
+secret. A new build is required after changing it. Leave it unset for previews
+if they should not contribute to production analytics.
+
+The shared locale layout installs one `next/script` integration for all storefront
+pages. Initial automatic pageviews are disabled (`send_page_view: false`); the
+client reports a single pageview for committed path/query changes, including
+locale changes and back/forward navigation, with the current title and URL.
+
+**Before enabling tracking**, in GA4 Admin → Data streams → this web stream →
+Enhanced measurement → Page views → advanced settings, disable **Page changes
+based on browser history events**. Otherwise Google can produce additional
+pageviews independently of `send_page_view: false`. Do not install another
+Google tag/GTM pageview tracker alongside this integration.
+
+The bilingual consent banner uses **basic consent mode**: all four consent categories default to denied, and `gtag.js` is not loaded before explicit analytics consent. There are no pre-consent Google requests. Necessary preferences are always enabled; analytics is optional and initially unchecked. Advertising consent remains denied.
+
+Choices use first-party localStorage `colombo-consent`: `{version:1,necessary:true,analytics:boolean,updatedAt:number}`. Choices expire after 180 days; invalid, expired or different-version records default to denied and show the banner again. If localStorage is unavailable, the choice lasts only for the current document. Cookie settings in the footer reopen a keyboard-accessible native dialog. Changes sync between tabs. Withdrawal disables this GA4 destination, stops application pageviews and clears accessible first-party `_ga` / `_ga_*` cookies without touching commerce cookies. A loaded Google script cannot be unloaded, but this destination is disabled immediately.
+
+The existing `window.colomboAnalyticsConsent.setGranted` bridge and single loader remain the only GA4 implementation. Reloads restore the saved choice after hydration. No ecommerce events or advertising trackers are installed. This implementation provides no legal compliance guarantee; review privacy disclosures and the GA4 history setting before production use.
+
+After deployment approval, grant consent in a test session
+without an ad blocker and use Google Tag Assistant / GA4 Realtime to verify one
+`page_view` on entry and one per DE/EN navigation. Confirm the correct measurement
+ID, URL and title. Reject/withdraw consent and verify no further pageviews are sent.
+
 ## Architecture
 
 - `config/theme.ts`, `config/site.ts`, `config/collections.ts` — single source of truth

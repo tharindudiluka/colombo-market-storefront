@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import Script from "next/script";
 import { Geist, Geist_Mono, Nunito } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -14,6 +16,9 @@ import type { LanguageCode } from "@/lib/shopify/types";
 import "../globals.css";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationStructuredData } from "@/lib/structured-data";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { analyticsBootstrap } from "@/lib/analytics";
+import { ConsentManager } from "@/components/ConsentManager";
 
 // Matches spice_clone's original font setup: Geist Sans feeds both the heading and
 // body tokens (spice_clone had no separate heading font), Geist Mono is exposed for
@@ -64,6 +69,7 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
   const messages = await getMessages();
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const language = locale.toUpperCase() as LanguageCode;
   const [initialCart, initialCustomer] = await Promise.all([getCart(language), getCurrentCustomer()]);
 
@@ -73,8 +79,19 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {measurementId && /^G-[A-Z0-9]+$/.test(measurementId) && (
+          <>
+            <Script id="colombo-ga-consent" strategy="beforeInteractive">
+              {analyticsBootstrap(measurementId)}
+            </Script>
+            <Suspense fallback={null}>
+              <GoogleAnalytics measurementId={measurementId} />
+            </Suspense>
+          </>
+        )}
         <JsonLd data={organizationStructuredData()} />
         <NextIntlClientProvider messages={messages}>
+          <ConsentManager />
           <WishlistProvider>
             <CartProvider initialCart={initialCart} language={language}>
               <AccountProvider initialCustomer={initialCustomer}>

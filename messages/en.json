@@ -251,6 +251,22 @@
       }
     ]
   },
+  "consent": {
+    "title": "Privacy settings",
+    "text": "We use necessary cookies to operate our shop. With your consent, we also use Google Analytics to understand how our website is used and improve it.",
+    "acceptAll": "Accept all",
+    "necessaryOnly": "Necessary only",
+    "settings": "Settings",
+    "necessary": "Necessary",
+    "necessaryDescription": "Required to operate the shop, for example the cart and language preferences.",
+    "required": "Always active – required",
+    "analytics": "Analytics",
+    "analyticsDescription": "Enables Google Analytics to understand how our website is used. Optional and can be disabled at any time.",
+    "save": "Save settings",
+    "close": "Close settings",
+    "cookieSettings": "Cookie settings",
+    "privacyPolicy": "Privacy policy"
+  },
   "footer": {
     "tagline": "Sri Lankan, Indian and South Asian groceries – order online for delivery across Germany.",
     "shopTitle": "Shop",

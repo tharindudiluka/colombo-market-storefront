@@ -252,6 +252,22 @@
       }
     ]
   },
+  "consent": {
+    "title": "Datenschutz-Einstellungen",
+    "text": "Wir verwenden notwendige Cookies für den Betrieb unseres Shops. Mit deiner Zustimmung verwenden wir außerdem Google Analytics, um zu verstehen, wie unsere Website genutzt wird und sie zu verbessern.",
+    "acceptAll": "Alle akzeptieren",
+    "necessaryOnly": "Nur notwendige",
+    "settings": "Einstellungen",
+    "necessary": "Notwendig",
+    "necessaryDescription": "Für den Betrieb des Shops, beispielsweise Warenkorb und Spracheinstellungen.",
+    "required": "Immer aktiv – erforderlich",
+    "analytics": "Analytics",
+    "analyticsDescription": "Aktiviert Google Analytics, um die Nutzung unserer Website zu verstehen. Freiwillig und jederzeit deaktivierbar.",
+    "save": "Einstellungen speichern",
+    "close": "Einstellungen schließen",
+    "cookieSettings": "Cookie-Einstellungen",
+    "privacyPolicy": "Datenschutzerklärung"
+  },
   "footer": {
     "tagline": "Sri-lankische, indische und südasiatische Lebensmittel – online bestellen und deutschlandweit liefern lassen.",
     "shopTitle": "Shop",

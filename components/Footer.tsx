@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { FooterGroupsClient } from "@/components/FooterGroupsClient";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import { site } from "@/config/site";
 import { footerCollectionHandles } from "@/config/collections";
 import { pageHandles, pageHref, policyHandles, policyHref } from "@/config/pages";
@@ -83,7 +84,10 @@ export async function Footer() {
       </div>
       <div className="flex flex-col gap-1 border-t border-white/15 py-4 md:flex-row md:items-center md:justify-between md:gap-3 md:py-5">
         <p className="text-sm leading-relaxed text-white/75">© {new Date().getFullYear()} {site.name}. {t("footer.copyright")}</p>
-        <Link href={policyHref(policyHandles.contact)} className={footerLinkClass}>{t("footer.contactInformation")}</Link>
+        <div className="flex flex-wrap items-center gap-x-5">
+          <CookieSettingsButton label={t("consent.cookieSettings")} className={footerLinkClass} />
+          <Link href={policyHref(policyHandles.contact)} className={footerLinkClass}>{t("footer.contactInformation")}</Link>
+        </div>
       </div>
     </div>
   </footer>;
