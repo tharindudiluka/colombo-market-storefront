@@ -20,9 +20,7 @@ export function ProductDetailsAccordion({ product, variant, descriptionHtml }: {
   const information = [
     ...(product.vendor ? [{ label: t("brand"), value: product.vendor }] : []),
     ...variant.selectedOptions.filter((option) => option.name !== "Title" && option.value !== "Default Title").map((option) => ({ label: option.name, value: option.value })),
-    ...(variant.sku ? [{ label: t("sku"), value: variant.sku }] : []),
     ...(variant.barcode ? [{ label: t("barcode"), value: variant.barcode }] : []),
-    { label: t("availability"), value: variant.availableForSale ? t("inStock") : t("outOfStock") },
   ];
   const structuredInformation = [
     { key: "ingredients", value: product.information.ingredients },
