@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./design-foundation.css";
 
 /* Collections discovery uses the approved wide grid without widening other pages. */
 .collection-discovery-inner {

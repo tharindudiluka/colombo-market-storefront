@@ -53,6 +53,36 @@ export const theme = {
   },
 
   /* ----------------------------------------------------------------------
+   * DESIGN FOUNDATION (Batch A1). Mirrors the `--ds-*` tokens in
+   * app/design-foundation.css. Additive: no component reads these yet; later
+   * batches adopt them page by page. Change a value here, change it there.
+   * -------------------------------------------------------------------- */
+  foundation: {
+    colors: {
+      green: "#1e4a2c",
+      greenHover: "#163a22",
+      greenSoft: "#e8efe6",
+      sage: "#6f8f74",
+      canvas: "#faf7f2",
+      surface: "#fffdf9",
+      surfaceMuted: "#f3efe7",
+      ink: "#1c2a20",
+      inkSoft: "#4b5a50",
+      line: "#e3ddd1",
+      lineStrong: "#c9c2b4",
+      accentTerracotta: "#b4531f",
+      accentGold: "#b8912f",
+    },
+    containers: { shop: "1440px", wide: "1920px", narrow: "48rem" },
+    radii: { sm: "6px", md: "10px", lg: "14px" },
+    shadows: {
+      card: "0 1px 2px rgba(28,42,32,0.06), 0 1px 3px rgba(28,42,32,0.04)",
+      lift: "0 6px 16px -4px rgba(28,42,32,0.12), 0 2px 4px rgba(28,42,32,0.05)",
+    },
+    controlHeight: "2.75rem",
+  },
+
+  /* ----------------------------------------------------------------------
    * GLASS + GRADIENT LAYER (experimental). Mirrors the token block of the
    * same name in app/globals.css. Additive — nothing above depends on it;
    * delete this `glass` key (and the matching CSS block) to return to the

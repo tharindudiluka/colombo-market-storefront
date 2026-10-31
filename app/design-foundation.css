@@ -1,0 +1,224 @@
+/*
+ * Colombo Market design foundation (Batch A1).
+ *
+ * ADDITIVE ONLY: every name in this file is new (`--ds-*` custom properties, `.type-*`,
+ * `.container-*`, `.btn*`, `.control`, plus new `bg-canvas`/`text-ink`-style color
+ * utilities), so importing it changes nothing on existing pages. Later batches adopt
+ * these pieces page by page. The legacy brand-* tokens and the glass/gradient layer in
+ * globals.css are untouched; see DESIGN-FOUNDATION.md for the adoption guide and the
+ * list of glass selectors scheduled for retirement in A2.
+ *
+ * Tokens are mirrored in config/theme.ts (`theme.foundation`): change one, change both.
+ */
+
+:root {
+  /* --- color: deep Colombo green, warm neutrals, restrained accents --- */
+  --ds-green: #1e4a2c;
+  --ds-green-hover: #163a22;
+  --ds-green-soft: #e8efe6;
+  --ds-sage: #6f8f74;
+  --ds-canvas: #faf7f2;
+  --ds-surface: #fffdf9;
+  --ds-surface-muted: #f3efe7;
+  --ds-ink: #1c2a20;
+  --ds-ink-soft: #4b5a50;
+  --ds-line: #e3ddd1;
+  --ds-line-strong: #c9c2b4;
+  --ds-accent-terracotta: #b4531f;
+  --ds-accent-gold: #b8912f;
+  --ds-focus: #1e4a2c;
+
+  /* --- containers --- */
+  --ds-container-shop: 1440px;
+  --ds-container-wide: 1920px;
+  --ds-container-narrow: 48rem;
+  --ds-gutter: 1rem;
+
+  /* --- radii (restrained) --- */
+  --ds-radius-sm: 6px;
+  --ds-radius-md: 10px;
+  --ds-radius-lg: 14px;
+
+  /* --- shadows (subtle) --- */
+  --ds-shadow-card: 0 1px 2px rgba(28, 42, 32, 0.06), 0 1px 3px rgba(28, 42, 32, 0.04);
+  --ds-shadow-lift: 0 6px 16px -4px rgba(28, 42, 32, 0.12), 0 2px 4px rgba(28, 42, 32, 0.05);
+
+  /* --- controls --- */
+  --ds-control-height: 2.75rem; /* 44px minimum target */
+}
+
+@media (min-width: 640px) {
+  :root { --ds-gutter: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  :root { --ds-gutter: 2rem; }
+}
+
+/* New color utilities: bg-canvas, bg-surface, text-ink, border-line, ...
+ * Names are new, so no existing Tailwind or brand-* utility is affected. */
+@theme inline {
+  --color-colombo-green: var(--ds-green);
+  --color-colombo-green-hover: var(--ds-green-hover);
+  --color-colombo-green-soft: var(--ds-green-soft);
+  --color-sage: var(--ds-sage);
+  --color-canvas: var(--ds-canvas);
+  --color-surface: var(--ds-surface);
+  --color-surface-muted: var(--ds-surface-muted);
+  --color-ink: var(--ds-ink);
+  --color-ink-soft: var(--ds-ink-soft);
+  --color-line: var(--ds-line);
+  --color-line-strong: var(--ds-line-strong);
+  --color-accent-terracotta: var(--ds-accent-terracotta);
+  --color-accent-gold: var(--ds-accent-gold);
+  --shadow-card: var(--ds-shadow-card);
+  --shadow-lift: var(--ds-shadow-lift);
+  /* `ds` infix keeps these from overriding Tailwind's built-in rounded-sm/md/lg. */
+  --radius-ds-sm: var(--ds-radius-sm);
+  --radius-ds-md: var(--ds-radius-md);
+  --radius-ds-lg: var(--ds-radius-lg);
+}
+
+@layer components {
+  /* ===== Typography: Geist, six levels, nothing below 12px ===== */
+  .type-page-title,
+  .type-section-title,
+  .type-card-title,
+  .type-body,
+  .type-body-sm,
+  .type-caption {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    color: var(--ds-ink);
+  }
+  .type-page-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .type-section-title {
+    font-size: 1.375rem;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  .type-card-title {
+    font-size: 0.875rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 68ch;
+  }
+  .type-body-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--ds-ink-soft);
+  }
+  .type-caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--ds-ink-soft);
+  }
+  @media (min-width: 640px) {
+    .type-page-title { font-size: 2.25rem; }
+    .type-section-title { font-size: 1.75rem; }
+    .type-card-title { font-size: 0.9375rem; }
+  }
+
+  /* ===== Containers ===== */
+  .container-shop,
+  .container-wide,
+  .container-narrow {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--ds-gutter);
+  }
+  .container-shop { max-width: var(--ds-container-shop); }
+  .container-wide { max-width: var(--ds-container-wide); }
+  .container-narrow { max-width: var(--ds-container-narrow); }
+
+  /* ===== Surfaces ===== */
+  .surface-card {
+    background-color: var(--ds-surface);
+    border: 1px solid var(--ds-line);
+    border-radius: var(--ds-radius-lg);
+    box-shadow: var(--ds-shadow-card);
+  }
+
+  /* ===== Buttons: .btn + one of primary / secondary / tertiary ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--ds-control-height);
+    padding: 0.5rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: var(--ds-radius-md);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .btn:focus-visible,
+  .control:focus-visible {
+    outline: 2px solid var(--ds-focus);
+    outline-offset: 2px;
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .btn-primary {
+    background-color: var(--ds-green);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--ds-green-hover);
+  }
+  .btn-secondary {
+    background-color: var(--ds-surface);
+    border-color: var(--ds-green);
+    color: var(--ds-green);
+  }
+  .btn-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--ds-green-soft);
+  }
+  .btn-tertiary {
+    padding-inline: 0.5rem;
+    background-color: transparent;
+    color: var(--ds-green);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .btn-tertiary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--ds-green-soft);
+  }
+
+  /* ===== Form / filter controls (inputs, selects, textareas) ===== */
+  .control {
+    min-height: var(--ds-control-height);
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--ds-surface);
+    border: 1px solid var(--ds-line-strong);
+    border-radius: var(--ds-radius-md);
+    color: var(--ds-ink);
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-size: 1rem; /* 16px avoids iOS zoom-on-focus */
+    line-height: 1.4;
+    transition: border-color 150ms ease;
+  }
+  .control::placeholder { color: var(--ds-ink-soft); opacity: 0.8; }
+  .control:hover:not(:disabled) { border-color: var(--ds-green); }
+  .control:disabled { cursor: not-allowed; opacity: 0.5; }
+}
