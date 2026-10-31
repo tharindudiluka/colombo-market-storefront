@@ -33,7 +33,7 @@ export const site = {
     // facebook: add real handle here once confirmed
   },
   delivery: {
-    freeDeliveryThreshold: 59.99,
+    freeDeliveryThreshold: 39.99,
   },
   currency: "EUR",
   features: {
