@@ -8,28 +8,37 @@ import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { searchProductsQuery } from "@/lib/shopify/queries/search-products";
 import { toUiProduct } from "@/lib/shopify/mappers";
-import type { LanguageCode, SearchProductsResult } from "@/lib/shopify/types";
+import { runTieredSearch, type SearchTier } from "@/lib/search/search-query";
+import type { LanguageCode, SearchProductsResult, ShopifyProductNode } from "@/lib/shopify/types";
 
 // Results are read in batches (Storefront maximum 250) up to a safety cap, then paged for display
 // so every result is reachable.
 const PAGE_SIZE = 48;
 const MAX_RESULTS = 500;
 
-async function searchProducts(query: string, language: LanguageCode, vendor?: string) {
-  if (!query) return [];
-  const products = [];
+async function fetchSearchNodes(query: string, language: LanguageCode, tier: SearchTier) {
+  const nodes: ShopifyProductNode[] = [];
   let after: string | null = null;
   do {
     const data: SearchProductsResult = await shopifyFetch<SearchProductsResult>({
       query: searchProductsQuery,
-      variables: { query, first: 250, language, after },
+      // Only the text tier needs descriptions (to verify matches); the fielded tiers do not.
+      variables: { query, first: 250, language, after, withText: tier === "text" },
       tags: ["products"],
       revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
     });
-    products.push(...data.products.edges.filter(edge => !vendor || edge.node.vendor === vendor).map(edge => toUiProduct(edge.node)));
+    nodes.push(...data.products.edges.map(edge => edge.node));
     after = data.products.pageInfo.hasNextPage && data.products.pageInfo.endCursor !== after ? data.products.pageInfo.endCursor : null;
-  } while (after && products.length < MAX_RESULTS);
-  return products;
+  } while (after && nodes.length < MAX_RESULTS);
+  return nodes;
+}
+
+// Exact terms first, then controlled synonyms, then description matches; taxonomy tags never match on
+// their own (see lib/search/search-query.ts).
+async function searchProducts(query: string, language: LanguageCode, vendor?: string) {
+  if (!query) return [];
+  const nodes = await runTieredSearch(query, (tierQuery, tier) => fetchSearchNodes(tierQuery, language, tier));
+  return nodes.filter(node => !vendor || node.vendor === vendor).map(toUiProduct);
 }
 
 export async function generateMetadata({

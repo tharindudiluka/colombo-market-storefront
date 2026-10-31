@@ -14,6 +14,9 @@ export type ShopifyImage = {
 
 export type ShopifyProductNode = {
   vendor?: string;
+  productType?: string;
+  tags?: string[];
+  description?: string;
   variants?: { nodes: { id: string; title: string; availableForSale: boolean; price: { amount: string; currencyCode: string }; compareAtPrice: { amount: string; currencyCode: string } | null }[] };
   id: string;
   handle: string;

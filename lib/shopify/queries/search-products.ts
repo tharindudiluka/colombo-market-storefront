@@ -1,5 +1,5 @@
 export const searchProductsQuery = /* GraphQL */ `
-  query SearchProducts($query: String!, $first: Int!, $language: LanguageCode, $after: String)
+  query SearchProducts($query: String!, $first: Int!, $language: LanguageCode, $after: String, $withText: Boolean! = false)
   @inContext(country: DE, language: $language) {
     products(first: $first, after: $after, query: $query, sortKey: RELEVANCE) {
       pageInfo { hasNextPage endCursor }
@@ -9,6 +9,9 @@ export const searchProductsQuery = /* GraphQL */ `
           vendor
           handle
           title
+          productType
+          tags
+          description @include(if: $withText)
           availableForSale
           variants(first: 2) {
             nodes {
