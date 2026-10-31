@@ -9,6 +9,7 @@ import { Icon } from "@/components/Icon";
 import { HomepageCategoryIcon } from "@/components/HomepageCategoryIcon";
 import { mobileNavigationIcons } from "@/config/mobile-navigation";
 import { site } from "@/config/site";
+import { pageHandles, pageHref } from "@/config/pages";
 import type { NavigationEntry } from "@/lib/shopify/navigation";
 
 function filterEntries(entries: NavigationEntry[], query: string, locale: string): NavigationEntry[] {
@@ -135,6 +136,10 @@ export function MobileNavDrawer({ entries }: { entries: NavigationEntry[] }) {
               <p className="px-1 py-6 text-sm text-brand-teal-dark/60">{t("noCategoryMatches")}</p>
             )}
           </nav>
+          <div className="flex gap-2 border-t border-black/5 px-4 py-3 text-sm font-semibold text-brand-teal-dark">
+            <Link href={pageHref(pageHandles.contact)} onClick={() => setOpen(false)} className="flex min-h-11 flex-1 items-center justify-center rounded-xl border border-brand-teal/20 hover:bg-brand-cream">{t("contact")}</Link>
+            <Link href={pageHref(pageHandles.about)} onClick={() => setOpen(false)} className="flex min-h-11 flex-1 items-center justify-center rounded-xl border border-brand-teal/20 hover:bg-brand-cream">{t("aboutUs")}</Link>
+          </div>
         </div>
       </div>
     </>

@@ -2,9 +2,8 @@ import { categoryHandles } from "@/config/collections";
 import type { HomepageCategoryIconName } from "@/components/HomepageCategoryIcon";
 
 const icons: Record<string, HomepageCategoryIconName> = {
-  rice: "rice", bread: "bread", pulses: "dal", spices: "mortar",
-  sauces: "chili", pickles: "jar", frozen: "snowflake", blends: "spice",
-  sweets: "candy", tea: "tea", organic: "leaf", glutenFree: "wheatFree",
+  rice: "rice", pulses: "dal", bread: "bread", spices: "mortar",
+  sauces: "chili", snacks: "candy", frozen: "snowflake", offers: "tag",
 };
 const tones = [
   "bg-category-sage text-brand-teal-dark",

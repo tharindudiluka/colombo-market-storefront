@@ -102,9 +102,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
         </div>
 
-        <BestsellerCarousel products={bestsellers} />
-
         <CategoryGrid categories={categories} />
+
+        <BestsellerCarousel products={bestsellers} />
 
         <BrandStrip />
 

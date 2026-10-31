@@ -31,18 +31,15 @@ export const footerCollectionHandles = {
   offers: collectionHandles.weeklySpecials,
 } as const;
 
-// Homepage category selection. Titles and translations come from Shopify.
+// Homepage category selection: the same seven shopping categories (plus Offers) as the main menu.
+// Titles and translations come from Shopify.
 export const categoryHandles: readonly { handle: string; labelKey: string }[] = [
   { handle: "reis", labelKey: "rice" },
-  { handle: "mehl-asiatische-fladenbrote", labelKey: "bread" },
   { handle: "linsen-und-bohnen", labelKey: "pulses" },
+  { handle: "mehl-asiatische-fladenbrote", labelKey: "bread" },
   { handle: "gewuerze", labelKey: "spices" },
-  { handle: "sauce", labelKey: "sauces" },
-  { handle: "pickles-wurzmittel", labelKey: "pickles" },
+  { handle: "saucen-kochzutaten", labelKey: "sauces" },
+  { handle: "snacks-suesses", labelKey: "snacks" },
   { handle: "frozen-food", labelKey: "frozen" },
-  { handle: "curry-mixtures-currymischungen", labelKey: "blends" },
-  { handle: "sweets-sussigkeiten", labelKey: "sweets" },
-  { handle: "tee-kaffee", labelKey: "tea" },
-  { handle: "bio-producte", labelKey: "organic" },
-  { handle: "glutenfrei", labelKey: "glutenFree" },
+  { handle: "angebote", labelKey: "offers" },
 ];

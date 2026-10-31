@@ -28,7 +28,7 @@ function mapMenuItem(item: ShopifyMenuItem, primaryDomain: string): NavigationEn
 export async function getNavigationEntries(language: LanguageCode): Promise<NavigationEntry[]> {
   const data = await shopifyFetch<NavigationMenuResult>({
     query: navigationMenuQuery,
-    variables: { handle: "main-menu", language },
+    variables: { handle: "main-menu-v2", language },
     tags: ["navigation", "main-menu"],
     // Menu edits are immediately visible locally; production retains the existing cache.
     revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,

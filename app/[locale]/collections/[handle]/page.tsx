@@ -5,6 +5,8 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionBrowser } from "@/components/CollectionBrowser";
+import { CollectionSubnav } from "@/components/CollectionSubnav";
+import { getNavigationEntries } from "@/lib/shopify/navigation";
 import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionByHandleQuery } from "@/lib/shopify/queries/collection-by-handle";
@@ -122,7 +124,7 @@ export default async function CollectionPage({
   const language = locale.toUpperCase() as LanguageCode;
   const filters = parseFilters(query);
 
-  const raw = await getCollection(handle, language, filters, query.sort);
+  const [raw, navEntries] = await Promise.all([getCollection(handle, language, filters, query.sort), getNavigationEntries(language)]);
   if (!raw) notFound();
 
   const collection = toUiCollectionDetail(raw);
@@ -156,6 +158,8 @@ export default async function CollectionPage({
             {categoryLabel}
           </h1>
         </div>
+
+        <CollectionSubnav entries={navEntries} href={`/collections/${handle}`} allLabel={t("subnavAll")} label={t("subnavLabel")} />
 
         <CollectionBrowser
           products={visibleProducts}

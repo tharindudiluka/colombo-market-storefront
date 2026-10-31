@@ -190,6 +190,11 @@
     "storeNote": "Du suchst etwas Bestimmtes? Schreib uns gerne – wir helfen dir weiter."
   },
   "collection": {
+    "facetAvailability": "Verfügbarkeit",
+    "facetBrand": "Marke",
+    "facetSize": "Größe",
+    "subnavAll": "Alle ansehen",
+    "subnavLabel": "Unterkategorien",
     "allTitle": "Alle Kategorien",
     "productCount": "{count, plural, one {# Produkt} other {# Produkte}}",
     "sortLabel": "Sortieren nach:",

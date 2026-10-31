@@ -75,6 +75,12 @@ export function CollectionBrowser({
   }, [priceFacet, products]);
   const draftPrice = readPriceRange(draftFilters);
   const filtersActive = activeFilters.length > 0;
+  // Shopify's facet labels are shop-wide and untranslated ("Availability", "Vendor", "Große"); normalise the known ones.
+  const facetLabel = (facet: ShopifyProductFilter) =>
+    /availability/i.test(facet.id) ? t("facetAvailability")
+    : /vendor/i.test(facet.id) ? t("facetBrand")
+    : /size/i.test(facet.id) || /^gr(ö|o)(ß|ss)e$/i.test(facet.label) ? t("facetSize")
+    : facet.label;
 
   function replaceQuery(next: { filters?: ProductFilterInput[]; sort?: string }) {
     const params = new URLSearchParams(searchParams.toString());
@@ -235,7 +241,7 @@ export function CollectionBrowser({
                       className="group"
                     >
                       <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-semibold text-brand-teal-dark [&::-webkit-details-marker]:hidden">
-                        {facet.label}
+                        {facetLabel(facet)}
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-4 w-4 transition-transform group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
                       </summary>
                       {isPrice ? (

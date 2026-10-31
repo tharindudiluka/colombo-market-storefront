@@ -19,7 +19,7 @@ export async function CategoryGrid({ categories, variant = "homepage" }: { categ
       <Link href="/collections" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-teal/25 px-5 py-2 text-sm font-semibold text-brand-teal-dark transition hover:bg-brand-cream focus-visible:outline-2 focus-visible:outline-brand-teal">{t("categoryGrid.viewAll")} <span aria-hidden>→</span></Link>
       </div>
 
-      <div className="homepage-category-grid mt-6 grid grid-cols-2 overflow-hidden rounded-2xl border border-brand-teal/15 bg-white/90 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className={`homepage-category-grid mt-6 grid grid-cols-2 overflow-hidden rounded-2xl border border-brand-teal/15 bg-white/90 ${variant === "catalog" ? "sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6" : "sm:grid-cols-4 xl:grid-cols-8"}`}>
         {categories.map((cat) => (
           <Link
             key={cat.handle}
