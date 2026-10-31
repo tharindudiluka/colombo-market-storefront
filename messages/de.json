@@ -189,6 +189,47 @@
     "storeLabel": "Unser Markt",
     "storeNote": "Du suchst etwas Bestimmtes? Schreib uns gerne – wir helfen dir weiter."
   },
+  "categoriesPage": {
+    "meta": {
+      "title": "Alle Kategorien – sri-lankische & indische Lebensmittel online",
+      "description": "Sri-lankische, indische und südasiatische Lebensmittel nach Abteilung entdecken: Reis, Dal, Mehl, Gewürze, Saucen, Snacks und Tiefkühlprodukte bei Colombo Market Ravensburg."
+    },
+    "hero": {
+      "eyebrow": "Sortiment",
+      "title": "Alle Kategorien",
+      "intro": "Entdecken Sie sri-lankische, indische und südasiatische Lebensmittel nach Abteilung – von Reis und Dal bis zu Gewürzen, Snacks und Tiefkühlprodukten."
+    },
+    "quickNavLabel": "Abteilungen",
+    "sriLankaPill": "Sri Lanka",
+    "directoryTitle": "Nach Abteilung einkaufen",
+    "viewAll": "{category} ansehen",
+    "subLabel": "Unterkategorien von {category}",
+    "descriptions": {
+      "reis": "Basmati, Ponni, Sona Masoori und mehr – für jeden Reisgeschmack.",
+      "linsen-und-bohnen": "Dal, Linsen, Kichererbsen und Bohnen für die tägliche Küche.",
+      "mehl-asiatische-fladenbrote": "Atta, Reismehl, Grieß, Besan sowie Teigmischungen und Papadams.",
+      "gewuerze": "Ganze und gemahlene Gewürze, Currypulver und Masala-Mischungen.",
+      "saucen-kochzutaten": "Currypasten, Saucen, Pickles, Kokosmilch und weitere Kochzutaten.",
+      "snacks-suesses": "Salzige Snacks, Kokoschips, Kekse, Süßes und Tee.",
+      "frozen-food": "Roti, Paratha, Samosas und Tiefkühlgemüse.",
+      "angebote": "Aktuelle Angebote und reduzierte Produkte."
+    },
+    "sriLanka": {
+      "eyebrow": "Herkunft Sri Lanka",
+      "title": "Sri Lanka entdecken",
+      "body": "Sri-lankische Lieblinge und Küchenklassiker – Tee, Gebäck, Sambol und Kokosprodukte, in Deutschland erhältlich.",
+      "note": "Ausgewählt nach der Herkunftsangabe in den Produktdaten.",
+      "shortcutsLabel": "Beliebt aus Sri Lanka",
+      "shortcuts": {
+        "tea": "Tee",
+        "biscuits": "Kekse & Gebäck",
+        "coconut": "Kokoschips",
+        "sambol": "Sambol & Chutney"
+      },
+      "productsTitle": "Sri-lankische Favoriten",
+      "cta": "Kumaio: Bio aus Sri Lanka"
+    }
+  },
   "collection": {
     "facetAvailability": "Verfügbarkeit",
     "facetBrand": "Marke",
