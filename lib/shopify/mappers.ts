@@ -225,6 +225,9 @@ export function toUiProductDetail(node: ShopifyProductDetail): UiProductDetail {
 
 export type UiCartLine = {
   id: string;
+  variantId: string;
+  productId: string;
+  vendor: string | null;
   quantity: number;
   title: string;
   handle: string;
@@ -260,6 +263,9 @@ export function toUiCart(cart: ShopifyCart): UiCart {
     },
     lines: cart.lines.edges.map(({ node }) => ({
       id: node.id,
+      variantId: node.merchandise.id,
+      productId: node.merchandise.product.id,
+      vendor: node.merchandise.product.vendor || null,
       quantity: node.quantity,
       title: node.merchandise.product.title,
       handle: node.merchandise.product.handle,

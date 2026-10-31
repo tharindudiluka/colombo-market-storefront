@@ -44,8 +44,10 @@ const cartFragment = /* GraphQL */ `
                 currencyCode
               }
               product {
+                id
                 title
                 handle
+                vendor
               }
             }
           }

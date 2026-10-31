@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { useCart } from "@/components/cart/CartProvider";
+import { trackViewCart } from "@/lib/analytics-events";
 
 function money(amount: number, currency: string, locale: string) {
   return new Intl.NumberFormat(locale, { style: "currency", currency }).format(amount);
@@ -15,6 +17,12 @@ export function CartPageClient() {
   const locale = useLocale();
   const { cart, isPending, updateItem, removeItem } = useCart();
   const lines = cart?.lines ?? [];
+  const viewedCart = useRef(false);
+  useEffect(() => {
+    if (viewedCart.current || !cart || cart.lines.length === 0) return;
+    viewedCart.current = true;
+    trackViewCart(cart);
+  }, [cart]);
 
   if (!lines.length) {
     return <div className="glass py-16 text-center"><p className="text-brand-teal-dark/70">{t("empty")}</p><Link href="/collections" className="mt-5 inline-flex rounded-full bg-brand-teal px-5 py-3 text-sm font-bold text-white">{t("continueShopping")}</Link></div>;

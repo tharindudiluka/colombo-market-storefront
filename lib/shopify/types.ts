@@ -202,7 +202,7 @@ export type ShopifyCartMerchandise = {
   selectedOptions: ShopifySelectedOption[];
   image: ShopifyImage | null;
   price: ShopifyMoney;
-  product: { title: string; handle: string };
+  product: { id: string; title: string; handle: string; vendor: string };
 };
 
 export type ShopifyCartLine = {

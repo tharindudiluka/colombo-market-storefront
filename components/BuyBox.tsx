@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { ProductDetailsAccordion } from "@/components/ProductDetailsAccordion";
 import { useLocale, useTranslations } from "next-intl";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { useCart } from "@/components/cart/CartProvider";
 import { WishlistToggle } from "@/components/wishlist/WishlistToggle";
 import type { UiProductDetail, UiProductVariant } from "@/lib/shopify/mappers";
+import { analyticsItemId, trackViewItem, variantTitleForItem } from "@/lib/analytics-events";
 
 function formatMoney(amount: number, currencyCode: string, locale: string) {
   return new Intl.NumberFormat(locale, { style: "currency", currency: currencyCode }).format(amount);
@@ -38,6 +39,24 @@ export function BuyBox({ product, descriptionHtml, children }: { product: UiProd
     () => findMatchingVariant(product.variants, selectedOptions) ?? defaultVariant,
     [product.variants, selectedOptions, defaultVariant]
   );
+
+  const viewedProductId = useRef<string | null>(null);
+  useEffect(() => {
+    if (!selectedVariant || viewedProductId.current === product.id) return;
+    viewedProductId.current = product.id;
+    const variant = variantTitleForItem(selectedVariant.title);
+    trackViewItem(
+      {
+        item_id: analyticsItemId(product.id, selectedVariant.id),
+        item_name: product.title,
+        ...(product.vendor ? { item_brand: product.vendor } : {}),
+        ...(variant ? { item_variant: variant } : {}),
+        price: selectedVariant.price.amount,
+        quantity: 1,
+      },
+      selectedVariant.price.currencyCode
+    );
+  }, [product.id, product.title, product.vendor, selectedVariant]);
 
   const hasRealOptions = !(product.options.length === 1 && product.options[0].name === "Title");
   const isSoldOut = !selectedVariant || !selectedVariant.availableForSale;

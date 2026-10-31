@@ -4,6 +4,7 @@ import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { sendAnalyticsPageView } from "@/lib/analytics";
+import { ANALYTICS_READY_EVENT } from "@/lib/analytics-events";
 
 function subscribe(onChange: () => void) {
   window.addEventListener("colombo:analytics-consent", onChange);
@@ -71,6 +72,8 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string }) {
               });
             }
             setReady(true);
+            // Lets lib/analytics-events.ts send events it queued while the tag was loading.
+            window.dispatchEvent(new Event(ANALYTICS_READY_EVENT));
           }}
         />
       )}

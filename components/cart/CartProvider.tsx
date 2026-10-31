@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useTransition, type ReactNode } fr
 import { addToCart, removeCartLine, updateCartLine } from "@/lib/cart/actions";
 import type { UiCart } from "@/lib/shopify/mappers";
 import type { LanguageCode } from "@/lib/shopify/types";
+import { trackAddToCart, trackViewCart } from "@/lib/analytics-events";
 
 type CartContextValue = {
   cart: UiCart | null;
@@ -35,8 +36,10 @@ export function CartProvider({
     return new Promise<void>((resolve, reject) => {
       startTransition(async () => {
         try {
-          setCart(await addToCart(variantId, quantity, language));
+          const next = await addToCart(variantId, quantity, language);
+          setCart(next);
           setIsOpen(true);
+          trackAddToCart(next, variantId, quantity);
           resolve();
         } catch (error) {
           reject(error);
@@ -77,7 +80,11 @@ export function CartProvider({
         cart,
         isOpen,
         isPending,
-        openCart: () => setIsOpen(true),
+        // Only a visitor-initiated open counts as view_cart; the drawer also opens by itself after an add.
+        openCart: () => {
+          setIsOpen(true);
+          trackViewCart(cart);
+        },
         closeCart: () => setIsOpen(false),
         addItem,
         updateItem,
