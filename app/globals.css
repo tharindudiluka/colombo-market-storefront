@@ -312,9 +312,21 @@
     padding-inline: 0;
   }
 
+  /* The nine top-level entries need ~1,025px of text at 13px, ~1,095px at 14px, so the
+   * type size and padding are sized to keep one row; the desktop nav only shows from 1280px (xl). */
   .storefront-nav > div > ul > li > :is(a, button) {
-    padding-inline: clamp(0.625rem, calc(4.375vw - 2.875rem), 1.5rem);
+    padding-inline: clamp(0.5rem, calc(2.5vw - 1.5rem), 1.5rem);
+    font-size: 0.8125rem;
   }
+}
+
+@media (min-width: 1440px) {
+  .storefront-nav > div > ul > li > :is(a, button) {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
 
   .storefront-nav > div > ul > li:last-child > div {
     left: auto;

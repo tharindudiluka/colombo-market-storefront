@@ -70,7 +70,7 @@ export function MobileNavDrawer({ entries }: { entries: NavigationEntry[] }) {
       <button
         aria-label={t("openMenu")}
         onClick={() => setOpen(true)}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-brand-teal-dark transition-colors hover:bg-brand-cream lg:hidden"
+        className="flex h-9 w-9 items-center justify-center rounded-lg text-brand-teal-dark transition-colors hover:bg-brand-cream xl:hidden"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-6 w-6">
           <path d="M4 6h16M4 12h16M4 18h16" />
@@ -78,7 +78,7 @@ export function MobileNavDrawer({ entries }: { entries: NavigationEntry[] }) {
       </button>
 
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-50 xl:hidden ${open ? "" : "pointer-events-none"}`}
         aria-hidden={!open}
       >
         <button

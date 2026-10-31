@@ -125,7 +125,7 @@ export function NavMenuClient({ entries = [] }: { entries?: NavigationEntry[] })
   const pathname = usePathname();
   const t = useTranslations("nav");
   return (
-    <nav className="storefront-nav relative z-30 hidden h-[var(--layout-nav-height)] bg-transparent lg:block" aria-label={t("desktopMenuLabel")}>
+    <nav className="storefront-nav relative z-30 hidden h-[var(--layout-nav-height)] bg-transparent xl:block" aria-label={t("desktopMenuLabel")}>
       <div className="mx-auto flex h-full max-w-[var(--layout-max-width)] items-center overflow-visible px-[var(--layout-page-padding)]">
         <ul className="flex h-full min-w-0 flex-wrap items-center overflow-visible">
           {entries.map((entry) => (
