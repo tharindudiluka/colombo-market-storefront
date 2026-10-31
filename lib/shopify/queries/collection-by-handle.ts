@@ -2,6 +2,7 @@ export const collectionByHandleQuery = /* GraphQL */ `
   query CollectionByHandle(
     $handle: String!
     $first: Int!
+    $after: String
     $language: LanguageCode
     $filters: [ProductFilter!]
     $sortKey: ProductCollectionSortKeys!
@@ -23,7 +24,11 @@ export const collectionByHandleQuery = /* GraphQL */ `
         width
         height
       }
-      products(first: $first, filters: $filters, sortKey: $sortKey, reverse: $reverse) {
+      products(first: $first, after: $after, filters: $filters, sortKey: $sortKey, reverse: $reverse) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         filters {
           id
           label
@@ -41,6 +46,21 @@ export const collectionByHandleQuery = /* GraphQL */ `
             handle
             title
             availableForSale
+            variants(first: 2) {
+              nodes {
+                id
+                title
+                availableForSale
+                price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
+                  amount
+                  currencyCode
+                }
+              }
+            }
             featuredImage {
               url
               altText

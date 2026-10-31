@@ -16,7 +16,9 @@ export const collectionHandles = {
 } as const;
 
 export const promoCollectionHandles = {
-  dailyDelight: "daily-delight-tiefkuhlprodukte",
+  // The dedicated Daily Delight collection is empty in Shopify; frozen-food holds the same frozen
+  // Daily Delight products. Point back to it once the dedicated collection is populated.
+  dailyDelight: "frozen-food",
   kumaio: "kumaio-bio-produkte-aus-sri-lanka",
 } as const;
 
@@ -35,10 +37,10 @@ export const categoryHandles: readonly { handle: string; labelKey: string }[] = 
   { handle: "mehl-asiatische-fladenbrote", labelKey: "bread" },
   { handle: "linsen-und-bohnen", labelKey: "pulses" },
   { handle: "gewuerze", labelKey: "spices" },
-  { handle: "ghee-kochzutaten", labelKey: "cooking" },
+  { handle: "sauce", labelKey: "sauces" },
   { handle: "pickles-wurzmittel", labelKey: "pickles" },
   { handle: "frozen-food", labelKey: "frozen" },
-  { handle: "frisches-gemuse", labelKey: "vegetables" },
+  { handle: "curry-mixtures-currymischungen", labelKey: "blends" },
   { handle: "sweets-sussigkeiten", labelKey: "sweets" },
   { handle: "tee-kaffee", labelKey: "tea" },
   { handle: "bio-producte", labelKey: "organic" },

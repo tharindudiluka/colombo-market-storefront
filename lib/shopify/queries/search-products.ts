@@ -10,6 +10,21 @@ export const searchProductsQuery = /* GraphQL */ `
           handle
           title
           availableForSale
+          variants(first: 2) {
+            nodes {
+              id
+              title
+              availableForSale
+              price {
+                amount
+                currencyCode
+              }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
           featuredImage {
             url
             altText

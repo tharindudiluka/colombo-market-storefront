@@ -218,7 +218,13 @@
     "empty": "No products match your filters.",
     "resetFilters": "Reset filters",
     "aboutTitle": "About {title}",
-    "aboutFallback": "Shop {title} online at Colombo Market — {count, plural, one {# product} other {# products}} picked for everyday cooking, pantry restocking and family meals. Order online for delivery across Germany or pick up in-store in Ravensburg."
+    "aboutFallback": "Shop {title} online at Colombo Market — {count, plural, one {# product} other {# products}} picked for everyday cooking, pantry restocking and family meals. Order online for delivery across Germany or pick up in-store in Ravensburg.",
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "status": "Page {page} of {pages}"
+    }
   },
   "brandStrip": {
     "title": "Brands We Love",
@@ -386,7 +392,8 @@
     "gallery": {
       "label": "Product images",
       "image": "{title}: image {number}"
-    }
+    },
+    "chooseOptions": "Choose options"
   },
   "cart": {
     "title": "Your Cart",

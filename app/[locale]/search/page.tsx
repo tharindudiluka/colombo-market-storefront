@@ -10,6 +10,11 @@ import { searchProductsQuery } from "@/lib/shopify/queries/search-products";
 import { toUiProduct } from "@/lib/shopify/mappers";
 import type { LanguageCode, SearchProductsResult } from "@/lib/shopify/types";
 
+// Results are read in batches (Storefront maximum 250) up to a safety cap, then paged for display
+// so every result is reachable.
+const PAGE_SIZE = 48;
+const MAX_RESULTS = 500;
+
 async function searchProducts(query: string, language: LanguageCode, vendor?: string) {
   if (!query) return [];
   const products = [];
@@ -17,13 +22,13 @@ async function searchProducts(query: string, language: LanguageCode, vendor?: st
   do {
     const data: SearchProductsResult = await shopifyFetch<SearchProductsResult>({
       query: searchProductsQuery,
-      variables: { query, first: vendor ? 250 : 48, language, after },
+      variables: { query, first: 250, language, after },
       tags: ["products"],
       revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
     });
     products.push(...data.products.edges.filter(edge => !vendor || edge.node.vendor === vendor).map(edge => toUiProduct(edge.node)));
-    after = vendor && data.products.pageInfo.hasNextPage ? data.products.pageInfo.endCursor : null;
-  } while (after);
+    after = data.products.pageInfo.hasNextPage && data.products.pageInfo.endCursor !== after ? data.products.pageInfo.endCursor : null;
+  } while (after && products.length < MAX_RESULTS);
   return products;
 }
 
@@ -46,16 +51,19 @@ export default async function SearchPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ q?: string; vendor?: string }>;
+  searchParams: Promise<{ q?: string; vendor?: string; page?: string | string[] }>;
 }) {
   const { locale } = await params;
-  const { q, vendor: vendorParam } = await searchParams;
+  const { q, vendor: vendorParam, page: pageParam } = await searchParams;
   const vendor = vendorParam?.trim();
   const query = vendor ? `vendor:${JSON.stringify(vendor)}` : (q ?? "").trim();
   const language = locale.toUpperCase() as LanguageCode;
 
   const products = await searchProducts(query, language, vendor);
   const t = await getTranslations("search");
+  const pageCount = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
+  const requestedPage = Number.parseInt(Array.isArray(pageParam) ? pageParam[0] : pageParam ?? "", 10);
+  const page = Math.min(Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1, pageCount);
 
   return (
     <div className="flex min-h-full flex-col bg-white">
@@ -80,7 +88,12 @@ export default async function SearchPage({
             {t("noResults", { query })}
           </p>
         ) : (
-          <CollectionBrowser products={products} />
+          <CollectionBrowser
+            products={products.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)}
+            totalCount={products.length}
+            page={page}
+            pageCount={pageCount}
+          />
         )}
       </main>
 

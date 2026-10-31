@@ -219,7 +219,13 @@
     "empty": "Keine Produkte entsprechen deiner Filterauswahl.",
     "resetFilters": "Filter zurücksetzen",
     "aboutTitle": "Über {title}",
-    "aboutFallback": "Kaufe {title} online bei Colombo Market — {count, plural, one {# Produkt} other {# Produkte}} für den täglichen Kochtopf, den Vorratsschrank und Familienessen. Bestelle online mit Lieferung in ganz Deutschland oder hol im Markt in Ravensburg ab."
+    "aboutFallback": "Kaufe {title} online bei Colombo Market — {count, plural, one {# Produkt} other {# Produkte}} für den täglichen Kochtopf, den Vorratsschrank und Familienessen. Bestelle online mit Lieferung in ganz Deutschland oder hol im Markt in Ravensburg ab.",
+    "pagination": {
+      "label": "Seitennavigation",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "status": "Seite {page} von {pages}"
+    }
   },
   "brandStrip": {
     "title": "Marken, die wir lieben",
@@ -387,7 +393,8 @@
     "gallery": {
       "label": "Produktbilder",
       "image": "{title}: Bild {number}"
-    }
+    },
+    "chooseOptions": "Optionen wählen"
   },
   "cart": {
     "title": "Dein Warenkorb",

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { ProductTile } from "@/components/ProductTile";
 import type { UiProduct } from "@/lib/shopify/mappers";
 import type { ShopifyProductFilter } from "@/lib/shopify/types";
@@ -44,12 +44,16 @@ export function CollectionBrowser({
   activeFilters = [],
   sort = "featured",
   totalCount,
+  page = 1,
+  pageCount = 1,
 }: {
   products: UiProduct[];
   filters?: ShopifyProductFilter[];
   activeFilters?: ProductFilterInput[];
   sort?: string;
   totalCount?: number;
+  page?: number;
+  pageCount?: number;
 }) {
   const t = useTranslations("collection");
   const locale = useLocale();
@@ -74,6 +78,7 @@ export function CollectionBrowser({
 
   function replaceQuery(next: { filters?: ProductFilterInput[]; sort?: string }) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page"); // a new filter or sort starts again at the first page
     if (next.filters) {
       params.delete("filter");
       next.filters.forEach((filter) => params.append("filter", JSON.stringify(filter)));
@@ -84,6 +89,14 @@ export function CollectionBrowser({
     }
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
+
+  function pageHref(target: number) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (target > 1) params.set("page", String(target));
+    else params.delete("page");
+    const query = params.toString();
+    return query ? `${pathname}?${query}` : pathname;
   }
 
   function toggleFilter(input: ProductFilterInput) {
@@ -178,6 +191,18 @@ export function CollectionBrowser({
         </div>
       )}
 
+      {pageCount > 1 && (
+        <nav aria-label={t("pagination.label")} className="mt-8 flex items-center justify-center gap-3 border-t border-black/10 pt-6">
+          {page > 1 ? (
+            <Link href={pageHref(page - 1)} rel="prev" scroll className="inline-flex min-h-11 items-center rounded-lg border border-black/15 px-5 text-sm font-semibold text-brand-teal-dark hover:border-brand-teal">{t("pagination.previous")}</Link>
+          ) : <span aria-hidden className="min-h-11 w-[5.5rem]" />}
+          <span className="text-sm font-semibold text-brand-teal-dark/80" aria-current="page">{t("pagination.status", { page, pages: pageCount })}</span>
+          {page < pageCount ? (
+            <Link href={pageHref(page + 1)} rel="next" scroll className="inline-flex min-h-11 items-center rounded-lg border border-black/15 px-5 text-sm font-semibold text-brand-teal-dark hover:border-brand-teal">{t("pagination.next")}</Link>
+          ) : <span aria-hidden className="min-h-11 w-[5.5rem]" />}
+        </nav>
+      )}
+
       {filterOpen && (
         <div className="fixed inset-0 z-[70]">
           <button type="button" aria-label={t("closeFilters")} onClick={() => setFilterOpen(false)} className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
@@ -258,7 +283,7 @@ export function CollectionBrowser({
             </div>
             <div className="flex shrink-0 items-center gap-3 border-t border-black/10 bg-white px-5 py-4">
               <button type="button" onClick={clearFilters} className="flex-1 rounded-lg border border-black/15 px-4 py-3 text-sm font-semibold text-brand-teal-dark hover:bg-brand-cream/40">{t("clearFilters")}</button>
-              <button type="button" onClick={applyFilters} className="flex-1 rounded-lg bg-brand-teal px-4 py-3 text-sm font-bold text-white hover:bg-brand-teal-dark">{t("applyFilters", { count: products.length })}</button>
+              <button type="button" onClick={applyFilters} className="flex-1 rounded-lg bg-brand-teal px-4 py-3 text-sm font-bold text-white hover:bg-brand-teal-dark">{t("applyFilters", { count: totalCount ?? products.length })}</button>
             </div>
           </aside>
         </div>

@@ -110,6 +110,7 @@ export type ShopifyCollectionDetail = {
   products: {
     edges: { node: ShopifyProductNode }[];
     filters: ShopifyProductFilter[];
+    pageInfo: { hasNextPage: boolean; endCursor: string | null };
   };
 };
 

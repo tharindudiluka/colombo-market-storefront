@@ -3,7 +3,7 @@ import type { HomepageCategoryIconName } from "@/components/HomepageCategoryIcon
 
 const icons: Record<string, HomepageCategoryIconName> = {
   rice: "rice", bread: "bread", pulses: "dal", spices: "mortar",
-  cooking: "ghee", pickles: "jar", frozen: "snowflake", vegetables: "vegetables",
+  sauces: "chili", pickles: "jar", frozen: "snowflake", blends: "spice",
   sweets: "candy", tea: "tea", organic: "leaf", glutenFree: "wheatFree",
 };
 const tones = [

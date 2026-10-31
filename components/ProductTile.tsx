@@ -1,13 +1,82 @@
 "use client";
 
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { useCart } from "@/components/cart/CartProvider";
 import type { UiProduct } from "@/lib/shopify/mappers";
 import { WishlistToggle } from "@/components/wishlist/WishlistToggle";
 
 function formatMoney(amount: number, currencyCode: string, locale: string) {
   return new Intl.NumberFormat(locale, { style: "currency", currency: currencyCode }).format(amount);
+}
+
+const addControlClass =
+  "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-brand-teal-dark shadow-sm ring-1 ring-black/10 transition-colors hover:bg-brand-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal disabled:cursor-wait disabled:opacity-60";
+
+function PlusIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-4 w-4">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+/**
+ * Default add control for tiles that are not given their own addControl. Simple in-stock
+ * single-variant products are added (quantity 1) to the cart; products that need a variant
+ * choice, or whose variants are unknown, go to the product page instead of guessing one;
+ * sold-out products get no control.
+ */
+function DefaultAddControl({ product }: { product: UiProduct }) {
+  const t = useTranslations("product");
+  const { addItem, isPending } = useCart();
+  const [status, setStatus] = useState<"idle" | "added" | "error">("idle");
+
+  if (!product.availableForSale) return null;
+
+  if (!product.quickAddVariantId) {
+    return (
+      <Link href={`/products/${product.handle}`} aria-label={t("chooseOptions")} title={t("chooseOptions")} className={addControlClass}>
+        <PlusIcon />
+      </Link>
+    );
+  }
+
+  const variantId = product.quickAddVariantId;
+  async function handleAdd() {
+    try {
+      await addItem(variantId, 1);
+      setStatus("added");
+    } catch {
+      setStatus("error");
+    }
+    setTimeout(() => setStatus("idle"), 1600);
+  }
+
+  return (
+    <button
+      type="button"
+      disabled={isPending}
+      aria-label={status === "added" ? t("addedToCart") : status === "error" ? t("addToCartError") : t("addToCart")}
+      title={status === "error" ? t("addToCartError") : t("addToCart")}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        void handleAdd();
+      }}
+      className={`${addControlClass} ${status === "added" ? "bg-brand-teal-dark text-white hover:bg-brand-teal-dark" : ""} ${status === "error" ? "ring-2 ring-brand-terracotta" : ""}`}
+    >
+      {status === "added" ? (
+        <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="m5 12 5 5 9-10" /></svg>
+      ) : status === "error" ? (
+        <span aria-hidden className="text-base font-bold leading-none">!</span>
+      ) : (
+        <PlusIcon />
+      )}
+    </button>
+  );
 }
 
 type ProductTileProps = {
@@ -32,21 +101,7 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", addCo
     ? formatMoney(product.compareAtPrice.amount, product.compareAtPrice.currencyCode, locale)
     : null;
 
-  const addButton = addControl ?? (
-    <button
-      type="button"
-      aria-label="Add to bag"
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-brand-teal-dark ring-1 ring-black/10"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-3.5 w-3.5">
-        <path d="M12 5v14M5 12h14" />
-      </svg>
-    </button>
-  );
+  const addButton = addControl ?? <DefaultAddControl product={product} />;
 
   const image = (
     <div
