@@ -64,43 +64,27 @@ base for inputs, selects and textareas (44px, 16px text, line-strong border, sam
 ring). Not yet applied to existing buttons; existing `bg-brand-teal` buttons still render
 through the glass layer.
 
-## Glass/gradient layer: scope for A2
+## Glass/gradient layer: retired in A2
 
-Nothing below was removed or disabled in A1. All of it lives in `app/globals.css`
-between the banner `GLASS + GRADIENT LAYER` (line 387) and `END GLASS + GRADIENT LAYER`
-(line 640), plus `theme.glass` in `config/theme.ts` and one `.glass` class used in markup.
+The experimental layer is gone from `app/globals.css` and `config/theme.ts` (`theme.glass`).
+What replaced it, in `app/globals.css` under "SHARED SURFACES":
 
-**Tokens (`:root`)**: `--glass-*`, `--radius-glass`, `--gradient-ground|primary|warm|sprout|mint|header|footer|sheen`, `--orb`.
+- Page ground: `html` uses `--ds-canvas`; `body` uses `--background` (now `var(--ds-canvas)`);
+  `.min-h-full.bg-white` stays transparent so the canvas shows through route wrappers.
+- `.glass` (cart, wishlist, contact, about cards) is now a clean surface: `--ds-surface`,
+  1px `--ds-line` border, `--ds-radius-lg`, `--ds-shadow-card`. No blur.
+- `header.sticky.top-0`: `--ds-surface` with a 1px line and card shadow, via `box-shadow`
+  so header height does not change.
+- `form[role="search"]`: muted warm pill with line border and a green focus ring.
+- Body font is now Geist (`--font-geist-sans`).
+- `--color-brand-cream` is now the warm neutral `#f3efe7` (was mint `#d6efd9`); the name
+  finally matches the value. `brand-teal|teal-dark|gold|terracotta` keep their values.
 
-**Page ground**: `html { background-color }`, `body { background: transparent }`,
-`body::before` (fixed full-viewport mint gradient), `.min-h-full.bg-white` (forces route
-wrappers transparent so the ground shows through).
+Removed outright: all `--glass-*`, `--gradient-*`, `--orb`, `--radius-glass` tokens; the
+`body::before` ambient ground; the utility-class overrides on `.bg-brand-gold|terracotta|teal|cream`
+and `.bg-black\/50` (blur); the footer gradient; the `.overflow-hidden.rounded-2xl`,
+`.rounded-2xl.p-3`, `.rounded-full.bg-brand-cream` shadow rules. Dead selectors that matched
+nothing (`nav.border-b` chips, `a.rounded-xl.bg-white`, `button.fixed.rounded-full`) were deleted.
 
-**Global restyling by utility-class selector** (affects anything using those utilities):
-- `.bg-brand-gold` → sprout gradient (announcement bar)
-- `.bg-brand-terracotta` → warm gradient
-- `.bg-brand-teal` → green gradient (every teal button/badge)
-- `.bg-brand-cream` → mint gradient (product image backgrounds, bands)
-- `.bg-black\/50` → backdrop blur on scrims
-- `footer.bg-brand-teal-dark` → footer gradient (reset to none by `footer.storefront-footer`)
-- `.overflow-hidden.rounded-2xl:not(.bg-brand-cream)` → hero frame radius 18px + glass shadow
-- `.rounded-2xl.p-3` → promo tile radius 16px + glass shadow
-- `a.rounded-xl.bg-white` (+ `:hover`) → frosted product cards, 26px radius, blur
-- `.rounded-full.bg-brand-cream` → category circles border + glass shadow
-- `button.fixed.rounded-full` → floating help button border and shadow
-
-**Structural selectors**: `header.sticky.top-0` (+ ≥1024px override to flat white),
-`form[role="search"]` (+ `:focus-within`, + ≥1024px override), `nav.border-b` and its
-`.desktop-nav-link` chip rules (+ `[aria-current="page"]` gradient).
-
-**Component class**: `.glass`, used in `CartPageClient`, `WishlistPageClient`,
-`contact/page`, `pages/about-us/page`.
-
-**Inside the banner but NOT glass; keep or relocate in A2**: `.skeleton-shimmer` +
-`@keyframes skeleton-shimmer` (route loading skeletons) and `.footer-group-panel*`
-(functional footer accordion). `header.sticky.top-0` also supplies the header's base
-background and shadow, so it needs a flat replacement rather than plain deletion.
-
-A2 plan: swap the legacy-token usages to the foundation tokens, replace each selector with
-explicit component classes, compare before/after screenshots, then delete the block, the
-`theme.glass` key, and the `.glass` class uses.
+Preserved: `.skeleton-shimmer` + keyframes, `.footer-group-panel*`, the header's base
+surface, `.min-h-full.bg-white` transparency.

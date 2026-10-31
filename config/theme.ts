@@ -14,7 +14,7 @@ export const theme = {
     tealDark: "#2e5e2b",
     gold: "#8cc63f",
     terracotta: "#b4531f",
-    cream: "#d6efd9",
+    cream: "#f3efe7",
     categorySage: "#e3ede2",
     categoryGreen: "#d5e5d6",
     categoryTurmeric: "#f5e4bc",
@@ -80,32 +80,6 @@ export const theme = {
       lift: "0 6px 16px -4px rgba(28,42,32,0.12), 0 2px 4px rgba(28,42,32,0.05)",
     },
     controlHeight: "2.75rem",
-  },
-
-  /* ----------------------------------------------------------------------
-   * GLASS + GRADIENT LAYER (experimental). Mirrors the token block of the
-   * same name in app/globals.css. Additive — nothing above depends on it;
-   * delete this `glass` key (and the matching CSS block) to return to the
-   * flat Garden Frost theme.
-   * -------------------------------------------------------------------- */
-  glass: {
-    fill: "rgba(255,255,255,0.5)",
-    fillStrong: "rgba(255,255,255,0.66)",
-    rim: "rgba(255,255,255,0.85)",
-    edge: "rgba(47,94,43,0.10)",
-    blur: "blur(26px) saturate(165%)",
-    shadow: "0 22px 55px -16px rgba(31,58,35,0.28), 0 6px 18px -10px rgba(31,58,35,0.18)",
-    radius: "26px",
-    gradients: {
-      ground:
-        "radial-gradient(120% 78% at 0% 0%, #a9ddc8, transparent 55%), radial-gradient(130% 85% at 100% 100%, #f7ead7, transparent 55%), linear-gradient(165deg, #d9efe3 0%, #e9f3ea 45%, #f4eee1 100%)",
-      primary: "linear-gradient(135deg, #4e9a46 0%, #3f7d3a 55%, #2e5e2b 100%)",
-      warm: "linear-gradient(135deg, #e27d3a 0%, #b4531f 100%)",
-      sprout: "linear-gradient(120deg, #a8d85a 0%, #8cc63f 45%, #63a83a 100%)",
-      mint: "linear-gradient(135deg, #d0eadd 0%, #a7d7c1 55%, #8ec9af 100%)",
-      footer: "linear-gradient(180deg, #2e5e2b 0%, #1f3f23 100%)",
-      orb: "radial-gradient(circle at 32% 28%, #e2f4e6 0%, #8fcea9 42%, #3f7d3a 100%)",
-    },
   },
 } as const;
 
