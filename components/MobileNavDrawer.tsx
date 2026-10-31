@@ -24,9 +24,9 @@ function MobileEntry({ entry, pathname, searching, onNavigate, depth = 0 }: {
   entry: NavigationEntry; pathname: string; searching: boolean; onNavigate: () => void; depth?: number;
 }) {
   const t = useTranslations("nav");
-  const icon = mobileNavigationIcons[entry.id] ?? "store";
+  const icon = mobileNavigationIcons[entry.href] ?? "store";
   const title = <>{depth === 0 && <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-cream/60 text-brand-teal">
-    {icon === "mortar" || icon === "candy" ? <HomepageCategoryIcon name={icon} className="h-5 w-5" /> : <Icon name={icon} className="h-5 w-5" />}
+    {icon === "mortar" || icon === "candy" || icon === "bread" ? <HomepageCategoryIcon name={icon} className="h-5 w-5" /> : <Icon name={icon} className="h-5 w-5" />}
   </span>}<span className="min-w-0 flex-1">{entry.title}</span></>;
   const linkClass = "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-brand-teal-dark/80 hover:bg-brand-cream/60";
   return (
