@@ -77,7 +77,7 @@ const productFields = `id vendor handle title productType tags availableForSale
   compareAtPriceRange { minVariantPrice { amount currencyCode } }`;
 
 /** Verified Sri Lankan products (config/sri-lanka.ts) that exist and are available, in config priority order. */
-export async function getSriLankaProducts(language: LanguageCode): Promise<UiProduct[]> {
+export async function getSriLankaProducts(language: LanguageCode, limit: number = sriLankaShowcaseSize): Promise<UiProduct[]> {
   try {
     const data = await shopifyFetch<Record<string, ShopifyProductNode | null>>({
       query: `query SriLankaProducts($language: LanguageCode) @inContext(country: DE, language: $language) {
@@ -89,7 +89,7 @@ export async function getSriLankaProducts(language: LanguageCode): Promise<UiPro
     return sriLankaProducts
       .map((_, i) => data[`p${i}`])
       .filter((node): node is ShopifyProductNode => !!node && node.availableForSale)
-      .slice(0, sriLankaShowcaseSize)
+      .slice(0, limit)
       .map(toUiProduct);
   } catch {
     return [];

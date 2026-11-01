@@ -3,8 +3,8 @@
     "title": "Colombo Market - Sri-lankische, indische & internationale Lebensmittel",
     "description": "Colombo Market in Ravensburg — Gewürze, Reis, frisches Gemüse und mehr, online bestellen mit Abholung im Markt.",
     "home": {
-      "title": "Colombo Market Ravensburg | Sri-lankische & asiatische Lebensmittel",
-      "description": "Sri-lankische, indische und asiatische Lebensmittel in Ravensburg. Reis, Gewürze, Snacks, Tiefkühlprodukte und mehr – online entdecken oder vor Ort einkaufen."
+      "title": "Sri Lanka Lebensmittel online kaufen | Colombo Market",
+      "description": "Sri-lankische, indische und südasiatische Lebensmittel online bestellen: Reis, Dal, Gewürze, Tee, Snacks und mehr. Versand deutschlandweit, Abholung in Ravensburg."
     }
   },
   "announcementBar": {
@@ -230,6 +230,70 @@
       "cta": "Kumaio: Bio aus Sri Lanka"
     }
   },
+  "homePage": {
+    "h1": "Authentische sri-lankische & südasiatische Lebensmittel",
+    "h1Support": "Online bestellen, deutschlandweit liefern lassen oder kostenlos in Ravensburg abholen.",
+    "slider": {
+      "label": "Aktionen und Neuigkeiten",
+      "previous": "Vorheriger Banner",
+      "next": "Nächster Banner",
+      "goTo": "Banner {number} anzeigen"
+    },
+    "shortcuts": {
+      "title": "Nach Kategorie einkaufen",
+      "all": "Alle Kategorien"
+    },
+    "trust": {
+      "label": "Versand und Abholung",
+      "shipping": "Versand ab {rate}",
+      "free": "Kostenloser Versand ab {threshold}",
+      "germany": "Deutschlandweite Lieferung",
+      "pickup": "Kostenlose Abholung in Ravensburg"
+    },
+    "rows": {
+      "viewAll": "Alle ansehen",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "sale": "Angebot",
+      "sriLankaSubtitle": "Produkte mit ausgewiesener Herkunft Sri Lanka",
+      "titles": {
+        "bestsellers": "Bestseller",
+        "sriLanka": "Sri-lankische Favoriten",
+        "rice": "Reis",
+        "dal": "Dal, Linsen & Bohnen",
+        "spices": "Gewürze & Curry",
+        "snacks": "Snacks & Süßes",
+        "frozen": "Tiefkühl-Favoriten",
+        "offers": "Angebote"
+      }
+    },
+    "intro": {
+      "title": "Sri-lankische und südasiatische Lebensmittel bei Colombo Market",
+      "p1": "Bei Colombo Market finden Sie Lebensmittel für die sri-lankische, indische und südasiatische Küche: Basmati-, Ponni- und Sona-Masoori-Reis, Dal wie Masoor, Urad und Toor, Mehl, Grieß und Fladenbrote, ganze und gemahlene Gewürze, Currypulver, Saucen, Sambol, Tee, Snacks und Tiefkühlprodukte wie Roti und Paratha.",
+      "p2": "Bestellen Sie bequem online und lassen Sie sich Ihre Einkäufe deutschlandweit liefern – ab {threshold} versandkostenfrei, sonst {rate}. Wer in der Nähe wohnt, holt die Bestellung kostenlos in unserem Markt in der Herrenstraße 30 in Ravensburg ab. Neu hier? Starten Sie bei den Kategorien oder mit unseren sri-lankischen Favoriten."
+    },
+    "families": {
+      "title": "Beliebte Produktgruppen",
+      "subtitle": "Direkt zu dem, was am häufigsten gesucht wird.",
+      "items": {
+        "basmati": "Basmati Reis",
+        "ponni": "Ponni Reis",
+        "sonaMasoori": "Sona Masoori Reis",
+        "masoor": "Masoor Dal (Rote Linsen)",
+        "urad": "Urad Dal",
+        "toor": "Toor Dal",
+        "curryPowder": "Currypulver",
+        "tea": "Tee",
+        "roti": "Roti & Paratha (Tiefkühl)",
+        "snacks": "Salzige Snacks",
+        "coconutChips": "Kokoschips"
+      }
+    },
+    "links": {
+      "title": "Alle Kategorien im Überblick",
+      "all": "Alle Kategorien ansehen"
+    }
+  },
   "collection": {
     "facetAvailability": "Verfügbarkeit",
     "facetBrand": "Marke",
@@ -359,7 +423,8 @@
     "body": "Entdecken Sie eine vielfältige Auswahl an sri-lankischen, indischen und internationalen Lebensmitteln direkt in unserem Geschäft. Bei uns finden Sie Reis, Gewürze, Hülsenfrüchte, Snacks, Tiefkühlprodukte und viele weitere Spezialitäten für Ihre Küche.",
     "storeName": "Colombo Market",
     "address": "Herrenstraße 30, 88212 Ravensburg",
-    "imageAlt": "Außenansicht von Colombo Market in Ravensburg"
+    "imageAlt": "Außenansicht von Colombo Market in Ravensburg",
+    "pickup": "Online bestellen und kostenlos im Markt abholen."
   },
   "wishlist": {
     "title": "Gespeicherte Artikel",

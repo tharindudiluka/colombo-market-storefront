@@ -1,20 +1,21 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Header } from "@/components/Header";
-import { HeroCarousel } from "@/components/HeroCarousel";
-import { PromoTiles } from "@/components/PromoTiles";
-import { BestsellerCarousel } from "@/components/BestsellerCarousel";
-import { CategoryGrid } from "@/components/CategoryGrid";
-import { BrandStrip } from "@/components/BrandStrip";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { VisitStore } from "@/components/VisitStore";
-import { BotanicalAccents } from "@/components/BotanicalAccents";
 import { Footer } from "@/components/Footer";
-import { shopifyFetch } from "@/lib/shopify/client";
-import { collectionProductsQuery } from "@/lib/shopify/queries/collection-products";
-import { buildHomeCollectionsQuery } from "@/lib/shopify/queries/collections";
-import { toUiCategory, toUiProduct } from "@/lib/shopify/mappers";
-import type { CollectionProductsResult, LanguageCode, ShopifyCollection } from "@/lib/shopify/types";
-import { categoryHandles, collectionHandles } from "@/config/collections";
+import { HomeSlider } from "@/components/home/HomeSlider";
+import { HomeCategoryShortcuts } from "@/components/home/HomeCategoryShortcuts";
+import { HomeTrustStrip } from "@/components/home/HomeTrustStrip";
+import { HomeRows } from "@/components/home/HomeRows";
+import { HomeIntro } from "@/components/home/HomeIntro";
+import { HomeFamilies } from "@/components/home/HomeFamilies";
+import { HomeCategoryLinks } from "@/components/home/HomeCategoryLinks";
+import { getCategoryDirectory, getSriLankaProducts } from "@/lib/catalog/categories-page";
+import { getAvailableFamilies } from "@/lib/catalog/home";
+import { getHomeRows } from "@/lib/catalog/home-rows";
+import { getNavigationEntries } from "@/lib/shopify/navigation";
+import type { LanguageCode } from "@/lib/shopify/types";
+import { homeRowMaxProducts } from "@/config/home-rows";
 import { canonicalMetadata, storefrontOrigin, storefrontUrl } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -31,10 +32,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     height: 1024,
     alt: site.name,
   };
+  const canonical = canonicalMetadata(locale, "/");
 
   return {
-    ...canonicalMetadata(locale, "/"),
-    title,
+    ...canonical,
+    alternates: {
+      ...canonical.alternates,
+      languages: { de: storefrontUrl("de", "/"), en: storefrontUrl("en", "/"), "x-default": storefrontUrl("de", "/") },
+    },
+    title: { absolute: title },
     description,
     openGraph: {
       type: "website",
@@ -55,35 +61,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-async function getCollectionProducts(handle: string, language: LanguageCode, first = 6, includeQuickAdd = false) {
-  const data = await shopifyFetch<CollectionProductsResult>({
-    query: collectionProductsQuery,
-    variables: { handle, first, language, includeQuickAdd },
-    tags: ["collection", handle],
-    revalidate: process.env.NODE_ENV === "development" ? 0 : 3600,
-  });
-  return (data.collection?.products.edges ?? []).map((edge) => toUiProduct(edge.node));
-}
-
-async function getHomeCategories(language: LanguageCode) {
-  const data = await shopifyFetch<Record<string, ShopifyCollection | null>>({
-    query: buildHomeCollectionsQuery(),
-    variables: { language },
-    tags: ["collection"],
-  });
-  return categoryHandles
-    .map(({ labelKey }) => data[labelKey])
-    .filter((collection): collection is ShopifyCollection => collection !== null)
-    .map(toUiCategory);
-}
-
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const language = locale.toUpperCase() as LanguageCode;
+  const t = await getTranslations("homePage");
+  const entries = await getNavigationEntries(language);
 
-  const [bestsellers, categories] = await Promise.all([
-    getCollectionProducts(collectionHandles.bestsellers, language, 250, true),
-    getHomeCategories(language),
+  // Four batched Storefront requests (directory, Sri Lankan products, collection rows, product families); the rows
+  // request shares the Sri Lankan product promise instead of fetching it twice.
+  const sriLankaProducts = getSriLankaProducts(language, homeRowMaxProducts);
+  const [categories, rows, families] = await Promise.all([
+    getCategoryDirectory(entries, language),
+    getHomeRows(language, sriLankaProducts),
+    getAvailableFamilies(language),
   ]);
 
   return (
@@ -91,25 +81,22 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <AnnouncementBar />
       <Header />
 
-      <main className="flex-1">
-        <div className="relative isolate">
-          <BotanicalAccents variant="hero" />
-          <div className="relative z-10 mx-auto max-w-[var(--layout-max-width)] px-4 pt-6">
-            <div className="hero-grid grid grid-cols-1 gap-3 md:grid-cols-[3fr_2fr] md:items-start">
-              <HeroCarousel />
-              <PromoTiles />
-            </div>
+      <main className="flex-1 pb-4">
+        <div className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-4 sm:pt-5">
+          <div className="mb-3 sm:mb-4">
+            <h1 className="text-[22px] font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-[28px]">{t("h1")}</h1>
+            <p className="mt-1 text-sm text-neutral-500 sm:text-[15px]">{t("h1Support")}</p>
           </div>
+          <HomeSlider />
         </div>
-
-        <CategoryGrid categories={categories} />
-
-        <BestsellerCarousel products={bestsellers} />
-
-        <BrandStrip />
-
+        <HomeCategoryShortcuts categories={categories} />
+        <HomeTrustStrip />
+        <HomeRows rows={rows} from={0} to={rows.length} />
+        <HomeFamilies families={families} />
+        <HomeIntro />
         <FaqAccordion />
         <VisitStore />
+        <HomeCategoryLinks categories={categories} />
       </main>
 
       <Footer />

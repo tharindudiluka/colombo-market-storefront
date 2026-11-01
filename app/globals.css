@@ -32,6 +32,8 @@
   --foreground: #16281a;
   --color-brand-teal: #3f7d3a;
   --color-brand-teal-dark: #2e5e2b;
+  /* Exact green of the "Jetzt entdecken" button in the homepage banner (sampled from banner1.png). */
+  --color-brand-cta: #015233;
   --color-brand-gold: #8cc63f;
   --color-brand-terracotta: #b4531f;
   --color-brand-cream: #f3efe7;
@@ -289,6 +291,7 @@
   --color-foreground: var(--foreground);
   --color-brand-teal: var(--color-brand-teal);
   --color-brand-teal-dark: var(--color-brand-teal-dark);
+  --color-brand-cta: var(--color-brand-cta);
   --color-brand-gold: var(--color-brand-gold);
   --color-brand-terracotta: var(--color-brand-terracotta);
   --color-brand-cream: var(--color-brand-cream);
@@ -619,3 +622,8 @@ form[role="search"]:focus-within {
 .product-rich-text img { max-width: 100%; height: auto; }
 .product-rich-text table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
 .product-rich-text :is(th, td) { border: 1px solid var(--color-category-sage); padding: 0.5em; }
+
+/* Homepage is a clean white storefront: no ground gradient behind the content. */
+.homepage.min-h-full.bg-white {
+  background-color: var(--color-white);
+}

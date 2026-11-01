@@ -3,8 +3,8 @@
     "title": "Colombo Market - Sri Lankan, Indian & International Groceries",
     "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup.",
     "home": {
-      "title": "Colombo Market Ravensburg | Sri Lankan & Asian Groceries",
-      "description": "Sri Lankan, Indian and Asian groceries in Ravensburg. Shop rice, spices, snacks, frozen foods and more online or visit our local store."
+      "title": "Sri Lankan Groceries in Germany | Colombo Market",
+      "description": "Shop Sri Lankan, Indian and South Asian groceries online in Germany: rice, dal, spices, tea, snacks and frozen foods. Nationwide delivery or pickup in Ravensburg."
     }
   },
   "announcementBar": {
@@ -229,6 +229,70 @@
       "cta": "Kumaio: organic from Sri Lanka"
     }
   },
+  "homePage": {
+    "h1": "Authentic Sri Lankan & South Asian groceries",
+    "h1Support": "Order online for delivery across Germany or collect for free in Ravensburg.",
+    "slider": {
+      "label": "Promotions and news",
+      "previous": "Previous banner",
+      "next": "Next banner",
+      "goTo": "Show banner {number}"
+    },
+    "shortcuts": {
+      "title": "Shop by category",
+      "all": "All categories"
+    },
+    "trust": {
+      "label": "Shipping and pickup",
+      "shipping": "Shipping from {rate}",
+      "free": "Free shipping from {threshold}",
+      "germany": "Delivery across Germany",
+      "pickup": "Free pickup in Ravensburg"
+    },
+    "rows": {
+      "viewAll": "View all",
+      "previous": "Previous",
+      "next": "Next",
+      "sale": "Sale",
+      "sriLankaSubtitle": "Products with a stated Sri Lankan origin",
+      "titles": {
+        "bestsellers": "Bestsellers",
+        "sriLanka": "Sri Lankan Favourites",
+        "rice": "Rice",
+        "dal": "Dal, Lentils & Beans",
+        "spices": "Spices & Curry Essentials",
+        "snacks": "Snacks & Sweets",
+        "frozen": "Frozen Favourites",
+        "offers": "Offers"
+      }
+    },
+    "intro": {
+      "title": "Sri Lankan and South Asian groceries at Colombo Market",
+      "p1": "Colombo Market stocks groceries for Sri Lankan, Indian and South Asian cooking: basmati, ponni and sona masoori rice, dal such as masoor, urad and toor, flour, semolina and flatbreads, whole and ground spices, curry powder, sauces, sambol, tea, snacks and frozen foods like roti and paratha.",
+      "p2": "Order online with delivery anywhere in Germany – free shipping from {threshold}, otherwise {rate}. If you live nearby, collect your order for free at our shop at Herrenstraße 30 in Ravensburg. New here? Start with the categories or our Sri Lankan favourites."
+    },
+    "families": {
+      "title": "Popular product groups",
+      "subtitle": "Straight to what customers look for most.",
+      "items": {
+        "basmati": "Basmati Rice",
+        "ponni": "Ponni Rice",
+        "sonaMasoori": "Sona Masoori Rice",
+        "masoor": "Masoor Dal (red lentils)",
+        "urad": "Urad Dal",
+        "toor": "Toor Dal",
+        "curryPowder": "Curry Powder",
+        "tea": "Tea",
+        "roti": "Frozen Roti & Paratha",
+        "snacks": "Savoury Snacks",
+        "coconutChips": "Coconut Chips"
+      }
+    },
+    "links": {
+      "title": "All categories at a glance",
+      "all": "View all categories"
+    }
+  },
   "collection": {
     "facetAvailability": "Availability",
     "facetBrand": "Brand",
@@ -358,7 +422,8 @@
     "body": "Discover a wide selection of Sri Lankan, Indian and international groceries in our local store. Find rice, spices, pulses, snacks, frozen foods and many more specialties for your kitchen.",
     "storeName": "Colombo Market",
     "address": "Herrenstraße 30, 88212 Ravensburg",
-    "imageAlt": "Colombo Market storefront in Ravensburg"
+    "imageAlt": "Colombo Market storefront in Ravensburg",
+    "pickup": "Order online and collect for free in store."
   },
   "wishlist": {
     "title": "Saved Items",

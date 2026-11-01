@@ -2,7 +2,6 @@
 
 import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
-import { BotanicalAccents } from "@/components/BotanicalAccents";
 
 type FaqItem = { q: string; a: string };
 
@@ -13,9 +12,8 @@ export function FaqAccordion() {
   const accordionId = useId();
 
   return (
-    <section className="relative isolate bg-white py-10 sm:py-12">
-      <BotanicalAccents variant="faq" />
-      <div className="relative z-10 mx-auto max-w-[var(--layout-max-width)] px-4">
+    <section className="bg-white py-8 sm:py-10">
+      <div className="mx-auto max-w-[var(--layout-max-width)] px-4">
         <h2 className="font-heading text-xl font-extrabold text-brand-teal-dark sm:text-2xl">
           {t("title")}
         </h2>

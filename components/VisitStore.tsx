@@ -1,34 +1,33 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { site } from "@/config/site";
-import { BotanicalAccents } from "@/components/BotanicalAccents";
 
 export async function VisitStore() {
   const t = await getTranslations("visitStore");
 
   return (
-    <section className="relative isolate bg-brand-cream/70 py-10 sm:py-12 lg:py-16">
-      <BotanicalAccents variant="store" />
-      <div className="relative z-10 mx-auto grid max-w-[var(--layout-max-width)] items-center gap-8 px-4 lg:grid-cols-2 lg:gap-12">
+    <section className="border-t border-neutral-200 bg-neutral-50 py-8 sm:py-10">
+      <div className="mx-auto grid max-w-[var(--layout-max-width)] items-center gap-8 px-4 lg:grid-cols-[1fr_1fr] lg:gap-10">
         <Image
           src={site.storefrontImage.src}
           width={site.storefrontImage.width}
           height={site.storefrontImage.height}
           alt={t("imageAlt")}
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="h-auto w-full rounded-xl"
+          className="h-auto w-full rounded-lg"
         />
 
         <div className="max-w-xl">
           <p className="text-xs font-bold tracking-widest text-brand-teal-dark/80 sm:text-sm">
             {t("eyebrow")}
           </p>
-          <h2 className="mt-3 font-heading text-2xl font-extrabold leading-tight text-brand-teal-dark sm:text-3xl lg:text-4xl">
+          <h2 className="mt-2 font-heading text-xl font-extrabold leading-tight text-brand-teal-dark sm:text-2xl">
             {t("title")}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-brand-teal-dark/80">
+          <p className="mt-3 text-sm leading-relaxed text-brand-teal-dark/80 sm:text-base">
             {t("body")}
           </p>
+          <p className="mt-4 text-base font-semibold text-brand-teal-dark">{t("pickup")}</p>
           <address className="mt-6 text-base leading-relaxed not-italic text-brand-teal-dark">
             <span className="block font-bold">{t("storeName")}</span>
             <a

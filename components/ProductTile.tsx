@@ -29,7 +29,7 @@ function PlusIcon() {
  * choice, or whose variants are unknown, go to the product page instead of guessing one;
  * sold-out products get no control.
  */
-function DefaultAddControl({ product }: { product: UiProduct }) {
+export function DefaultAddControl({ product, className }: { product: UiProduct; className?: string }) {
   const t = useTranslations("product");
   const { addItem, isPending } = useCart();
   const [status, setStatus] = useState<"idle" | "added" | "error">("idle");
@@ -38,7 +38,7 @@ function DefaultAddControl({ product }: { product: UiProduct }) {
 
   if (!product.quickAddVariantId) {
     return (
-      <Link href={`/products/${product.handle}`} aria-label={t("chooseOptions")} title={t("chooseOptions")} className={addControlClass}>
+      <Link href={`/products/${product.handle}`} aria-label={t("chooseOptions")} title={t("chooseOptions")} className={className ?? addControlClass}>
         <PlusIcon />
       </Link>
     );
@@ -66,7 +66,7 @@ function DefaultAddControl({ product }: { product: UiProduct }) {
         event.stopPropagation();
         void handleAdd();
       }}
-      className={`${addControlClass} ${status === "added" ? "bg-brand-teal-dark text-white hover:bg-brand-teal-dark" : ""} ${status === "error" ? "ring-2 ring-brand-terracotta" : ""}`}
+      className={`${className ?? addControlClass} ${status === "added" ? "bg-brand-teal-dark text-white hover:bg-brand-teal-dark" : ""} ${status === "error" ? "ring-2 ring-brand-terracotta" : ""}`}
     >
       {status === "added" ? (
         <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="m5 12 5 5 9-10" /></svg>
