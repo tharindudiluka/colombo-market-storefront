@@ -126,7 +126,7 @@ export function AnnouncementBarClient({
   };
 
   return (
-    <div className="bg-brand-gold text-brand-teal-dark text-xs font-medium sm:text-sm">
+    <div className="bg-brand-teal-dark text-white text-xs font-medium sm:text-sm">
       <div
         role="region"
         aria-label={regionLabel}
