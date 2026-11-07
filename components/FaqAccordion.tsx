@@ -14,23 +14,24 @@ export function FaqAccordion() {
   return (
     <section className="bg-white py-8 sm:py-10">
       <div className="mx-auto max-w-[var(--layout-max-width)] px-4">
-        <h2 className="font-heading text-xl font-extrabold text-brand-teal-dark sm:text-2xl">
+        <h2 className="flex items-center gap-2.5 text-xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-[22px]">
+          <span aria-hidden className="h-5 w-1 shrink-0 rounded-full bg-brand-teal" />
           {t("title")}
         </h2>
 
-        <div className="mt-6 divide-y divide-neutral-200 rounded-xl border border-neutral-200 bg-white">
+        <ul className="mt-5 grid gap-2.5 sm:mt-6">
           {items.map((item, i) => {
             const isOpen = openIndex === i;
             const questionId = `${accordionId}-question-${i}`;
             const panelId = `${accordionId}-answer-${i}`;
             return (
-              <div key={item.q}>
+              <li key={item.q} className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition duration-200 hover:border-brand-teal/50 hover:shadow-md motion-reduce:transition-none">
                 <button
                   type="button"
                   id={questionId}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left text-sm font-semibold text-brand-teal-dark sm:text-base"
+                  className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left font-heading text-[15px] font-extrabold leading-snug text-brand-teal-dark focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-teal sm:text-base"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
                   {item.q}
@@ -39,20 +40,21 @@ export function FaqAccordion() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth={1.8}
+                    strokeWidth={2.5}
                     strokeLinecap="round"
-                    className={`h-4 w-4 shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`}
+                    strokeLinejoin="round"
+                    className={`h-5 w-5 shrink-0 transition-transform duration-200 motion-reduce:transition-none ${isOpen ? "rotate-90" : ""}`}
                   >
-                    <path d="M12 5v14M5 12h14" />
+                    <path d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
-                <div id={panelId} role="region" aria-labelledby={questionId} hidden={!isOpen}>
-                  <p className="px-4 pb-4 text-sm leading-relaxed text-brand-teal-dark/80 lg:text-base">{item.a}</p>
+                <div id={panelId} role="region" aria-labelledby={questionId} hidden={!isOpen} className="border-t border-neutral-100">
+                  <p className="px-4 pb-4 pt-3 text-sm leading-relaxed text-neutral-600 sm:text-base">{item.a}</p>
                 </div>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );
