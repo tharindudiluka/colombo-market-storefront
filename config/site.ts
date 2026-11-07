@@ -28,6 +28,11 @@ export const site = {
     mapsUrl:
       "https://www.google.com/maps/place//data=!4m2!3m1!1s0x479baf9ce6fb37e5:0x3499ac08ecb1dfa?sa=X&ved=1t:8290&ictx=111",
   },
+  // Contact details as stated in the shop policies (Impressum, shipping policy).
+  contact: {
+    phone: "+49 170 9927662",
+    email: "colombomarket.rv@gmail.com",
+  },
   social: {
     instagram: "https://instagram.com/colombo_market",
     // facebook: add real handle here once confirmed

@@ -147,47 +147,64 @@
     "nativeFormHint": "Nach dem Absenden wird deine Nachricht sicher über unseren Shopify-Shop verarbeitet."
   },
   "about": {
-    "metaTitle": "Über uns",
-    "metaDescription": "Lerne Colombo Market kennen – dein Markt für sri-lankische, indische und internationale Lebensmittel in Ravensburg.",
+    "metaTitle": "Über uns – Colombo Market, Ravensburg",
+    "metaDescription": "Colombo Market ist ein Lebensmittelgeschäft für südasiatische Küche in der Herrenstraße 30 in Ravensburg. Online bestellen oder im Markt abholen.",
     "title": "Über uns",
-    "eyebrow": "Colombo Market, Ravensburg",
-    "heroTitle": "Ein Stück Sri Lanka und Indien für Deutschland.",
-    "heroBody": "Unsere Geschichte begann mit einem Gefühl, das viele Menschen kennen, die ihre Heimat verlassen haben – der Sehnsucht nach dem Geschmack von zu Hause.",
-    "heroCta": "Sortiment entdecken",
-    "heroImageAlt": "Frisches Gemüse und Vorräte in einem einladenden Lebensmittelmarkt",
-    "storyEyebrow": "Unsere Geschichte",
-    "storyTitle": "Von unserer Familie für Ihre Familie.",
-    "storyOne": "Vor etwa acht Jahren zog unsere Familie nach Deutschland. Wir stammen aus traditionellen Familien Sri Lankas und haben unsere Liebe zu unserer Heimat, unserer Kultur und vor allem zu unserer traditionellen Küche mitgebracht.",
-    "storyTwo": "Nach unserem Umzug nach Deutschland haben wir schnell gemerkt, wie sehr uns die authentischen Aromen und Zutaten unserer Heimat fehlen.",
-    "storyThree": "Diese Erfahrung hat uns dazu inspiriert, unseren eigenen Shop aufzubauen – einen Ort, an dem wir ein kleines Stück Sri Lanka und Indien nach Deutschland bringen können.",
-    "storyFour": "Wir möchten authentische sri-lankische und indische Lebensmittel und Produkte anbieten – für alle, die diese besonderen Küchen zum ersten Mal entdecken möchten, aber auch für Sri Lanker, Inder und andere Menschen, die fern von ihrer Heimat leben und sich nach den vertrauten Geschmäckern ihrer Kindheit sehnen.",
-    "storyFive": "Bei der Auswahl unserer Produkte legen wir großen Wert auf Qualität, Authentizität und Frische.",
-    "storySix": "Ob traditionelle Zutaten, beliebte Lebensmittel aus der Heimat oder neue Spezialitäten, die Sie entdecken möchten – wir möchten Ihnen Produkte anbieten, die wir auch für unsere eigene Familie auswählen würden.",
-    "storySeven": "Für uns ist guter Service genauso wichtig wie gute Produkte. Wir möchten unseren Kunden mit Ehrlichkeit, Freundlichkeit und Zuverlässigkeit begegnen und sind gerne für Sie da, wenn Sie Fragen haben oder etwas Bestimmtes suchen.",
-    "storyEight": "Wir freuen uns, unsere Leidenschaft für die sri-lankische und indische Küche mit Ihnen zu teilen und Ihnen ein Stück Heimat näherzubringen.",
-    "valuesEyebrow": "Was uns leitet",
-    "valuesTitle": "Qualität, Authentizität und Frische.",
-    "values": {
-      "care": {
-        "title": "Qualität",
-        "body": "Wir wählen Produkte aus, die wir auch für unsere eigene Familie auswählen würden."
+    "eyebrow": "Colombo Market · Ravensburg",
+    "heroTitle": "Sri-lankische und indische Lebensmittel, von Ravensburg in deine Küche.",
+    "heroBody": "Wir sind ein Lebensmittelgeschäft in der Herrenstraße 30 in Ravensburg mit Reis, Dal, Gewürzen und Zutaten für den Alltag aus Sri Lanka, Indien und der übrigen südasiatischen Küche. Bestelle online mit Lieferung in ganz Deutschland oder komm im Markt vorbei.",
+    "heroBrowse": "Sortiment entdecken",
+    "heroVisit": "Besuche uns in Ravensburg",
+    "photoAlt": "Außenansicht von Colombo Market in der Herrenstraße in Ravensburg",
+    "facts": {
+      "location": "Herrenstraße 30, Ravensburg",
+      "delivery": "Lieferung innerhalb Deutschlands",
+      "pickup": "Abholung im Markt, wenn verfügbar"
+    },
+    "introEyebrow": "Wer wir sind",
+    "introTitle": "Vertraute Zutaten, ganz in der Nähe.",
+    "introOne": "Colombo Market ist ein Lebensmittelgeschäft für die sri-lankische, indische und südasiatische Küche. Viele unserer Kundinnen und Kunden sind Sri Lanker und Inder, die in Deutschland leben und die Zutaten suchen, die sie von zu Hause kennen: den richtigen Reis, das richtige Dal, die Gewürze, mit denen ein Curry so schmeckt, wie es soll.",
+    "introTwo": "Du musst nicht mit dieser Küche aufgewachsen sein, um bei uns einzukaufen. Wenn du neugierig auf südasiatisches Kochen bist, sind unsere Regale und unser Online-Shop ein guter Anfang.",
+    "introThree": "Du kannst online mit Lieferung innerhalb Deutschlands bestellen oder, wenn es an der Kasse angeboten wird, deine Bestellung in Ravensburg abholen.",
+    "shelvesEyebrow": "Was du bei uns findest",
+    "shelvesTitle": "Alltagsklassiker, so sortiert, wie du kochst.",
+    "shelvesBody": "Ein Blick in unsere Regale. Jede Karte führt direkt in den passenden Teil des Shops.",
+    "shelfCta": "Ansehen",
+    "shelves": {
+      "rice": { "title": "Reis", "body": "Basmati von Tilda, Daawat, India Gate, Laila und Annam sowie Ponni-, Sona-Masoori- und Jasminreis." },
+      "lentils": { "title": "Linsen, Bohnen & Dal", "body": "Toor, Chana, Moong und Urid Dal, rote Linsen, Kichererbsen und Schwarzaugenbohnen." },
+      "spices": { "title": "Gewürze", "body": "Ganze und gemahlene Gewürze, Madras- und Jaffna-Currypulver sowie Masala-Mischungen von MDH, Shan und MTR." },
+      "flour": { "title": "Mehl, Grieß & Fladen", "body": "Atta, Reismehl, Besan, Rawa, Dosa- und Idli-Mischungen und Papadams." },
+      "sauces": { "title": "Saucen & Kochzutaten", "body": "Kokosmilch, Currypasten, Tamarinde, Sambol, Pickles und Fischkonserven." },
+      "snacks": { "title": "Snacks & Süßes", "body": "Haldiram-Mixturen, Murukku, Maliban-Kekse, Kokoschips und Marmelade." },
+      "frozen": { "title": "Tiefkühl", "body": "Parotta, Chapathi, Samosas, geriebene Kokosnuss, Jackfrucht und Yam." }
+    },
+    "mealsEyebrow": "Fang mit einem Essen an",
+    "mealsTitle": "Zwei Ideen für den Warenkorb.",
+    "meals": {
+      "rice": {
+        "title": "Sri-lankischer Reis mit Curry",
+        "body": "Ponni- oder Sona-Masoori-Reis, rote Linsen für ein Parippu, Jaffna-Currypulver, Kokosmilch, getrocknete Curryblätter und ein Löffel Katta Sambol dazu.",
+        "links": { "rice": "Ponni Reis", "lentils": "Rote Linsen", "curry": "Currypulver", "coconut": "Kokosmilch", "sambol": "Sambol & Pickles" }
       },
-      "discovery": {
-        "title": "Authentizität",
-        "body": "Traditionelle Zutaten und beliebte Lebensmittel aus der Heimat bringen vertraute Aromen auf Ihren Tisch."
-      },
-      "community": {
-        "title": "Guter Service",
-        "body": "Ehrlichkeit, Freundlichkeit und Zuverlässigkeit sind für uns genauso wichtig wie gute Produkte."
+      "dal": {
+        "title": "Dal und Biryani",
+        "body": "Toor Dal für den Topf, Basmatireis für das Biryani, eine Biryani-Masala, ganze Gewürze wie Kardamom, Nelken und Zimtstangen und Papadams dazu.",
+        "links": { "dal": "Toor Dal", "basmati": "Basmati Reis", "masala": "Masala-Mischungen", "cardamom": "Kardamom", "papadam": "Papadams" }
       }
     },
-    "visitEyebrow": "Komm vorbei",
-    "visitTitle": "Besuche uns in Ravensburg.",
-    "visitBody": "Stöbere durch die Regale, nimm etwas Frisches mit und entdecke Zutaten für dein nächstes Essen. Wir freuen uns, dich persönlich willkommen zu heißen.",
+    "visitEyebrow": "Bestellen oder besuchen",
+    "visitTitle": "Online einkaufen oder in Ravensburg vorbeikommen.",
+    "orderTitle": "Online bestellen",
+    "orderBody": "Wir liefern in ganz Deutschland. Versandkostenfrei ab {threshold}; darunter werden die Versandkosten an der Kasse angezeigt. Wenn die Abholung an der Kasse angeboten wird, kannst du deine Bestellung im Markt abholen. Bitte warte vorher auf unsere Bestätigung.",
+    "orderCta": "Versandinformationen",
+    "shopCta": "Jetzt einkaufen",
+    "storeTitle": "Besuche den Markt",
+    "storeBody": "Du findest uns in der Herrenstraße 30 in Ravensburg.",
     "directions": "Route planen",
     "contactCta": "Kontakt aufnehmen",
-    "storeLabel": "Unser Markt",
-    "storeNote": "Du suchst etwas Bestimmtes? Schreib uns gerne – wir helfen dir weiter."
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-Mail"
   },
   "categoriesPage": {
     "meta": {
