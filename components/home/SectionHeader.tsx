@@ -16,7 +16,7 @@ export function SectionHeader({ id, title, subtitle, action, children }: { id: s
         {subtitle && <p className="mt-1 pl-[14px] text-xs text-neutral-500 sm:text-sm">{subtitle}</p>}
         {action && <div className="pl-[14px]">{action}</div>}
       </div>
-      {children && <div className="ml-auto flex shrink-0 items-center gap-2">{children}</div>}
+      {children && <div className="flex shrink-0 items-center gap-2 sm:ml-auto">{children}</div>}
     </div>
   );
 }
