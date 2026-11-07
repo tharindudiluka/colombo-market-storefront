@@ -12,7 +12,7 @@
 //                      drops any product whose only match is a technical tag.
 // This file has no imports so it can also be exercised outside Next.js.
 
-export const TECHNICAL_TAG = /^(family|type|storage|diet):/i;
+export const TECHNICAL_TAG = /^(family|type|storage|diet|origin):/i;
 
 export type SearchNode = {
   id: string;

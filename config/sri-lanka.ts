@@ -37,3 +37,10 @@ export const sriLankaShortcuts = [
 
 /** The only Sri Lanka-specific Shopify collection today (Kumaio, all products sourced from Sri Lanka). */
 export const sriLankaCollectionHandle = "kumaio-bio-produkte-aus-sri-lanka";
+
+/**
+ * The full Sri Lankan assortment: every product whose Sri Lankan origin is verified (country of origin field, origin
+ * metafield, or a description that states the item's own origin) carries the tag `origin:sri-lanka`, which drives this
+ * automated Shopify collection. The curated list above stays the homepage "Sri Lankan Favourites" selection.
+ */
+export const sriLankaAllHandle = "sri-lankische-produkte";

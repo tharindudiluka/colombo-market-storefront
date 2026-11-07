@@ -21,13 +21,16 @@ export type HomeSlideImage = HomeSlideAsset & { alt: string; mobile?: HomeSlideA
 export type HomeSlide = {
   id: string;
   href?: string;
+  /** Accessible name of the slide link (what the link does), per language; falls back to the image alt text. */
+  linkLabel?: { de: string; en: string };
   image?: { de: HomeSlideImage; en?: HomeSlideImage };
 };
 
 export const homeSlides: HomeSlide[] = [
   {
     id: "sri-lankan-favourites",
-    // No link yet: the planned target /collections/sri-lankan-groceries does not exist in Shopify. Add `href` once it does.
+    href: "/collections/sri-lankische-produkte",
+    linkLabel: { de: "Sri-lankische Produkte ansehen", en: "Browse Sri Lankan products" },
     image: {
       de: {
         src: "/images/home/banner1.png",
@@ -35,6 +38,14 @@ export const homeSlides: HomeSlide[] = [
         height: 793,
         alt: "Sri-lankische Favoriten: Tee, Gewürze, Kokos, Snacks – Jetzt entdecken",
         // Edge colour of banner1.png (uniform on both sides), so the strips beside it are seamless.
+        background: "#fbf8f2",
+      },
+      // Same artwork (its text is German); English alt text only.
+      en: {
+        src: "/images/home/banner1.png",
+        width: 1983,
+        height: 793,
+        alt: "Sri Lankan favourites: tea, spices, coconut, snacks – discover now",
         background: "#fbf8f2",
       },
     },

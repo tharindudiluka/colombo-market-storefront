@@ -76,6 +76,8 @@ export function HomeSlider() {
   }
 
   const many = slides.length > 1;
+  const slideLinkClass = "block h-full w-full focus-visible:outline-3 focus-visible:-outline-offset-4 focus-visible:outline-brand-teal";
+  const linkLabel = (slide: HomeSlide) => (slide.linkLabel ? (locale === "en" ? slide.linkLabel.en : slide.linkLabel.de) : undefined);
 
   return (
     <section aria-roledescription="carousel" aria-label={t("label")} className="relative -mx-4 sm:mx-0">
@@ -100,9 +102,9 @@ export function HomeSlider() {
             >
               {slide?.href ? (
                 isExternal(slide.href) ? (
-                  <a href={slide.href} className="block h-full w-full">{body}</a>
+                  <a href={slide.href} aria-label={linkLabel(slide)} className={slideLinkClass}>{body}</a>
                 ) : (
-                  <Link href={slide.href} className="block h-full w-full">{body}</Link>
+                  <Link href={slide.href} aria-label={linkLabel(slide)} className={slideLinkClass}>{body}</Link>
                 )
               ) : (
                 body
