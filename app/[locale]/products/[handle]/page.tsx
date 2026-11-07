@@ -125,8 +125,8 @@ export default async function ProductPage({
           ]}
         />
 
-        <div className="product-detail-layout mx-auto grid max-w-[var(--layout-max-width)] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:py-10">
-          <div className="min-w-0 lg:sticky lg:top-48 lg:self-start">
+        <div className="product-detail-layout mx-auto grid max-w-[var(--layout-max-width)] gap-6 px-4 pb-24 pt-4 sm:px-6 sm:pb-10 md:grid-cols-2 md:gap-8 md:py-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-12">
+          <div className="min-w-0 md:sticky md:top-40 md:self-start lg:top-48">
             <ProductGallery images={product.images} title={product.title} />
           </div>
           <div className="min-w-0">

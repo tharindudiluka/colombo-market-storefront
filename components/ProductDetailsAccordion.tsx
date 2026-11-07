@@ -53,13 +53,13 @@ export function ProductDetailsAccordion({ product, variant, descriptionHtml }: {
     </div> },
     { key: "delivery", title: t("deliveryTitle"), body: <div className="space-y-3"><p>{t("deliveryBody", { threshold })}</p><p>{site.address.street}, {site.address.postalCode} {site.address.city}</p><p>{t("returnsBody")}</p></div> },
   ];
-  return <section className="mt-6 overflow-hidden rounded-2xl border border-brand-teal-dark/10 bg-white" aria-label={t("informationTitle")}>
+  return <section className="mt-6 overflow-hidden rounded-2xl border border-brand-teal-dark/10 bg-white shadow-sm" aria-label={t("informationTitle")}>
     {sections.map((section, index) => {
       const isOpen = openSection === section.key;
       const buttonId = `${id}-${section.key}-button`;
       const panelId = `${id}-${section.key}-panel`;
       return <div key={section.key} className={index > 0 ? "border-t border-brand-teal-dark/10" : undefined}>
-        <h2><button type="button" id={buttonId} aria-controls={panelId} aria-expanded={isOpen} onClick={() => setOpenSection(isOpen ? null : section.key)} className="flex min-h-14 w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-brand-teal-dark transition-colors hover:bg-brand-cream/20 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-teal sm:text-base">
+        <h2><button type="button" id={buttonId} aria-controls={panelId} aria-expanded={isOpen} onClick={() => setOpenSection(isOpen ? null : section.key)} className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-brand-teal-dark transition-colors hover:bg-brand-cream/20 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-teal sm:text-base">
           {section.title}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" className={`h-5 w-5 shrink-0 transition-transform motion-reduce:transition-none ${isOpen ? "rotate-45" : ""}`}><path d="M12 5v14M5 12h14" /></svg>
         </button></h2>
         <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!isOpen} className="px-5 pb-5 text-sm leading-relaxed text-brand-teal-dark/80 sm:text-base">{section.body}</div>

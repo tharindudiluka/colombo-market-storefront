@@ -492,6 +492,8 @@
     "addToCartError": "Konnte nicht zum Warenkorb hinzugefügt werden. Bitte versuche es erneut.",
     "soldOut": "Ausverkauft",
     "onlyLeft": "Nur noch {count} verfügbar",
+    "save": "{percent} % sparen",
+    "inStock": "Auf Lager",
     "details": {
       "descriptionTitle": "Produktbeschreibung",
       "deliveryTitle": "Versand & Abholung",

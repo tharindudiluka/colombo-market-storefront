@@ -491,6 +491,8 @@
     "addToCartError": "Couldn't add this to your cart. Please try again.",
     "soldOut": "Sold Out",
     "onlyLeft": "Only {count} left",
+    "save": "Save {percent}%",
+    "inStock": "In stock",
     "details": {
       "descriptionTitle": "Product description",
       "deliveryTitle": "Shipping & pickup",
