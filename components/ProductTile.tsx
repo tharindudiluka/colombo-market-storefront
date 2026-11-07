@@ -115,7 +115,8 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", addCo
           alt={product.image.alt}
           fill
           sizes={variant === "list" ? "80px" : "(min-width: 640px) 220px, 45vw"}
-          className="object-cover"
+          // Contained, never cropped: packshots with their own label art fill the square otherwise and look zoomed in.
+          className={`object-contain mix-blend-multiply ${variant === "list" ? "p-1" : "p-3"}`}
         />
       ) : (
         <span className="absolute inset-0 flex items-center justify-center px-1 text-center text-[10px] text-brand-teal-dark/40">
