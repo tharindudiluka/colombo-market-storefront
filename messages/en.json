@@ -383,6 +383,18 @@
     "cookieSettings": "Cookie settings",
     "privacyPolicy": "Privacy policy"
   },
+  "policyPages": {
+    "eyebrow": "Colombo Market",
+    "onThisPage": "On this page",
+    "titles": {
+      "privacy-policy": "Privacy Policy",
+      "refund-policy": "Refund Policy",
+      "terms-of-service": "Terms of Service",
+      "shipping-policy": "Shipping Policy",
+      "legal-notice": "Legal Notice (Impressum)",
+      "contact-information": "Contact Information"
+    }
+  },
   "footer": {
     "tagline": "Sri Lankan, Indian and South Asian groceries – order online for delivery across Germany.",
     "shopTitle": "Shop",

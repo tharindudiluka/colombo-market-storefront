@@ -4,6 +4,7 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { PolicyLayout } from "@/components/PolicyLayout";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { pageByHandleQuery } from "@/lib/shopify/queries/page-by-handle";
 import type { LanguageCode, PageByHandleResult, ShopifyPage } from "@/lib/shopify/types";
@@ -51,15 +52,7 @@ export default async function ShopifyPageRoute({
       <Header />
       <main className="flex-1">
         <Breadcrumbs currentPath={pageHref(page.handle)} items={[{ label: page.title }]} />
-        <article className="mx-auto max-w-[var(--layout-max-width)] px-4 py-10 sm:py-14">
-          <h1 className="font-heading text-3xl font-extrabold text-brand-teal-dark sm:text-4xl">
-            {page.title}
-          </h1>
-          <div
-            className="prose prose-sm mt-8 max-w-3xl text-brand-teal-dark/80 sm:prose-base"
-            dangerouslySetInnerHTML={{ __html: page.bodyHtml }}
-          />
-        </article>
+        <PolicyLayout title={page.title} html={page.bodyHtml} />
       </main>
       <Footer />
     </div>

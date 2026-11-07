@@ -384,6 +384,18 @@
     "cookieSettings": "Cookie-Einstellungen",
     "privacyPolicy": "Datenschutzerklärung"
   },
+  "policyPages": {
+    "eyebrow": "Colombo Market",
+    "onThisPage": "Auf dieser Seite",
+    "titles": {
+      "privacy-policy": "Datenschutzerklärung",
+      "refund-policy": "Widerrufsrecht & Rückerstattung",
+      "terms-of-service": "Allgemeine Geschäftsbedingungen",
+      "shipping-policy": "Versand & Lieferung",
+      "legal-notice": "Impressum",
+      "contact-information": "Kontaktinformationen"
+    }
+  },
   "footer": {
     "tagline": "Sri-lankische, indische und südasiatische Lebensmittel – online bestellen und deutschlandweit liefern lassen.",
     "shopTitle": "Shop",
