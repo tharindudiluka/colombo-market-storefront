@@ -46,7 +46,7 @@ export function BestsellerCarousel({ products }: { products: UiProduct[] }) {
             <p className="mt-2 text-sm text-brand-teal-dark/70 lg:text-base lg:leading-6">{t("subtitle")}</p>
           </div>
           {(position.previous || position.next) && <div className="flex gap-2">
-            {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button key={key} type="button" aria-label={t(key)} aria-controls="bestseller-products" disabled={!position[key]} onClick={() => move(direction)} className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}
+            {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button key={key} type="button" aria-label={t(key)} aria-controls="bestseller-products" disabled={!position[key]} onClick={() => move(direction)} className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:cursor-not-allowed disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}
           </div>}
         </div>
         {error && <p role="alert" className="mt-4 text-sm text-brand-terracotta">{tp("addToCartError")}</p>}

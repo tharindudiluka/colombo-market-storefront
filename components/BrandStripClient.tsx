@@ -28,7 +28,7 @@ export function BrandStripClient({ brands }: { brands: UiHomepageBrand[] }) {
           <p className="mt-2 text-sm text-brand-teal-dark/70 lg:text-base lg:leading-6">{t("subtitle")}</p>
         </div>
         {(position.previous || position.next) && <div className="flex gap-2">
-          {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button type="button" key={key} aria-label={t(key)} aria-controls="brand-cards" disabled={!position[key]} onClick={() => track.current?.scrollBy({ left: direction * track.current.clientWidth })} className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}
+          {([[-1, "previous"], [1, "next"]] as const).map(([direction, key]) => <button type="button" key={key} aria-label={t(key)} aria-controls="brand-cards" disabled={!position[key]} onClick={() => track.current?.scrollBy({ left: direction * track.current.clientWidth })} className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-brand-teal/25 text-brand-teal-dark transition hover:bg-brand-cream disabled:cursor-not-allowed disabled:opacity-30"><span aria-hidden>{direction < 0 ? "←" : "→"}</span></button>)}
         </div>}
       </div>
       <div ref={track} id="brand-cards" tabIndex={0} role="region" aria-label={t("title")} className="brand-track no-scrollbar mt-6 pb-2">

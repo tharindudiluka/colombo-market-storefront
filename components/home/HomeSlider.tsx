@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { CarouselArrow } from "@/components/CarouselArrow";
 import { homeSlides, placeholderSlideCount, type HomeSlide, type HomeSlideImage } from "@/config/home-slides";
 
 function isExternal(href: string) {
@@ -75,7 +76,6 @@ export function HomeSlider() {
   }
 
   const many = slides.length > 1;
-  const arrow = "absolute top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-neutral-800 shadow ring-1 ring-black/10 transition hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal disabled:opacity-0 sm:flex";
 
   return (
     <section aria-roledescription="carousel" aria-label={t("label")} className="relative -mx-4 sm:mx-0">
@@ -114,8 +114,8 @@ export function HomeSlider() {
 
       {many && (
         <>
-          <button type="button" aria-label={t("previous")} disabled={active <= 0} onClick={() => goTo(active - 1)} className={`${arrow} left-3`}><span aria-hidden>←</span></button>
-          <button type="button" aria-label={t("next")} disabled={active >= slides.length - 1} onClick={() => goTo(active + 1)} className={`${arrow} right-3`}><span aria-hidden>→</span></button>
+          <CarouselArrow direction="left" label={t("previous")} state={active <= 0 ? "disabled" : "active"} onClick={() => goTo(active - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 max-sm:hidden" />
+          <CarouselArrow direction="right" label={t("next")} state={active >= slides.length - 1 ? "disabled" : active <= 0 ? "muted" : "active"} onClick={() => goTo(active + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 max-sm:hidden" />
           <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
             {slides.map((slide, index) => (
               <button

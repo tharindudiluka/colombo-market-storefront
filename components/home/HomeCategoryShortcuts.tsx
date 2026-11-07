@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { HomepageCategoryIcon } from "@/components/HomepageCategoryIcon";
-import { SectionHeader, viewAllLinkClass } from "@/components/home/SectionHeader";
+import { SectionHeader, viewAllButtonClass } from "@/components/home/SectionHeader";
 import { Link } from "@/i18n/navigation";
 import { categoryImages } from "@/config/category-images";
 import { homepageCategoryPresentation } from "@/lib/content/homepage-categories";
@@ -17,7 +17,10 @@ export async function HomeCategoryShortcuts({ categories }: { categories: Catego
   return (
     <section aria-labelledby="home-shortcuts-title" className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-6 sm:pt-7">
       <SectionHeader id="home-shortcuts-title" title={t("title")}>
-        <Link href="/collections" className={viewAllLinkClass}>{t("all")} <span aria-hidden>→</span></Link>
+        <Link href="/collections" className={viewAllButtonClass}>
+          {t("all")}
+          <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+        </Link>
       </SectionHeader>
       <ul className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-8">
         {categories.map((category, index) => {
@@ -28,7 +31,7 @@ export async function HomeCategoryShortcuts({ categories }: { categories: Catego
             <li key={category.id}>
               <Link
                 href={`/collections/${category.handle}`}
-                className="group flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white transition-colors hover:border-brand-teal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal"
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-teal hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal"
               >
                 <span className="relative block aspect-square bg-white">
                   {custom ? (
