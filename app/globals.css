@@ -652,3 +652,24 @@ form[role="search"]:focus-within {
 .policy-prose th { background: var(--color-brand-cream); color: var(--color-brand-teal-dark); font-weight: 700; }
 .policy-prose img { max-width: 100%; height: auto; }
 @media (max-width: 639px) { .policy-prose { font-size: 1rem; } .policy-prose h2 { font-size: 1.3rem; margin-top: 2.25rem; padding-top: 1.6rem; } }
+
+/* Desktop pointers: Tailwind v4 resets buttons to the default arrow cursor. Anything clickable shows a hand; disabled
+   controls keep a "not allowed" cursor. Utility classes (cursor-grab, cursor-not-allowed, ...) still win over this. */
+@layer base {
+  @media (hover: hover) and (pointer: fine) {
+    button:not(:disabled):not([aria-disabled="true"]),
+    [role="button"]:not([aria-disabled="true"]),
+    summary,
+    select,
+    label[for],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="range"] {
+      cursor: pointer;
+    }
+    button:disabled,
+    [aria-disabled="true"] {
+      cursor: not-allowed;
+    }
+  }
+}

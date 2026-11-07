@@ -154,7 +154,7 @@ export function CollectionBrowser({
             type="button"
             onClick={() => { setDraftFilters(activeFilters); setFilterOpen(true); }}
             aria-expanded={filterOpen}
-            className={`flex h-12 items-center gap-2 rounded-lg border px-4 text-sm font-semibold transition-colors ${filtersActive ? "border-brand-teal bg-brand-teal text-white" : "border-black/15 text-brand-teal-dark hover:border-brand-teal"}`}
+            className={`flex h-12 items-center gap-2 rounded-lg border px-4 text-sm font-semibold transition-colors ${filtersActive ? "border-brand-teal bg-brand-teal text-white" : "border-black/15 bg-white text-brand-teal-dark hover:border-brand-teal"}`}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-4 w-4">
               <path d="M4 6h16M7 12h10M10 18h4" />
@@ -171,7 +171,7 @@ export function CollectionBrowser({
               {sortOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
             </select>
           </label>
-          <div className="hidden items-center gap-1 rounded-lg border border-black/15 p-1 sm:flex">
+          <div className="hidden items-center gap-1 rounded-lg border border-black/15 bg-white p-1 sm:flex">
             <button type="button" aria-label={t("viewGrid")} aria-pressed={viewMode === "grid"} onClick={() => setViewMode("grid")} className={`flex h-9 w-9 items-center justify-center rounded-md ${viewMode === "grid" ? "bg-brand-teal text-white" : "text-brand-teal-dark/60"}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><rect x="4" y="4" width="7" height="7" rx="1" /><rect x="13" y="4" width="7" height="7" rx="1" /><rect x="4" y="13" width="7" height="7" rx="1" /><rect x="13" y="13" width="7" height="7" rx="1" /></svg>
             </button>
@@ -185,7 +185,7 @@ export function CollectionBrowser({
       {products.length === 0 ? (
         <div className="flex flex-col items-center gap-3 py-16 text-center">
           <p className="text-sm text-brand-teal-dark/60">{t("empty")}</p>
-          <button type="button" onClick={clearFilters} className="rounded-full border border-brand-teal px-4 py-2 text-sm font-semibold text-brand-teal">{t("resetFilters")}</button>
+          <button type="button" onClick={clearFilters} className="rounded-full border border-brand-teal bg-white px-4 py-2 text-sm font-semibold text-brand-teal">{t("resetFilters")}</button>
         </div>
       ) : viewMode === "grid" ? (
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">

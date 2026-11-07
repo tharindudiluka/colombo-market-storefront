@@ -21,7 +21,7 @@ export function CollectionSubnav({ entries, href, allLabel, label }: { entries: 
       <ul className="flex flex-wrap gap-2">
         {trail.parent && (
           <li>
-            <Link href={trail.parent.href} className={`${chip} border-brand-teal/25 text-brand-teal-dark hover:bg-brand-cream`}>{allLabel}</Link>
+            <Link href={trail.parent.href} className={`${chip} border-brand-teal/25 bg-white text-brand-teal-dark hover:bg-brand-cream`}>{allLabel}</Link>
           </li>
         )}
         {trail.options.map((option) => {
@@ -31,7 +31,7 @@ export function CollectionSubnav({ entries, href, allLabel, label }: { entries: 
               <Link
                 href={option.href}
                 aria-current={current ? "page" : undefined}
-                className={`${chip} ${current ? "border-brand-teal-dark bg-brand-teal-dark text-white" : "border-brand-teal/25 text-brand-teal-dark hover:bg-brand-cream"}`}
+                className={`${chip} ${current ? "border-brand-teal-dark bg-brand-teal-dark text-white" : "border-brand-teal/25 bg-white text-brand-teal-dark hover:bg-brand-cream"}`}
               >
                 {option.title}
               </Link>
