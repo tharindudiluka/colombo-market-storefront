@@ -23,6 +23,7 @@ export async function HomeRows({ rows, from, to }: { rows: HomeRow[]; from: numb
           locale={locale}
           products={row.products}
           eager={from === 0 && index === 0}
+          viewAllBeside={row.key === "bestsellers"}
         />
       ))}
     </>

@@ -19,6 +19,11 @@ type Props = {
   products: UiProduct[];
   /** The first row above the fold loads its first images eagerly. */
   eager?: boolean;
+  /**
+   * From lg up, place "view all" right after the last card, centred on the product images, when the whole row plus the
+   * button fits. When it does not fit it stays below the row, so the cards are never squeezed.
+   */
+  viewAllBeside?: boolean;
 };
 
 /**
@@ -26,8 +31,13 @@ type Props = {
  * edges, centred on the product images, a slider track with a draggable thumb under the row showing how far it scrolls,
  * and a "view all" button below the row aligned with the right arrow. Used by every homepage product row.
  */
-export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, next, locale, products, eager = false }: Props) {
+export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, next, locale, products, eager = false, viewAllBeside = false }: Props) {
   const track = useRef<HTMLUListElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonWidth = useRef(170);
+  // True while the cards and the button fit on one line; only used when viewAllBeside is set.
+  const [fitsBeside, setFitsBeside] = useState(true);
   const rail = useRef<HTMLDivElement>(null);
   const drag = useRef<{ x: number; scroll: number } | null>(null);
   // Arrows are assumed necessary until measured, so the reserved edge space does not jump for the common long row.
@@ -66,16 +76,29 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
         if (!hovering.current && !drag.current) setActive(false);
       }, 1200);
     };
-    const observer = new ResizeObserver(update);
+    const fit = () => {
+      if (!viewAllBeside) return;
+      const container = wrap.current;
+      const card = element.querySelector("li");
+      if (!container || !card) return;
+      const measured = buttonRef.current?.offsetWidth ?? 0;
+      if (measured > 0) buttonWidth.current = measured;
+      const gap = parseFloat(getComputedStyle(element).columnGap) || 14;
+      const cards = products.length * (card as HTMLElement).offsetWidth + (products.length - 1) * gap;
+      setFitsBeside(cards + 16 + gap + buttonWidth.current <= container.clientWidth);
+    };
+    const observer = new ResizeObserver(() => { update(); fit(); });
     observer.observe(element);
+    if (wrap.current) observer.observe(wrap.current);
     element.addEventListener("scroll", onScroll, { passive: true });
     update();
+    fit();
     return () => {
       observer.disconnect();
       element.removeEventListener("scroll", onScroll);
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
-  }, [products]);
+  }, [products, viewAllBeside]);
 
   const move = (direction: number) => track.current?.scrollBy({ left: direction * track.current.clientWidth * 0.85, behavior: "smooth" });
 
@@ -101,8 +124,19 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
     element.scrollLeft = drag.current.scroll + (event.clientX - drag.current.x) * scale;
   }
 
+  const chevron = (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+  );
+  const viewAllLink = (
+    <Link ref={buttonRef} href={href} className={`${viewAllButtonClass} shrink-0`}>
+      {viewAll}
+      {chevron}
+    </Link>
+  );
+
   // From sm up the arrows sit at the row edges, so the track leaves room for them. On phones they move below the row.
-  const gutter = edge.scrollable ? "sm:mx-14" : "";
+  // When the row and the "view all" button fit on one line at lg+, the arrows are not needed and neither is their gutter.
+  const gutter = edge.scrollable ? (viewAllBeside && fitsBeside ? "sm:mx-14 lg:mx-0" : "sm:mx-14") : "";
 
   return (
     <section
@@ -116,7 +150,7 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
       {/* One self-contained block per row: a divider above, generous space around it, tight spacing inside. */}
       <div className="mt-8 border-t border-neutral-200 pt-8 sm:mt-10 sm:pt-10">
         <SectionHeader id={id} title={title} subtitle={subtitle} />
-        <div className="relative mt-4 flex flex-wrap items-center gap-x-2 gap-y-4 [--card:152px] sm:mt-5 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-4 sm:gap-y-2 sm:[--card:184px] lg:[--card:212px]">
+        <div ref={wrap} className="relative mt-4 flex flex-wrap items-center gap-x-2 gap-y-4 [--card:152px] sm:mt-5 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-4 sm:gap-y-2 sm:[--card:184px] lg:[--card:212px]">
           <ul
             ref={track}
             role="group"
@@ -129,6 +163,11 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
                 <HomeProductCard product={product} locale={locale} priority={eager && index < 4} />
               </li>
             ))}
+            {viewAllBeside && (
+              <li className={`hidden shrink-0 snap-start self-start ml-4 mt-[calc(var(--card)/2-1.375rem)] ${fitsBeside ? "lg:flex" : ""}`}>
+                {viewAllLink}
+              </li>
+            )}
           </ul>
           {edge.scrollable && (
             <>
@@ -154,9 +193,13 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
               />
             </div>
           )}
-          <Link href={href} className={`${viewAllButtonClass} order-4 ml-auto shrink-0 sm:order-none sm:col-start-2 sm:ml-0`}>
+          <Link
+            ref={viewAllBeside ? undefined : buttonRef}
+            href={href}
+            className={`${viewAllButtonClass} order-4 ml-auto shrink-0 sm:order-none sm:col-start-2 sm:ml-0 ${viewAllBeside && fitsBeside ? "lg:hidden" : ""}`}
+          >
             {viewAll}
-            <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+            {chevron}
           </Link>
         </div>
       </div>
