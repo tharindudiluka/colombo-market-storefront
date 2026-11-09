@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionBrowser } from "@/components/CollectionBrowser";
 import { Footer } from "@/components/Footer";
+import { brandedTitle } from "@/lib/seo";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { searchProductsQuery } from "@/lib/shopify/queries/search-products";
 import { toUiProduct } from "@/lib/shopify/mappers";
@@ -42,15 +43,18 @@ async function searchProducts(query: string, language: LanguageCode, vendor?: st
 }
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ q?: string; vendor?: string }>;
 }): Promise<Metadata> {
-  const { q, vendor: vendorParam } = await searchParams;
+  const [{ locale }, { q, vendor: vendorParam }] = await Promise.all([params, searchParams]);
+  const t = await getTranslations({ locale, namespace: "search" });
   const vendor = vendorParam?.trim();
-  const query = vendor ? `vendor:${JSON.stringify(vendor)}` : (q ?? "").trim();
+  const query = (q ?? "").trim();
   return {
-    title: vendor ? `${vendor} — Colombo Market` : query ? `${query} — Colombo Market` : "Search — Colombo Market",
+    title: brandedTitle(vendor || query || t("title")),
     robots: { index: false, follow: true },
   };
 }

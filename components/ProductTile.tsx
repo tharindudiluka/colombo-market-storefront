@@ -96,6 +96,7 @@ type ProductTileProps = {
  * row) wraps the tile in its own sizing `<div>` instead of fighting this one.
  */
 export function ProductTile({ product, locale = "de-DE", variant = "grid", addControl }: ProductTileProps) {
+  const t = useTranslations("product");
   const price = formatMoney(product.price.amount, product.price.currencyCode, locale);
   const compareAtPrice = product.compareAtPrice
     ? formatMoney(product.compareAtPrice.amount, product.compareAtPrice.currencyCode, locale)
@@ -120,12 +121,12 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", addCo
         />
       ) : (
         <span className="absolute inset-0 flex items-center justify-center px-1 text-center text-[10px] text-brand-teal-dark/40">
-          Kein Bild
+          {t("noImage")}
         </span>
       )}
       {variant === "grid" && product.compareAtPrice && (
         <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[9px] font-bold text-emerald-700 sm:text-[10px]">
-          Angebot
+          {t("saleBadge")}
         </span>
       )}
     </div>
@@ -140,11 +141,11 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", addCo
             <p className="truncate text-sm font-semibold text-brand-teal-dark sm:text-base">{product.title}</p>
             {product.compareAtPrice && (
               <span className="mt-1 inline-block rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                Angebot
+                {t("saleBadge")}
               </span>
             )}
             {!product.availableForSale && (
-              <p className="mt-1 text-xs text-brand-teal-dark/50">Ausverkauft</p>
+              <p className="mt-1 text-xs text-brand-teal-dark/50">{t("soldOut")}</p>
             )}
           </div>
           <div className="flex shrink-0 flex-col items-end gap-0.5">
@@ -181,7 +182,7 @@ export function ProductTile({ product, locale = "de-DE", variant = "grid", addCo
             {compareAtPrice && <p className="text-xs text-brand-teal-dark/40 line-through">{compareAtPrice}</p>}
           </div>
           {!product.availableForSale && (
-            <p className="text-[11px] text-brand-teal-dark/50">Ausverkauft</p>
+            <p className="text-[11px] text-brand-teal-dark/50">{t("soldOut")}</p>
           )}
         </div>
       </Link>

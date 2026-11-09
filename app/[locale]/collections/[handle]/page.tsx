@@ -11,7 +11,7 @@ import { Footer } from "@/components/Footer";
 import { shopifyFetch } from "@/lib/shopify/client";
 import { collectionByHandleQuery } from "@/lib/shopify/queries/collection-by-handle";
 import { toUiCollectionDetail } from "@/lib/shopify/mappers";
-import { canonicalMetadata, storefrontUrl } from "@/lib/seo";
+import { brandedTitle, canonicalMetadata, pickMetaDescription, storefrontUrl } from "@/lib/seo";
 import type { CollectionByHandleResult, LanguageCode, ShopifyCollectionDetail } from "@/lib/shopify/types";
 
 // Products per rendered page, and how many are fetched per Storefront request. The full
@@ -107,8 +107,8 @@ export async function generateMetadata({
     : canonicalMetadata(locale, `/collections/${raw.handle}`);
   return {
     ...canonical,
-    title: collection.seo.title || `${collection.title} — Colombo Market`,
-    description: collection.seo.description || undefined,
+    title: collection.seo.title || brandedTitle(collection.title),
+    description: pickMetaDescription(locale, collection.seo.description, collection.descriptionHtml),
     openGraph: collection.image ? { images: [collection.image.url] } : undefined,
   };
 }

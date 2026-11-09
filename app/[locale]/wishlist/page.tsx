@@ -5,10 +5,13 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WishlistPageClient } from "@/components/wishlist/WishlistPageClient";
+import { brandedTitle } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "wishlist" });
+  return { title: brandedTitle(t("title")), robots: { index: false, follow: true } };
+}
 
 export default async function WishlistPage() {
   const t = await getTranslations("wishlist");

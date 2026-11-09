@@ -1,13 +1,20 @@
 "use client";
 
 import { useId, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { delivery, formatEuro } from "@/config/delivery";
 
 type FaqItem = { q: string; a: string };
 
 export function FaqAccordion() {
   const t = useTranslations("faq");
-  const items = t.raw("items") as FaqItem[];
+  const locale = useLocale();
+  // Shipping figures come from config, never from the copy.
+  const values: Record<string, string> = { threshold: formatEuro(delivery.freeShippingThreshold, locale), rate: formatEuro(delivery.flatShippingRate, locale) };
+  const items = (t.raw("items") as FaqItem[]).map((item) => ({
+    ...item,
+    a: item.a.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match),
+  }));
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const accordionId = useId();
 

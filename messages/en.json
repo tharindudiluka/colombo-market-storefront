@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Colombo Market - Sri Lankan, Indian & International Groceries",
-    "description": "Colombo Market in Ravensburg — spices, rice, fresh vegetables and more, order online with in-store pickup.",
+    "title": "Colombo Market – Sri Lankan, Indian & International Groceries",
+    "description": "Sri Lankan, Indian and South Asian groceries online: rice, dal, spices, snacks and more. Delivery across Germany, pickup in Ravensburg.",
     "home": {
       "title": "Sri Lankan Groceries in Germany | Colombo Market",
       "description": "Shop Sri Lankan, Indian and South Asian groceries online in Germany: rice, dal, spices, tea, snacks and frozen foods. Nationwide delivery or pickup in Ravensburg."
@@ -26,7 +26,7 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "menuTitle": "Menu",
-    "desktopMenuLabel": "Shop categories",
+    "desktopMenuLabel": "Product categories",
     "searchCategories": "Search categories and subcategories",
     "viewAllCategory": "View all {category}",
     "noCategoryMatches": "No categories match your search.",
@@ -46,87 +46,9 @@
     "snacks": "Snacks",
     "bio-produkte": "Organic Products"
   },
-  "hero": {
-    "mainBanner": {
-      "heading": "Sri Lankan & South Asian Groceries",
-      "body": "Rice, spices, snacks, frozen foods and more.",
-      "cta": "Explore all categories"
-    },
-    "slideLabel": "Go to slide {number}",
-    "slides": [
-      {
-        "eyebrow": "Welcome",
-        "title": "Welcome to Colombo Market",
-        "body": "Authentic spices, rice and specialty foods from Sri Lanka, India and around the world.",
-        "cta": "Shop now"
-      },
-      {
-        "eyebrow": "Bestsellers",
-        "title": "Authentic Spices from Sri Lanka",
-        "body": "Whole and ground spices, straight to your kitchen.",
-        "cta": "Explore spices"
-      },
-      {
-        "eyebrow": "This Week",
-        "title": "This Week's Offers",
-        "body": "Selected products at reduced prices — for a limited time only.",
-        "cta": "View offers"
-      }
-    ]
-  },
-  "promo": {
-    "dailyDelight": {
-      "heading": "Daily Delight – A Taste of Home",
-      "body": "Popular frozen favourites, quick and easy to enjoy.",
-      "cta": "Discover Daily Delight"
-    },
-    "kumaio": {
-      "heading": "Kumaio – Naturally from Sri Lanka",
-      "body": "Selected organic specialties with authentic flavour.",
-      "cta": "Discover Kumaio"
-    },
-    "tiles": [
-      {
-        "title": "Fresh Vegetables & Fruit",
-        "subtitle": "Hand-picked & guaranteed fresh"
-      },
-      {
-        "title": "Discover Tea & Biscuits",
-        "subtitle": "For your coffee break"
-      }
-    ]
-  },
-  "productRow": {
-    "bestsellers": {
-      "title": "Best Sellers",
-      "subtitle": "Our most popular products at a glance.",
-      "previous": "Previous products",
-      "next": "Next products",
-      "empty": "No best sellers are available right now.",
-      "variant": "Variant for {title}"
-    },
-    "weeklySpecials": {
-      "viewAll": "View all offers",
-      "chooseOptions": "Choose options",
-      "empty": "New offers are on their way. Check back soon.",
-      "title": "This Week's Offers",
-      "subtitle": "Fresh picks, seasonal favourites and limited-time finds."
-    },
-    "freshVegetables": {
-      "title": "Fresh Vegetables",
-      "subtitle": "Sourced a few times a week, freshness guaranteed."
-    },
-    "pantryPicks": {
-      "title": "Pantry Picks",
-      "subtitle": "Everyday staples at everyday prices."
-    }
-  },
-  "categoryGrid": {
-    "viewAll": "View all categories",
-    "title": "Shop by Category"
-  },
   "breadcrumbs": {
-    "home": "Home"
+    "home": "Home",
+    "label": "Breadcrumb"
   },
   "contact": {
     "title": "Contact Us",
@@ -147,27 +69,27 @@
   },
   "about": {
     "metaTitle": "About Us – Colombo Market, Ravensburg",
-    "metaDescription": "Colombo Market is a South Asian grocery shop at Herrenstraße 30 in Ravensburg. Shop Sri Lankan and Indian groceries online or collect in store.",
+    "metaDescription": "Colombo Market is a South Asian grocery store at Herrenstraße 30 in Ravensburg. Shop Sri Lankan and Indian groceries online or collect in store.",
     "title": "About Us",
     "eyebrow": "Colombo Market · Ravensburg",
     "heroTitle": "Sri Lankan and Indian groceries, from Ravensburg to your kitchen.",
-    "heroBody": "We are a grocery shop at Herrenstraße 30 in Ravensburg, stocking rice, dal, spices and everyday cooking essentials from Sri Lanka, India and the wider South Asian kitchen. Order online for delivery across Germany, or come by the shop.",
-    "heroBrowse": "Browse the shop",
+    "heroBody": "We are a grocery store at Herrenstraße 30 in Ravensburg, stocking rice, dal, spices and everyday cooking essentials from Sri Lanka, India and the wider South Asian kitchen. Order online for delivery across Germany, or come by the store.",
+    "heroBrowse": "Browse our range",
     "heroVisit": "Visit us in Ravensburg",
-    "photoAlt": "The Colombo Market shop front on Herrenstraße in Ravensburg",
+    "photoAlt": "The Colombo Market storefront on Herrenstraße in Ravensburg",
     "facts": {
       "location": "Herrenstraße 30, Ravensburg",
       "delivery": "Delivery within Germany",
-      "pickup": "Pickup in the shop, when available"
+      "pickup": "Pickup in store, when available"
     },
     "introEyebrow": "Who we are",
     "introTitle": "Familiar ingredients, close to home.",
-    "introOne": "Colombo Market is a grocery shop for Sri Lankan, Indian and other South Asian cooking. Many of our customers are Sri Lankans and Indians living in Germany who are looking for the ingredients they know from home: the right rice, the right dal, the spices that make a curry taste the way it should.",
+    "introOne": "Colombo Market is a grocery store for Sri Lankan, Indian and other South Asian cooking. Many of our customers are Sri Lankans and Indians living in Germany who are looking for the ingredients they know from home: the right rice, the right dal, the spices that make a curry taste the way it should.",
     "introTwo": "You do not need to have grown up with this food to shop with us. If you are curious about South Asian cooking, our shelves and our online shop are a good place to start.",
     "introThree": "You can order online for delivery within Germany or, where it is offered at checkout, collect your order in Ravensburg.",
     "shelvesEyebrow": "What you will find",
     "shelvesTitle": "Everyday staples, grouped the way you cook.",
-    "shelvesBody": "Here is a look at what is on our shelves. Each card opens that part of the shop.",
+    "shelvesBody": "Here is a look at what is on our shelves. Each card opens that section.",
     "shelfCta": "Browse",
     "shelves": {
       "rice": { "title": "Rice", "body": "Basmati from Tilda, Daawat, India Gate, Laila and Annam, plus ponni, sona masoori and jasmine rice." },
@@ -195,10 +117,10 @@
     "visitEyebrow": "Order or visit",
     "visitTitle": "Shop online, or find us in Ravensburg.",
     "orderTitle": "Order online",
-    "orderBody": "We deliver anywhere in Germany. Free shipping from {threshold}; below that, shipping costs are shown at checkout. Where pickup is offered at checkout, you can collect your order in the shop. Please wait for our confirmation before you come.",
+    "orderBody": "We deliver anywhere in Germany. Free shipping from {threshold}; below that, shipping costs are shown at checkout. Where pickup is offered at checkout, you can collect your order in store. Please wait for our confirmation before you come.",
     "orderCta": "Shipping information",
     "shopCta": "Start shopping",
-    "storeTitle": "Visit the shop",
+    "storeTitle": "Visit the store",
     "storeBody": "Find us at Herrenstraße 30 in Ravensburg.",
     "directions": "Get directions",
     "contactCta": "Contact us",
@@ -291,7 +213,7 @@
     "intro": {
       "title": "Sri Lankan and South Asian groceries at Colombo Market",
       "p1": "Colombo Market stocks groceries for Sri Lankan, Indian and South Asian cooking: basmati, ponni and sona masoori rice, dal such as masoor, urad and toor, flour, semolina and flatbreads, whole and ground spices, curry powder, sauces, sambol, tea, snacks and frozen foods like roti and paratha.",
-      "p2": "Order online with delivery anywhere in Germany – free shipping from {threshold}, otherwise {rate}. If you live nearby, collect your order for free at our shop at Herrenstraße 30 in Ravensburg. New here? Start with the categories or our Sri Lankan favourites."
+      "p2": "Order online with delivery anywhere in Germany – free shipping from {threshold}, otherwise {rate}. If you live nearby, collect your order for free at our store at Herrenstraße 30 in Ravensburg. New here? Start with the categories or our Sri Lankan favourites."
     },
     "families": {
       "title": "Popular product groups",
@@ -358,14 +280,8 @@
       "status": "Page {page} of {pages}"
     }
   },
-  "brandStrip": {
-    "title": "Brands We Love",
-    "subtitle": "Discover popular brands from our range.",
-    "previous": "Previous brands",
-    "next": "Next brands"
-  },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Frequently asked questions",
     "items": [
       {
         "q": "How long does delivery take?",
@@ -376,8 +292,8 @@
         "a": "Yes. If pickup is offered at checkout, you can collect your order free of charge from our store at Herrenstraße 30, 88212 Ravensburg. Please wait for your pickup confirmation before visiting the store."
       },
       {
-        "q": "When is shipping free?",
-        "a": "Shipping within Germany is free for orders of €39.99 or more. Available shipping options are shown at checkout."
+        "q": "How much is shipping, and when is it free?",
+        "a": "We deliver anywhere in Germany. Shipping costs {rate}, and it is free for orders of {threshold} or more. Available shipping options are shown at checkout."
       },
       {
         "q": "Can I return products?",
@@ -451,7 +367,7 @@
     "homeLabel": "Colombo Market – home"
   },
   "visitStore": {
-    "eyebrow": "SHOP LOCALLY IN RAVENSBURG",
+    "eyebrow": "Shop locally in Ravensburg",
     "title": "Visit Colombo Market in Ravensburg",
     "body": "Discover a wide selection of Sri Lankan, Indian and international groceries in our local store. Find rice, spices, pulses, snacks, frozen foods and many more specialties for your kitchen.",
     "storeName": "Colombo Market",
@@ -494,7 +410,9 @@
     "adding": "Adding…",
     "addedToCart": "Added ✓",
     "addToCartError": "Couldn't add this to your cart. Please try again.",
-    "soldOut": "Sold Out",
+    "soldOut": "Sold out",
+    "noImage": "No image",
+    "saleBadge": "Sale",
     "onlyLeft": "Only {count} left",
     "save": "Save {percent}%",
     "inStock": "In stock",
@@ -612,43 +530,6 @@
     "errors": {
       "authFailed": "Something went wrong signing you in. Please try again.",
       "sessionExpired": "Your session has expired. Please sign in again."
-    }
-  },
-  "collectionDiscovery": {
-    "eyebrow": "Colombo Market · Shop by department",
-    "title": "All categories",
-    "intro": "Explore Sri Lankan, Indian and South Asian groceries – from everyday kitchen staples to new favourites.",
-    "jumpLabel": "Jump to a department",
-    "viewDepartment": "Explore all products",
-    "viewGroup": "View all",
-    "staples": {
-      "title": "Staple foods",
-      "intro": "The foundations of Sri Lankan and South Asian cooking: rice, pulses, flour and grains. Find the right variety for your kitchen."
-    },
-    "spices": {
-      "title": "Spices",
-      "intro": "Whole spices, ground spices and selected blends for Indian and Sri Lankan cooking."
-    },
-    "essentials": {
-      "title": "Essentials",
-      "intro": "Everyday pantry essentials: curry pastes, sauces, coconut products and savoury accompaniments."
-    },
-    "frozen": {
-      "title": "Fresh & frozen",
-      "intro": "Explore our frozen range: flatbreads, vegetables, snacks and desserts for your kitchen."
-    },
-    "snacks": {
-      "title": "Snacks & sweets",
-      "intro": "Savoury snacks, biscuits and sweet treats for everyday snacking and sharing."
-    },
-    "organic": {
-      "title": "Organic & special",
-      "intro": "Selected organic products and specialties, with a focus on the Sri Lankan range from Kumaio."
-    },
-    "offers": {
-      "title": "Offers",
-      "intro": "Explore current offers from our range.",
-      "action": "Browse current offers"
     }
   }
 }

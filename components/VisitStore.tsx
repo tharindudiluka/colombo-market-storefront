@@ -18,7 +18,7 @@ export async function VisitStore() {
         />
 
         <div className="max-w-xl">
-          <p className="text-xs font-bold tracking-widest text-brand-teal-dark/80 sm:text-sm">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-teal-dark/80 sm:text-sm">
             {t("eyebrow")}
           </p>
           <h2 className="mt-2 font-heading text-xl font-extrabold leading-tight text-brand-teal-dark sm:text-2xl">

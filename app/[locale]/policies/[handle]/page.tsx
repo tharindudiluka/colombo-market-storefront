@@ -8,7 +8,7 @@ import { PolicyLayout } from "@/components/PolicyLayout";
 import { getShopPolicy, isPolicyHandle, type PolicyHandle } from "@/lib/shopify/policies";
 import { getTranslations } from "next-intl/server";
 import type { LanguageCode } from "@/lib/shopify/types";
-import { canonicalMetadata } from "@/lib/seo";
+import { brandedTitle, canonicalMetadata } from "@/lib/seo";
 import { policyHref } from "@/config/pages";
 import { delivery, formatEuro } from "@/config/delivery";
 
@@ -35,7 +35,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, handle } = await params;
   const policy = await loadPolicy(handle, locale);
-  return { ...(policy ? canonicalMetadata(locale, policyHref(handle)) : {}), title: policy ? await localizedTitle(handle, policy.title) : "Policy" };
+  return { ...(policy ? canonicalMetadata(locale, policyHref(handle)) : {}), title: policy ? brandedTitle(await localizedTitle(handle, policy.title)) : "Colombo Market" };
 }
 
 /**

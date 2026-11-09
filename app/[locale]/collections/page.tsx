@@ -11,18 +11,13 @@ import { getCategoryDirectory } from "@/lib/catalog/categories-page";
 import { getSriLankaCollection } from "@/lib/catalog/sri-lanka-collection";
 import { getNavigationEntries } from "@/lib/shopify/navigation";
 import type { LanguageCode } from "@/lib/shopify/types";
-import { canonicalMetadata, storefrontUrl } from "@/lib/seo";
+import { canonicalMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "categoriesPage.meta" });
-  const canonical = canonicalMetadata(locale, "/collections");
   return {
-    ...canonical,
-    alternates: {
-      ...canonical.alternates,
-      languages: { de: storefrontUrl("de", "/collections"), en: storefrontUrl("en", "/collections"), "x-default": storefrontUrl("de", "/collections") },
-    },
+    ...canonicalMetadata(locale, "/collections"),
     title: t("title"),
     description: t("description"),
   };

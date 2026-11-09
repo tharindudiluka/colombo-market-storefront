@@ -32,14 +32,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     height: 1024,
     alt: site.name,
   };
-  const canonical = canonicalMetadata(locale, "/");
 
   return {
-    ...canonical,
-    alternates: {
-      ...canonical.alternates,
-      languages: { de: storefrontUrl("de", "/"), en: storefrontUrl("en", "/"), "x-default": storefrontUrl("de", "/") },
-    },
+    ...canonicalMetadata(locale, "/"),
     title: { absolute: title },
     description,
     openGraph: {

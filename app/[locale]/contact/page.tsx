@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { site } from "@/config/site";
-import { canonicalMetadata } from "@/lib/seo";
+import { brandedTitle, canonicalMetadata } from "@/lib/seo";
 
 function getShopifyContactAction() {
   const domain = process.env.SHOPIFY_STORE_DOMAIN;
@@ -22,7 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
-  return { ...canonicalMetadata(locale, "/contact"), title: t("title"), description: t("description") };
+  return { ...canonicalMetadata(locale, "/contact"), title: brandedTitle(t("title")), description: t("description") };
 }
 
 export default async function ContactPage() {

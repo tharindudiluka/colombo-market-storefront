@@ -20,7 +20,7 @@ export async function Breadcrumbs({ items, currentPath }: { items: BreadcrumbIte
       })),
     }} />}
     <nav
-      aria-label="Breadcrumb"
+      aria-label={t("breadcrumbs.label")}
       className="mx-auto max-w-[var(--layout-max-width)] px-4 pt-4 text-xs text-brand-teal-dark/60 sm:text-sm"
     >
       <ol className="flex flex-wrap items-center gap-1.5">
