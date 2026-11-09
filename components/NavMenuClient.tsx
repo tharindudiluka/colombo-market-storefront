@@ -1,8 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { KumaioIcon } from "@/components/KumaioIcon";
+import { promoCollectionHandles } from "@/config/collections";
 import { Link, usePathname } from "@/i18n/navigation";
 import type { NavigationEntry } from "@/lib/shopify/navigation";
+
+// The Kumaio brand link carries the brand mark in front of its label.
+const kumaioHref = `/collections/${promoCollectionHandles.kumaio}`;
 
 function containsPath(entry: NavigationEntry, pathname: string): boolean {
   return entry.href === pathname || entry.children.some((child) => containsPath(child, pathname));
@@ -98,6 +103,7 @@ function TopLevelEntry({ entry, pathname }: { entry: NavigationEntry; pathname: 
           aria-haspopup={hasChildren ? "menu" : undefined}
           className={itemClassName}
         >
+          {entry.href === kumaioHref && <KumaioIcon className="h-[18px] w-[18px] shrink-0" />}
           <span>{entry.title}</span>
           {hasChildren && <DownCaret />}
         </Link>

@@ -31,6 +31,7 @@
     "viewAllCategory": "View all {category}",
     "noCategoryMatches": "No categories match your search.",
     "aboutUs": "About Us",
+    "kumaioMobile": "Kumaio – Organic Products from Sri Lanka",
     "contact": "Contact",
     "angebote": "Offers",
     "gewurze": "Spices",
@@ -199,6 +200,9 @@
       "next": "Next",
       "sale": "Sale",
       "sriLankaSubtitle": "Products with a stated Sri Lankan origin",
+      "kumaioEyebrow": "Kumaio",
+      "kumaioSubtitle": "Coconut chips, coconut oil, coconut milk, aminos and more.",
+      "kumaioViewAll": "Shop all Kumaio products",
       "titles": {
         "bestsellers": "Bestsellers",
         "sriLanka": "Sri Lankan Favourites",
@@ -206,6 +210,7 @@
         "dal": "Dal, Lentils & Beans",
         "spices": "Spices & Curry Essentials",
         "snacks": "Snacks & Sweets",
+        "kumaio": "Discover Kumaio",
         "frozen": "Frozen Favourites",
         "offers": "Offers"
       }

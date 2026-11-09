@@ -31,6 +31,7 @@
     "viewAllCategory": "Alle aus {category} ansehen",
     "noCategoryMatches": "Keine passenden Kategorien gefunden.",
     "aboutUs": "Über uns",
+    "kumaioMobile": "Kumaio – Bio Produkte aus Sri Lanka",
     "contact": "Kontakt",
     "angebote": "Angebote",
     "gewurze": "Gewürze",
@@ -199,6 +200,9 @@
       "next": "Weiter",
       "sale": "Angebot",
       "sriLankaSubtitle": "Produkte mit ausgewiesener Herkunft Sri Lanka",
+      "kumaioEyebrow": "Kumaio",
+      "kumaioSubtitle": "Kokoschips, Kokosöl, Kokosmilch, Aminos und mehr.",
+      "kumaioViewAll": "Alle Kumaio Produkte",
       "titles": {
         "bestsellers": "Bestseller",
         "sriLanka": "Sri-lankische Favoriten",
@@ -206,6 +210,7 @@
         "dal": "Dal, Linsen & Bohnen",
         "spices": "Gewürze & Curry",
         "snacks": "Snacks & Süßes",
+        "kumaio": "Kumaio entdecken",
         "frozen": "Tiefkühl-Favoriten",
         "offers": "Angebote"
       }

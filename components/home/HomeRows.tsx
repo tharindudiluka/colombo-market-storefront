@@ -15,9 +15,10 @@ export async function HomeRows({ rows, from, to }: { rows: HomeRow[]; from: numb
           key={row.key}
           id={`home-row-${row.key}`}
           title={t(`titles.${row.key}`)}
-          subtitle={row.key === "sriLanka" ? t("sriLankaSubtitle") : undefined}
+          eyebrow={row.key === "kumaio" ? t("kumaioEyebrow") : undefined}
+          subtitle={row.key === "sriLanka" ? t("sriLankaSubtitle") : row.key === "kumaio" ? t("kumaioSubtitle") : undefined}
           href={row.handle ? `/collections/${row.handle}` : `/collections/${sriLankaAllHandle}`}
-          viewAll={t("viewAll")}
+          viewAll={row.key === "kumaio" ? t("kumaioViewAll") : t("viewAll")}
           previous={t("previous")}
           next={t("next")}
           locale={locale}

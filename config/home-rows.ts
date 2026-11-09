@@ -1,3 +1,5 @@
+import { promoCollectionHandles } from "@/config/collections";
+
 /**
  * Product rows on the homepage, in display order. `handle` is an existing Shopify collection (never hardcoded in a
  * query); `sriLanka` is the verified Sri Lankan list from config/sri-lanka.ts. A row is only rendered when it has at
@@ -5,6 +7,7 @@
  */
 export const homeRows = [
   { key: "bestsellers", handle: "bestseller" },
+  { key: "kumaio", handle: promoCollectionHandles.kumaio },
   { key: "sriLanka", handle: null },
   { key: "rice", handle: "reis" },
   { key: "dal", handle: "linsen-und-bohnen" },

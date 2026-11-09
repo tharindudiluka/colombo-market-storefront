@@ -10,6 +10,8 @@ import type { UiProduct } from "@/lib/shopify/mappers";
 type Props = {
   id: string;
   title: string;
+  /** Small label above the title (e.g. a featured brand). */
+  eyebrow?: string;
   subtitle?: string;
   href: string;
   viewAll: string;
@@ -35,7 +37,7 @@ type Props = {
  * edges, centred on the product images, a slider track with a draggable thumb under the row showing how far it scrolls,
  * and a "view all" button below the row aligned with the right arrow. Used by every homepage product row.
  */
-export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, next, locale, products, eager = false, viewAllBeside = false, intro, bare = false }: Props) {
+export function HomeProductRow({ id, title, eyebrow, subtitle, href, viewAll, previous, next, locale, products, eager = false, viewAllBeside = false, intro, bare = false }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -153,7 +155,7 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
     >
       {/* One self-contained block per row: a divider above, generous space around it, tight spacing inside. */}
       <div className={bare ? "" : "mt-8 border-t border-neutral-200 pt-8 sm:mt-10 sm:pt-10"}>
-        <SectionHeader id={id} title={title} subtitle={subtitle} />
+        <SectionHeader id={id} title={title} eyebrow={eyebrow} subtitle={subtitle} />
         {intro}
         <div ref={wrap} className="relative mt-4 flex flex-wrap items-center gap-x-2 gap-y-4 [--card:152px] sm:mt-5 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-4 sm:gap-y-2 sm:[--card:184px] lg:[--card:212px]">
           <ul

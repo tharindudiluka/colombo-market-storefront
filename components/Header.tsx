@@ -7,13 +7,21 @@ import { CartButton } from "@/components/cart/CartButton";
 import { SearchForm } from "@/components/search/SearchForm";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { WishlistHeaderButton } from "@/components/wishlist/WishlistHeaderButton";
+import { collectionHandles, promoCollectionHandles } from "@/config/collections";
 import { site } from "@/config/site";
 import { getLocale } from "next-intl/server";
 import { getNavigationEntries } from "@/lib/shopify/navigation";
 
 export async function Header() {
   const locale = await getLocale();
-  const entries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
+  const menuEntries = await getNavigationEntries(locale.toUpperCase() as "DE" | "EN");
+  // Kumaio gets its own top-level link to its existing collection (brand name, same in DE and EN) without editing the
+  // Shopify menu. It sits before "Angebote", or at the end if that entry is absent. Only the header uses this list.
+  const kumaioHref = `/collections/${promoCollectionHandles.kumaio}`;
+  const offersIndex = menuEntries.findIndex((entry) => entry.href === `/collections/${collectionHandles.weeklySpecials}`);
+  const entries = menuEntries.some((entry) => entry.href === kumaioHref)
+    ? menuEntries
+    : [...menuEntries.slice(0, offersIndex < 0 ? menuEntries.length : offersIndex), { id: "brand-kumaio", title: "Kumaio", href: kumaioHref, children: [] }, ...(offersIndex < 0 ? [] : menuEntries.slice(offersIndex))];
   return (
     <header className="storefront-header sticky top-0 z-40 bg-white shadow-sm">
       <div className="storefront-header-row mx-auto flex max-w-[var(--layout-max-width)] items-center gap-3 px-4 py-3 sm:gap-6 lg:h-[var(--layout-header-height)] lg:px-[var(--layout-page-padding)] lg:py-[var(--layout-header-padding)]">

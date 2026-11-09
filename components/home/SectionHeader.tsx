@@ -5,10 +5,11 @@ import type { ReactNode } from "react";
  * an optional action line under the title ("view all"), and an optional right-hand slot (carousel arrows). Pure presentation, so it works from server and client
  * components alike.
  */
-export function SectionHeader({ id, title, subtitle, action, children }: { id: string; title: string; subtitle?: string; action?: ReactNode; children?: ReactNode }) {
+export function SectionHeader({ id, title, eyebrow, subtitle, action, children }: { id: string; title: string; eyebrow?: string; subtitle?: string; action?: ReactNode; children?: ReactNode }) {
   return (
     <div className="flex flex-wrap items-end justify-between gap-x-3 gap-y-2">
       <div className="min-w-0 max-w-full">
+        {eyebrow && <p className="mb-0.5 pl-[14px] text-xs font-bold uppercase tracking-widest text-brand-teal-dark/70">{eyebrow}</p>}
         <h2 id={id} className="flex items-center gap-2.5 text-xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-[22px]">
           <span aria-hidden className="h-5 w-1 shrink-0 rounded-full bg-brand-teal" />
           <span className="min-w-0">{title}</span>

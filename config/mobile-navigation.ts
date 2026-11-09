@@ -1,6 +1,6 @@
 import type { IconName } from "@/components/Icon";
 
-export type MobileNavigationIconName = IconName | "mortar" | "candy" | "bread";
+export type MobileNavigationIconName = IconName | "mortar" | "candy" | "bread" | "kumaio";
 
 // Keyed by collection path (stable across menu rebuilds and identical in DE and EN), not by Shopify menu item id.
 export const mobileNavigationIcons: Partial<Record<string, MobileNavigationIconName>> = {
@@ -12,4 +12,5 @@ export const mobileNavigationIcons: Partial<Record<string, MobileNavigationIconN
   "/collections/snacks-suesses": "candy",
   "/collections/frozen-food": "snowflake",
   "/collections/angebote": "tag",
+  "/collections/kumaio-bio-produkte-aus-sri-lanka": "kumaio",
 };

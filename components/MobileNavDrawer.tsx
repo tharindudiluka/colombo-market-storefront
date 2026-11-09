@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Icon } from "@/components/Icon";
 import { HomepageCategoryIcon } from "@/components/HomepageCategoryIcon";
+import { KumaioIcon } from "@/components/KumaioIcon";
 import { mobileNavigationIcons } from "@/config/mobile-navigation";
 import { site } from "@/config/site";
 import { pageHandles, pageHref } from "@/config/pages";
@@ -26,8 +27,8 @@ function MobileEntry({ entry, pathname, searching, onNavigate, depth = 0 }: {
   const t = useTranslations("nav");
   const icon = mobileNavigationIcons[entry.href] ?? "store";
   const title = <>{depth === 0 && <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-cream/60 text-brand-teal">
-    {icon === "mortar" || icon === "candy" || icon === "bread" ? <HomepageCategoryIcon name={icon} className="h-5 w-5" /> : <Icon name={icon} className="h-5 w-5" />}
-  </span>}<span className="min-w-0 flex-1">{entry.title}</span></>;
+    {icon === "mortar" || icon === "candy" || icon === "bread" ? <HomepageCategoryIcon name={icon} className="h-5 w-5" /> : icon === "kumaio" ? <KumaioIcon className="h-5 w-5" /> : <Icon name={icon} className="h-5 w-5" />}
+  </span>}<span className="min-w-0 flex-1 text-balance">{icon === "kumaio" ? t("kumaioMobile") : entry.title}</span></>;
   const linkClass = "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-brand-teal-dark/80 hover:bg-brand-cream/60";
   return (
     <li>
