@@ -28,6 +28,7 @@
     "menuTitle": "Menu",
     "desktopMenuLabel": "Product categories",
     "searchCategories": "Search categories and subcategories",
+    "searchPlaceholder": "Search categories",
     "viewAllCategory": "View all {category}",
     "noCategoryMatches": "No categories match your search.",
     "aboutUs": "About Us",
