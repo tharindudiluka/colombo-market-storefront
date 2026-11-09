@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { CarouselArrow } from "@/components/CarouselArrow";
 import { HomeProductCard } from "@/components/home/HomeProductCard";
@@ -24,6 +24,10 @@ type Props = {
    * button fits. When it does not fit it stays below the row, so the cards are never squeezed.
    */
   viewAllBeside?: boolean;
+  /** Optional content between the section header and the cards (e.g. shortcut chips). */
+  intro?: ReactNode;
+  /** Drop the divider and outer spacing so the row can sit inside another surface. */
+  bare?: boolean;
 };
 
 /**
@@ -31,7 +35,7 @@ type Props = {
  * edges, centred on the product images, a slider track with a draggable thumb under the row showing how far it scrolls,
  * and a "view all" button below the row aligned with the right arrow. Used by every homepage product row.
  */
-export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, next, locale, products, eager = false, viewAllBeside = false }: Props) {
+export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, next, locale, products, eager = false, viewAllBeside = false, intro, bare = false }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -148,8 +152,9 @@ export function HomeProductRow({ id, title, subtitle, href, viewAll, previous, n
       onBlur={() => concealSoon(800)}
     >
       {/* One self-contained block per row: a divider above, generous space around it, tight spacing inside. */}
-      <div className="mt-8 border-t border-neutral-200 pt-8 sm:mt-10 sm:pt-10">
+      <div className={bare ? "" : "mt-8 border-t border-neutral-200 pt-8 sm:mt-10 sm:pt-10"}>
         <SectionHeader id={id} title={title} subtitle={subtitle} />
+        {intro}
         <div ref={wrap} className="relative mt-4 flex flex-wrap items-center gap-x-2 gap-y-4 [--card:152px] sm:mt-5 sm:grid sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-4 sm:gap-y-2 sm:[--card:184px] lg:[--card:212px]">
           <ul
             ref={track}

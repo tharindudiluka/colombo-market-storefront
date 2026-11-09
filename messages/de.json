@@ -212,14 +212,19 @@
       "description": "Sri-lankische, indische und südasiatische Lebensmittel nach Abteilung entdecken: Reis, Dal, Mehl, Gewürze, Saucen, Snacks und Tiefkühlprodukte bei Colombo Market Ravensburg."
     },
     "hero": {
-      "eyebrow": "Sortiment",
       "title": "Alle Kategorien",
-      "intro": "Entdecken Sie sri-lankische, indische und südasiatische Lebensmittel nach Abteilung – von Reis und Dal bis zu Gewürzen, Snacks und Tiefkühlprodukten."
+      "intro": "Alle Abteilungen auf einen Blick – von Reis und Dal bis zu Gewürzen, Snacks und Tiefkühlware."
+    },
+    "search": {
+      "label": "Kategorie suchen",
+      "placeholder": "Kategorie suchen, z. B. Basmati",
+      "clear": "Suche löschen",
+      "noResults": "Keine passende Kategorie gefunden.",
+      "resultsLabel": "Gefilterte Kategorien"
     },
     "quickNavLabel": "Abteilungen",
     "sriLankaPill": "Sri Lanka",
-    "directoryTitle": "Nach Abteilung einkaufen",
-    "viewAll": "{category} ansehen",
+    "viewAll": "Alle {category} ansehen",
     "subLabel": "Unterkategorien von {category}",
     "descriptions": {
       "reis": "Basmati, Ponni, Sona Masoori und mehr – für jeden Reisgeschmack.",
@@ -232,19 +237,19 @@
       "angebote": "Aktuelle Angebote und reduzierte Produkte."
     },
     "sriLanka": {
-      "eyebrow": "Herkunft Sri Lanka",
       "title": "Sri Lanka entdecken",
-      "body": "Sri-lankische Lieblinge und Küchenklassiker – Tee, Gebäck, Sambol und Kokosprodukte, in Deutschland erhältlich.",
-      "note": "Ausgewählt nach der Herkunftsangabe in den Produktdaten.",
+      "subtitle": "Unser aktuelles Sortiment mit ausgewiesener Herkunft Sri Lanka",
       "shortcutsLabel": "Beliebt aus Sri Lanka",
       "shortcuts": {
         "tea": "Tee",
         "biscuits": "Kekse & Gebäck",
         "coconut": "Kokoschips",
-        "sambol": "Sambol & Chutney"
+        "coconutProducts": "Kokosmilch & Kokosöl",
+        "sambol": "Sambol & Chutney",
+        "jam": "Marmelade & Süßes",
+        "sauces": "Saucen"
       },
-      "productsTitle": "Sri-lankische Favoriten",
-      "cta": "Kumaio: Bio aus Sri Lanka"
+      "cta": "Alle sri-lankischen Produkte"
     }
   },
   "homePage": {

@@ -605,6 +605,7 @@ form[role="search"]:focus-within {
 
 /* Product-only controls and merchant rich text; shared cart styles remain unchanged. */
 .product-page.min-h-full.bg-white { background-color: white; }
+.collections-page.min-h-full.bg-white { background-color: white; }
 .product-page .product-buy-box > section.overflow-hidden { box-shadow: none; }
 .product-quantity button { width: 2.75rem; height: 2.75rem; }
 .product-quantity button:focus-visible { outline: 2px solid var(--color-brand-teal); outline-offset: 2px; border-radius: 999px; }

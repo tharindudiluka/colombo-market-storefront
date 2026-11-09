@@ -211,14 +211,19 @@
       "description": "Browse Sri Lankan, Indian and South Asian groceries by department: rice, dal, flour, spices, sauces, snacks and frozen foods at Colombo Market Ravensburg."
     },
     "hero": {
-      "eyebrow": "Our range",
       "title": "All Categories",
-      "intro": "Browse Sri Lankan, Indian and South Asian groceries by department – from rice and dal to spices, snacks and frozen foods."
+      "intro": "Every department at a glance – from rice and dal to spices, snacks and frozen foods."
+    },
+    "search": {
+      "label": "Search categories",
+      "placeholder": "Search categories, e.g. basmati",
+      "clear": "Clear search",
+      "noResults": "No matching category found.",
+      "resultsLabel": "Filtered categories"
     },
     "quickNavLabel": "Departments",
     "sriLankaPill": "Sri Lanka",
-    "directoryTitle": "Shop by department",
-    "viewAll": "View {category}",
+    "viewAll": "View all {category}",
     "subLabel": "Subcategories of {category}",
     "descriptions": {
       "reis": "Basmati, Ponni, Sona Masoori and more – for every kind of rice.",
@@ -231,19 +236,19 @@
       "angebote": "Current offers and reduced products."
     },
     "sriLanka": {
-      "eyebrow": "Origin Sri Lanka",
       "title": "Discover Sri Lanka",
-      "body": "Sri Lankan favourites and kitchen staples – tea, biscuits, sambol and coconut products, available in Germany.",
-      "note": "Selected according to the origin stated in the product data.",
+      "subtitle": "Our current range with a stated Sri Lankan origin",
       "shortcutsLabel": "Popular from Sri Lanka",
       "shortcuts": {
         "tea": "Tea",
         "biscuits": "Biscuits & Pastries",
         "coconut": "Coconut chips",
-        "sambol": "Sambal & chutney"
+        "coconutProducts": "Coconut milk & oil",
+        "sambol": "Sambal & chutney",
+        "jam": "Jam & sweets",
+        "sauces": "Sauces"
       },
-      "productsTitle": "Sri Lankan favourites",
-      "cta": "Kumaio: organic from Sri Lanka"
+      "cta": "Shop all Sri Lankan products"
     }
   },
   "homePage": {

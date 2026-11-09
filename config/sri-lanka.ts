@@ -27,12 +27,18 @@ export const sriLankaProducts = [
 
 export const sriLankaShowcaseSize = 8;
 
-/** Category shortcuts that each contain at least one verified Sri Lankan product above. */
+/**
+ * Category shortcuts for the /collections Sri Lanka section. A shortcut is only shown while the live Sri Lankan collection
+ * contains at least one product that is also in that sub-collection (see lib/catalog/sri-lanka-collection.ts).
+ */
 export const sriLankaShortcuts = [
   { handle: "tea", labelKey: "tea" },
   { handle: "kekse-geback-und-zwieback", labelKey: "biscuits" },
   { handle: "kokoschips", labelKey: "coconut" },
+  { handle: "saucen-speiseole-ghee", labelKey: "coconutProducts" },
   { handle: "pickles-chutney-sambol", labelKey: "sambol" },
+  { handle: "suesses-marmelade", labelKey: "jam" },
+  { handle: "sauce", labelKey: "sauces" },
 ] as const;
 
 /** The only Sri Lanka-specific Shopify collection today (Kumaio, all products sourced from Sri Lanka). */

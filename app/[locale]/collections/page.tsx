@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
-import { BotanicalAccents } from "@/components/BotanicalAccents";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { CategoryDirectory } from "@/components/CategoryDirectory";
+import { CategoryBrowser, type BrowserCategory } from "@/components/collections/CategoryBrowser";
+import { SriLankaDiscover } from "@/components/collections/SriLankaDiscover";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { SriLankaShowcase } from "@/components/SriLankaShowcase";
-import { getCategoryDirectory, getSriLankaProducts } from "@/lib/catalog/categories-page";
+import { categoryImages } from "@/config/category-images";
+import { getCategoryDirectory } from "@/lib/catalog/categories-page";
+import { getSriLankaCollection } from "@/lib/catalog/sri-lanka-collection";
 import { getNavigationEntries } from "@/lib/shopify/navigation";
 import type { LanguageCode } from "@/lib/shopify/types";
 import { canonicalMetadata, storefrontUrl } from "@/lib/seo";
@@ -33,37 +34,52 @@ export default async function CollectionsIndexPage({ params }: { params: Promise
   const t = await getTranslations("categoriesPage");
   const tc = await getTranslations("collection");
   const entries = await getNavigationEntries(language);
-  const [categories, sriLankaProducts] = await Promise.all([getCategoryDirectory(entries, language), getSriLankaProducts(language)]);
+  // Two batched Storefront requests: the department directory (menu-driven, counts and photos included) and the
+  // live Sri Lankan collection. Both reuse the existing cache tags.
+  const [directory, sriLanka] = await Promise.all([getCategoryDirectory(entries, language), getSriLankaCollection(language)]);
 
-  const pill = "inline-flex min-h-11 shrink-0 items-center rounded-full border border-brand-teal/25 bg-white px-4 py-2 text-sm font-semibold text-brand-teal-dark transition-colors hover:border-brand-teal hover:bg-brand-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal";
+  const categories: BrowserCategory[] = directory.map((category) => ({
+    id: category.id,
+    handle: category.handle,
+    title: category.title,
+    description: t.has(`descriptions.${category.handle}`) ? t(`descriptions.${category.handle}`) : null,
+    countLabel: category.productCount !== null ? tc("productCount", { count: category.productCount }) : null,
+    viewAllLabel: t("viewAll", { category: category.title }),
+    subLabel: t("subLabel", { category: category.title }),
+    image: categoryImages[category.handle] ?? null,
+    packshot: category.images[0]?.url ?? null,
+    subs: category.subs,
+  }));
 
   return (
-    <div className="flex min-h-full flex-col bg-white">
+    <div className="collections-page flex min-h-full flex-col bg-white">
       <AnnouncementBar />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 pb-10">
         <Breadcrumbs currentPath="/collections" items={[{ label: tc("allTitle") }]} />
 
-        <div className="relative isolate overflow-hidden">
-          <BotanicalAccents variant="hero" />
-          <div className="relative z-10 mx-auto max-w-[var(--layout-max-width)] px-4 pb-6 pt-6 sm:pb-8 sm:pt-8">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-terracotta">{t("hero.eyebrow")}</p>
-            <h1 className="mt-2 font-heading text-3xl font-extrabold text-brand-teal-dark sm:text-4xl lg:text-5xl">{t("hero.title")}</h1>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-brand-teal-dark/75">{t("hero.intro")}</p>
-          </div>
-        </div>
+        <div className="pt-3 sm:pt-4" />
+        <CategoryBrowser
+          heading={
+            <>
+              <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-[28px]">{t("hero.title")}</h1>
+              <p className="mt-1 text-sm text-neutral-500 sm:text-[15px]">{t("hero.intro")}</p>
+            </>
+          }
+          categories={categories}
+          hasSriLanka={Boolean(sriLanka)}
+          text={{
+            quickNavLabel: t("quickNavLabel"),
+            sriLankaPill: t("sriLankaPill"),
+            searchLabel: t("search.label"),
+            searchPlaceholder: t("search.placeholder"),
+            clear: t("search.clear"),
+            noResults: t("search.noResults"),
+            resultsLabel: t("search.resultsLabel"),
+          }}
+        />
 
-        <nav aria-label={t("quickNavLabel")} className="border-y border-brand-teal/10 bg-white">
-          <ul className="no-scrollbar mx-auto flex max-w-[var(--layout-max-width)] gap-2 overflow-x-auto px-4 py-3 xl:flex-wrap xl:overflow-visible">
-            {categories.map((category) => (
-              <li key={category.id} className="shrink-0"><a href={`#cat-${category.handle}`} className={pill}>{category.title}</a></li>
-            ))}
-            {sriLankaProducts.length > 0 && <li className="shrink-0"><a href="#sri-lanka" className={`${pill} border-brand-terracotta/40 text-brand-terracotta`}>{t("sriLankaPill")}</a></li>}
-          </ul>
-        </nav>
-
-        <CategoryDirectory categories={categories} />
-        <SriLankaShowcase products={sriLankaProducts} />
+        {sriLanka && <SriLankaDiscover data={sriLanka} />}
       </main>
       <Footer />
     </div>
