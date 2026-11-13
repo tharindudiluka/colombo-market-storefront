@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -16,29 +16,102 @@ export function CartDrawer() {
   const locale = useLocale();
   const { cart, isOpen, isPending, closeCart, updateItem, removeItem } = useCart();
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const closeCartRef = useRef(closeCart);
+  useEffect(() => {
+    closeCartRef.current = closeCart;
+  }, [closeCart]);
+
+  // Remember the last focused element outside the drawer. "Add to cart" disables its button while
+  // the request is pending, which drops focus to <body> before the drawer opens.
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const onFocusIn = (e: FocusEvent) => {
+      const el = e.target;
+      if (el instanceof HTMLElement && !el.closest("[role='dialog']")) lastFocusedRef.current = el;
+    };
+    document.addEventListener("focusin", onFocusIn);
+    return () => document.removeEventListener("focusin", onFocusIn);
+  }, []);
+
+  // Modal behaviour while open: move focus in, trap Tab / Shift+Tab, make the rest of the
+  // page inert, close on Escape, and hand focus back to whatever opened the drawer.
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeCart();
+    const root = rootRef.current;
+    const dialog = dialogRef.current;
+    if (!root || !dialog) return;
+
+    const active = document.activeElement;
+    const trigger =
+      active instanceof HTMLElement && active !== document.body ? active : lastFocusedRef.current;
+
+    const inerted: Element[] = [];
+    for (const el of Array.from(root.parentElement?.children ?? [])) {
+      if (el === root || el.hasAttribute("inert")) continue;
+      if (["SCRIPT", "STYLE", "LINK", "NEXT-ROUTE-ANNOUNCER"].includes(el.tagName)) continue;
+      el.setAttribute("inert", "");
+      inerted.push(el);
+    }
+
+    closeButtonRef.current?.focus();
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeCartRef.current();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (el) => el.getAttribute("aria-disabled") !== "true" && el.offsetParent !== null,
+      );
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (!dialog.contains(active)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [isOpen, closeCart]);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      inerted.forEach((el) => el.removeAttribute("inert"));
+      if (trigger && trigger.isConnected) trigger.focus();
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   const lines = cart?.lines ?? [];
 
   return (
-    <div className="fixed inset-0 z-50">
-      <button aria-label={t("close")} className="absolute inset-0 bg-black/40" onClick={closeCart} />
-      <div role="dialog" aria-modal="true" aria-label={t("title")} className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-xl">
+    <div ref={rootRef} className="fixed inset-0 z-50">
+      <button type="button" tabIndex={-1} aria-hidden="true" className="absolute inset-0 bg-black/40" onClick={closeCart} />
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={t("title")} className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-xl">
         <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
           <span className="text-lg font-bold text-brand-teal-dark">
             {t("title")}
             {cart && cart.totalQuantity > 0 ? ` (${cart.totalQuantity})` : ""}
           </span>
-          <button type="button" aria-label={t("close")} onClick={closeCart} className="-m-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-brand-teal">
+          <button ref={closeButtonRef} type="button" aria-label={t("close")} onClick={closeCart} className="-m-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-brand-teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-5 w-5" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
