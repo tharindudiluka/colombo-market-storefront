@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import { preparePolicyHtml } from "@/lib/policy-content";
+import { HashScroll } from "@/components/HashScroll";
+import { preparePolicyHtml, type PolicyHtmlOptions } from "@/lib/policy-content";
 
 /** Pages with at least this many sections get an "On this page" menu; short pages (Impressum, contact) stay simple. */
 const TOC_MIN_SECTIONS = 4;
@@ -11,9 +12,9 @@ const jumpLink =
  * Shared layout for Shopify policies and pages: cream title band, centred left-aligned reading column, and a jump menu
  * (sticky side list on desktop, collapsible card on phones) for pages with clear sections. Content wording is untouched.
  */
-export async function PolicyLayout({ title, html }: { title: string; html: string }) {
+export async function PolicyLayout({ title, html, options }: { title: string; html: string; options?: PolicyHtmlOptions }) {
   const t = await getTranslations("policyPages");
-  const { html: body, toc } = preparePolicyHtml(html, title);
+  const { html: body, toc } = preparePolicyHtml(html, title, options);
   const showToc = toc.length >= TOC_MIN_SECTIONS;
 
   const list = (
@@ -28,6 +29,7 @@ export async function PolicyLayout({ title, html }: { title: string; html: strin
 
   return (
     <article>
+      <HashScroll />
       <header className="border-b border-neutral-200 bg-brand-cream">
         <div className={`mx-auto px-4 py-10 sm:py-14 ${showToc ? "max-w-5xl" : "max-w-3xl"}`}>
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-teal">{t("eyebrow")}</p>

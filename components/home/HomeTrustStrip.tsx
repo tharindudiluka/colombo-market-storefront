@@ -2,20 +2,20 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/i18n/navigation";
 import { delivery, formatEuro } from "@/config/delivery";
-import { pageHandles, pageHref, policyHandles, policyHref } from "@/config/pages";
+import { aboutAnchors, pageHandles, pageHref, policyHandles, policyHref, shippingAnchors } from "@/config/pages";
 
 const svg = { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, className: "h-5 w-5", "aria-hidden": true };
 
-/** One contained strip of four equal delivery facts (2 x 2 on phones), icon and text centred. Each cell links to the shipping policy (pickup: About us). Amounts come from config/delivery.ts. */
+/** One contained strip of four equal delivery facts (2 x 2 on phones), icon and text centred. Each cell links to its section of the shipping policy (pickup: the directions card on About us). Amounts come from config/delivery.ts. */
 export async function HomeTrustStrip() {
   const t = await getTranslations("homePage.trust");
   const locale = await getLocale();
   const values = { threshold: formatEuro(delivery.freeShippingThreshold, locale), rate: formatEuro(delivery.flatShippingRate, locale) };
   const items = [
-    { key: "shipping", href: policyHref(policyHandles.shipping), icon: <Icon name="package" className="h-5 w-5" />, text: t("shipping", values) },
-    { key: "free", href: policyHref(policyHandles.shipping), icon: <Icon name="tag" className="h-5 w-5" />, text: t("free", values) },
-    { key: "germany", href: policyHref(policyHandles.shipping), icon: <svg {...svg}><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7" /><circle cx="7.5" cy="17.5" r="1.8" /><circle cx="17.5" cy="17.5" r="1.8" /></svg>, text: t("germany") },
-    { key: "pickup", href: pageHref(pageHandles.about), icon: <Icon name="store" className="h-5 w-5" />, text: t("pickup") },
+    { key: "shipping", href: `${policyHref(policyHandles.shipping)}#${shippingAnchors.costs}`, icon: <Icon name="package" className="h-5 w-5" />, text: t("shipping", values) },
+    { key: "free", href: `${policyHref(policyHandles.shipping)}#${shippingAnchors.freeShipping}`, icon: <Icon name="tag" className="h-5 w-5" />, text: t("free", values) },
+    { key: "germany", href: `${policyHref(policyHandles.shipping)}#${shippingAnchors.delivery}`, icon: <svg {...svg}><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7" /><circle cx="7.5" cy="17.5" r="1.8" /><circle cx="17.5" cy="17.5" r="1.8" /></svg>, text: t("germany") },
+    { key: "pickup", href: `${pageHref(pageHandles.about)}#${aboutAnchors.storeDirections}`, icon: <Icon name="store" className="h-5 w-5" />, text: t("pickup") },
   ];
 
   return (

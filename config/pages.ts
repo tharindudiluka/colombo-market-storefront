@@ -25,4 +25,8 @@ export const policyHandles = {
   legalNotice: "legal-notice",
 } as const;
 
+/** Stable section ids on the shipping policy and About page, targeted by the homepage benefit cards. */
+export const shippingAnchors = { costs: "shipping-costs", freeShipping: "free-shipping", delivery: "delivery-germany" } as const;
+export const aboutAnchors = { storeDirections: "store-directions" } as const;
+
 export const policyHref = (handle: string) => `/policies/${handle}` as const;

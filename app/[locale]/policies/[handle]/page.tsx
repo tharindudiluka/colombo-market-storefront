@@ -9,7 +9,8 @@ import { getShopPolicy, isPolicyHandle, type PolicyHandle } from "@/lib/shopify/
 import { getTranslations } from "next-intl/server";
 import type { LanguageCode } from "@/lib/shopify/types";
 import { brandedTitle, canonicalMetadata } from "@/lib/seo";
-import { policyHref } from "@/config/pages";
+import { policyHref, shippingAnchors } from "@/config/pages";
+import type { PolicyHtmlOptions } from "@/lib/policy-content";
 import { delivery, formatEuro } from "@/config/delivery";
 
 async function loadPolicy(handle: string, locale: string) {
@@ -48,6 +49,28 @@ function withCurrentThreshold(handle: string, html: string, locale: string) {
   return html.replace(/59[,.]99\s?€|€\s?59[,.]99/g, formatEuro(delivery.freeShippingThreshold, locale));
 }
 
+/**
+ * Stable anchors for the homepage delivery cards. The shipping policy is merchant-written in Shopify and its headings
+ * differ per language, so the known headings are mapped to fixed ids. Nothing is added to the policy wording except a
+ * "Free shipping" label on the sentence that already states the threshold.
+ */
+async function shippingPolicyOptions(): Promise<PolicyHtmlOptions> {
+  const t = await getTranslations("policyPages");
+  const threshold = delivery.freeShippingThreshold.toFixed(2).replace(".", "[.,]");
+  return {
+    headingAnchors: {
+      versandkosten: shippingAnchors.costs,
+      "shipping-costs": shippingAnchors.costs,
+      lieferzeit: shippingAnchors.delivery,
+      "shipping-methods-delivery-times": shippingAnchors.delivery,
+      "kostenloser-versand": shippingAnchors.freeShipping,
+      "free-shipping": shippingAnchors.freeShipping,
+    },
+    splitParagraph: { match: new RegExp(threshold), heading: t("freeShippingHeading") },
+    fallbackAnchor: { id: shippingAnchors.freeShipping, before: shippingAnchors.costs },
+  };
+}
+
 export default async function PolicyPage({
   params,
 }: {
@@ -65,7 +88,7 @@ export default async function PolicyPage({
       <Header />
       <main className="flex-1">
         <Breadcrumbs currentPath={policyHref(handle)} items={[{ label: title }]} />
-        <PolicyLayout title={title} html={withCurrentThreshold(handle, policy.body, locale)} />
+        <PolicyLayout title={title} html={withCurrentThreshold(handle, policy.body, locale)} options={handle === "shipping-policy" ? await shippingPolicyOptions() : undefined} />
       </main>
       <Footer />
     </div>

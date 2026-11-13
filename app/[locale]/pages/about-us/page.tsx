@@ -11,7 +11,8 @@ import { site } from "@/config/site";
 import { delivery, formatEuro } from "@/config/delivery";
 import { categoryImages } from "@/config/category-images";
 import { canonicalMetadata } from "@/lib/seo";
-import { pageHandles, pageHref, policyHandles, policyHref } from "@/config/pages";
+import { HashScroll } from "@/components/HashScroll";
+import { aboutAnchors, pageHandles, pageHref, policyHandles, policyHref } from "@/config/pages";
 
 export async function generateMetadata({
   params,
@@ -65,6 +66,7 @@ export default async function AboutUsPage() {
       <AnnouncementBar />
       <Header />
       <main className="flex-1">
+        <HashScroll />
         <Breadcrumbs currentPath={pageHref(pageHandles.about)} items={[{ label: t("title") }]} />
 
         {/* Opening: who we are, what shoppers can find, where we are, with two clear next steps. */}
@@ -204,8 +206,8 @@ export default async function AboutUsPage() {
                 </div>
               </article>
 
-              <article className="flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
-                <h3 className="font-heading text-xl font-extrabold text-brand-teal-dark sm:text-2xl">{t("storeTitle")}</h3>
+              <article id={aboutAnchors.storeDirections} aria-labelledby="about-store" className="scroll-mt-40 flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
+                <h3 id="about-store" className="font-heading text-xl font-extrabold text-brand-teal-dark sm:text-2xl">{t("storeTitle")}</h3>
                 <p className="mt-3 text-base leading-7 text-neutral-700">{t("storeBody")}</p>
                 <address className="mt-5 space-y-1 text-base not-italic leading-7 text-neutral-800">
                   <span className="block font-bold text-brand-teal-dark">{site.name}</span>

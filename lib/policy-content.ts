@@ -37,7 +37,16 @@ function linkify(html: string): string {
     .join("");
 }
 
-export function preparePolicyHtml(source: string, pageTitle = ""): { html: string; toc: PolicyTocItem[] } {
+export type PolicyHtmlOptions = {
+  /** Stable ids for headings, keyed by the heading's slug (the merchant's German and English headings slug differently). */
+  headingAnchors?: Record<string, string>;
+  /** Gives the first paragraph that matches its own labelled sub-section (existing wording, plus a heading), so it can be linked to. */
+  splitParagraph?: { match: RegExp; heading: string };
+  /** When no heading received this stable id, place an empty anchor right before the heading that has `before`. */
+  fallbackAnchor?: { id: string; before: string };
+};
+
+export function preparePolicyHtml(source: string, pageTitle = "", options: PolicyHtmlOptions = {}): { html: string; toc: PolicyTocItem[] } {
   let html = source;
 
   // Empty spacer paragraphs.
@@ -61,6 +70,17 @@ export function preparePolicyHtml(source: string, pageTitle = ""): { html: strin
     return `<h2>${text.trim()}</h2>`;
   });
 
+  // Optional: label the paragraph that holds a given fact, so it becomes its own linkable section. Wording is untouched.
+  if (options.splitParagraph) {
+    const { match, heading } = options.splitParagraph;
+    let done = false;
+    html = html.replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (paragraph) => {
+      if (done || !match.test(plainText(paragraph))) return paragraph;
+      done = true;
+      return `<h3>${heading}</h3>${paragraph}`;
+    });
+  }
+
   // A rule right before a heading doubles the heading's own divider.
   html = html.replace(/<hr\s*\/?>\s*(?=<h[23]\b)/gi, "");
 
@@ -70,13 +90,20 @@ export function preparePolicyHtml(source: string, pageTitle = ""): { html: strin
   html = html.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level: string, attributes: string, inner: string) => {
     const title = plainText(inner);
     if (!title) return match;
-    let id = /\sid="([^"]+)"/i.exec(attributes)?.[1] ?? slugify(title);
-    for (let n = 2; used.has(id); n += 1) id = `${slugify(title)}-${n}`;
+    const slug = slugify(title);
+    let id = options.headingAnchors?.[slug] ?? /\sid="([^"]+)"/i.exec(attributes)?.[1] ?? slug;
+    for (let n = 2; used.has(id); n += 1) id = `${slug}-${n}`;
     used.add(id);
     if (level === "2") toc.push({ id, title });
     const withoutId = attributes.replace(/\sid="[^"]*"/i, "");
     return `<h${level}${withoutId} id="${id}">${inner}</h${level}>`;
   });
+
+  // Stable anchor whose own section does not exist in this language: point at the nearest section instead.
+  if (options.fallbackAnchor && !used.has(options.fallbackAnchor.id)) {
+    const { id, before } = options.fallbackAnchor;
+    html = html.replace(new RegExp(`<h2\\b[^>]*\\sid="${before}"`), (heading) => `<span id="${id}"></span>${heading}`);
+  }
 
   // Wide tables scroll inside their own box instead of the page.
   html = html.replace(/<table\b[\s\S]*?<\/table>/gi, (table) => `<div class="policy-table">${table}</div>`);
