@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -15,6 +16,15 @@ export function CartDrawer() {
   const locale = useLocale();
   const { cart, isOpen, isPending, closeCart, updateItem, removeItem } = useCart();
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeCart();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen, closeCart]);
+
   if (!isOpen) return null;
 
   const lines = cart?.lines ?? [];
@@ -22,14 +32,14 @@ export function CartDrawer() {
   return (
     <div className="fixed inset-0 z-50">
       <button aria-label={t("close")} className="absolute inset-0 bg-black/40" onClick={closeCart} />
-      <div className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-xl">
+      <div role="dialog" aria-modal="true" aria-label={t("title")} className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-xl">
         <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
           <span className="text-lg font-bold text-brand-teal-dark">
             {t("title")}
             {cart && cart.totalQuantity > 0 ? ` (${cart.totalQuantity})` : ""}
           </span>
-          <button aria-label={t("close")} onClick={closeCart} className="p-1">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-5 w-5">
+          <button type="button" aria-label={t("close")} onClick={closeCart} className="-m-2 flex h-11 w-11 items-center justify-center rounded-full hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-brand-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" className="h-5 w-5" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
@@ -113,6 +123,13 @@ export function CartDrawer() {
               >
                 {t("checkout")}
               </a>
+              <button
+                type="button"
+                onClick={closeCart}
+                className="mt-3 block w-full rounded-full border-2 border-brand-teal py-3 text-center text-sm font-bold text-brand-teal transition-colors hover:bg-brand-teal hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-teal sm:text-base"
+              >
+                {t("keepShopping")}
+              </button>
             </div>
           </>
         )}
