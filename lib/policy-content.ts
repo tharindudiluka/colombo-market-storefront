@@ -40,10 +40,14 @@ function linkify(html: string): string {
 export type PolicyHtmlOptions = {
   /** Stable ids for headings, keyed by the heading's slug (the merchant's German and English headings slug differently). */
   headingAnchors?: Record<string, string>;
+  /** Same, for headings whose slug merely starts with the key (e.g. "free-shipping-threshold"). Exact matches win. */
+  headingAnchorPrefixes?: Record<string, string>;
   /** Gives the first paragraph that matches its own labelled sub-section (existing wording, plus a heading), so it can be linked to. */
   splitParagraph?: {
     match: RegExp;
     heading: string;
+    /** Skip all of this (no label, no added section) when the policy already has a heading that resolves to this stable id. */
+    skipIfAnchor?: string;
     /** Used only when no paragraph matches (this language's policy lacks the fact): adds the section at the end of the section whose heading slug is in `afterSlugs`. */
     fallback?: { afterSlugs: string[]; bodyHtml: string };
   };
@@ -75,8 +79,20 @@ export function preparePolicyHtml(source: string, pageTitle = "", options: Polic
     return `<h2>${text.trim()}</h2>`;
   });
 
+  // Stable id for a heading slug: exact mapping first, then prefix mapping.
+  const stableIdFor = (slug: string): string | undefined => {
+    const exact = options.headingAnchors?.[slug];
+    if (exact) return exact;
+    const prefix = Object.keys(options.headingAnchorPrefixes ?? {}).find((key) => slug.startsWith(key));
+    return prefix ? options.headingAnchorPrefixes?.[prefix] : undefined;
+  };
+
   // Optional: label the paragraph that holds a given fact, so it becomes its own linkable section. Wording is untouched.
-  if (options.splitParagraph) {
+  // Once the merchant gives that fact a heading of their own, nothing is added, so there is never a doubled heading.
+  const alreadyHasSection =
+    !!options.splitParagraph?.skipIfAnchor &&
+    Array.from(html.matchAll(/<h[23]\b[^>]*>([\s\S]*?)<\/h[23]>/gi)).some((h) => stableIdFor(slugify(plainText(h[1]))) === options.splitParagraph?.skipIfAnchor);
+  if (options.splitParagraph && !alreadyHasSection) {
     const { match, heading, fallback } = options.splitParagraph;
     let done = false;
     html = html.replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (paragraph) => {
@@ -104,7 +120,7 @@ export function preparePolicyHtml(source: string, pageTitle = "", options: Polic
     const title = plainText(inner);
     if (!title) return match;
     const slug = slugify(title);
-    let id = options.headingAnchors?.[slug] ?? /\sid="([^"]+)"/i.exec(attributes)?.[1] ?? slug;
+    let id = stableIdFor(slug) ?? /\sid="([^"]+)"/i.exec(attributes)?.[1] ?? slug;
     for (let n = 2; used.has(id); n += 1) id = `${slug}-${n}`;
     used.add(id);
     if (level === "2") toc.push({ id, title });

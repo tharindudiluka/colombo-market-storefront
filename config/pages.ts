@@ -27,6 +27,22 @@ export const policyHandles = {
 
 /** Stable section ids on the shipping policy and About page, targeted by the homepage benefit cards. */
 export const shippingAnchors = { costs: "shipping-costs", freeShipping: "free-shipping", delivery: "delivery-germany" } as const;
+/**
+ * How the shipping policy's headings map to the stable ids above. The policy is merchant-written in Shopify and its
+ * headings differ per language. Prefix entries also catch headings such as "Free shipping from 39,99 EUR".
+ */
+export const shippingPolicyHeadingAnchors: Record<string, string> = {
+  versandkosten: shippingAnchors.costs,
+  "shipping-costs": shippingAnchors.costs,
+  lieferzeit: shippingAnchors.delivery,
+  "shipping-methods-delivery-times": shippingAnchors.delivery,
+};
+export const shippingPolicyFreeShippingPrefixes: Record<string, string> = {
+  "free-shipping": shippingAnchors.freeShipping,
+  "kostenloser-versand": shippingAnchors.freeShipping,
+  "kostenlose-lieferung": shippingAnchors.freeShipping,
+  versandkostenfrei: shippingAnchors.freeShipping,
+};
 export const aboutAnchors = { storeDirections: "store-directions" } as const;
 
 export const policyHref = (handle: string) => `/policies/${handle}` as const;
