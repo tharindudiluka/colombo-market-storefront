@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
@@ -21,29 +21,54 @@ function filterEntries(entries: NavigationEntry[], query: string, locale: string
 
 const rowClass = "flex min-h-[52px] items-center gap-3.5 rounded-xl px-2.5 py-1.5 text-[15px] font-bold leading-snug text-brand-teal-dark transition-colors hover:bg-brand-cream/70 active:bg-brand-cream focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-teal";
 
+const chevronClass = "h-4 w-4 shrink-0 text-brand-teal-dark/40 transition-transform duration-200 group-data-[open]:rotate-90 motion-reduce:transition-none";
+const chevron = <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={chevronClass}><path d="m9 6 6 6-6 6" /></svg>;
+
 function MobileEntry({ entry, pathname, searching, onNavigate, depth = 0 }: {
   entry: NavigationEntry; pathname: string; searching: boolean; onNavigate: () => void; depth?: number;
 }) {
   const t = useTranslations("nav");
+  const [expanded, setExpanded] = useState(false);
+  const submenuId = useId();
   const icon = mobileNavigationIcons[entry.href] ?? "store";
   const isOffers = entry.href === "/collections/angebote";
   const current = entry.href === pathname;
+  const label = icon === "kumaio" ? t("kumaioMobile") : entry.title;
   const title = <>{depth === 0 && <span aria-hidden="true" className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${isOffers ? "bg-brand-terracotta/10 text-brand-terracotta" : "bg-brand-cream text-brand-teal"}`}>
     <MobileNavIcon name={icon} className="h-6 w-6" />
-  </span>}<span className="min-w-0 flex-1 text-balance">{icon === "kumaio" ? t("kumaioMobile") : entry.title}</span></>;
+  </span>}<span className="min-w-0 flex-1 text-balance">{label}</span></>;
   const itemClass = `${rowClass} ${current ? "bg-brand-cream" : ""}`;
+  const hasChildren = entry.children.length > 0;
+  const isOpen = searching || expanded;
+  const toggleLabel = t(isOpen ? "collapseCategory" : "expandCategory", { category: label });
+  const toggle = () => setExpanded(value => !value);
   return (
     <li>
-      {entry.children.length ? (
-        <details open={searching || undefined} className="group">
-          <summary className={`${rowClass} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
-            {title}<svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 text-brand-teal-dark/40 transition-transform duration-200 group-open:rotate-90 motion-reduce:transition-none"><path d="m9 6 6 6-6 6" /></svg>
-          </summary>
-          <ul className="mb-2 ml-7 mt-0.5 border-l-2 border-brand-teal/15 pl-3">
-            {entry.href !== "#" && <li><Link href={entry.href} onClick={onNavigate} className="flex min-h-11 items-center rounded-lg px-3 text-sm font-bold text-brand-teal hover:bg-brand-cream/70">{t("viewAllCategory", {category:entry.title})}</Link></li>}
+      {hasChildren ? (
+        <div className="group" data-open={isOpen ? "" : undefined}>
+          {entry.href === "#" ? (
+            <button type="button" aria-expanded={isOpen} aria-controls={submenuId} onClick={toggle} className={`${rowClass} w-full text-left`}>
+              {title}{chevron}
+            </button>
+          ) : (
+            <div className="flex items-center">
+              <Link href={entry.href} onClick={onNavigate} aria-current={current ? "page" : undefined} className={`${itemClass} min-w-0 flex-1`}>{title}</Link>
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={submenuId}
+                aria-label={toggleLabel}
+                onClick={toggle}
+                className="flex min-h-[52px] w-12 shrink-0 items-center justify-center rounded-xl transition-colors hover:bg-brand-cream/70 active:bg-brand-cream focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-teal"
+              >
+                {chevron}
+              </button>
+            </div>
+          )}
+          <ul id={submenuId} hidden={!isOpen} className="mb-2 ml-7 mt-0.5 border-l-2 border-brand-teal/15 pl-3">
             {entry.children.map(child => <MobileEntry key={child.id} entry={child} pathname={pathname} searching={searching} onNavigate={onNavigate} depth={depth + 1} />)}
           </ul>
-        </details>
+        </div>
       ) : entry.href === "#" ? (
         <a href="#" onClick={event => event.preventDefault()} className={depth === 0 ? itemClass : subLinkClass}>{title}</a>
       ) : (

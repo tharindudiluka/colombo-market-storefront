@@ -29,6 +29,8 @@
     "desktopMenuLabel": "Produktkategorien",
     "searchCategories": "Kategorien und Unterkategorien suchen",
     "searchPlaceholder": "Kategorie suchen",
+    "expandCategory": "{category} Unterkategorien anzeigen",
+    "collapseCategory": "{category} Unterkategorien ausblenden",
     "viewAllCategory": "Alle aus {category} ansehen",
     "noCategoryMatches": "Keine passenden Kategorien gefunden.",
     "aboutUs": "Über uns",
