@@ -331,6 +331,7 @@
   },
   "policyPages": {
     "freeShippingHeading": "Kostenloser Versand",
+    "freeShippingBody": "Ab einem Bestellwert von {threshold} ist der Versand innerhalb Deutschlands kostenlos.",
     "eyebrow": "Colombo Market",
     "onThisPage": "Auf dieser Seite",
     "titles": {

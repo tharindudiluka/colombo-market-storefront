@@ -41,7 +41,12 @@ export type PolicyHtmlOptions = {
   /** Stable ids for headings, keyed by the heading's slug (the merchant's German and English headings slug differently). */
   headingAnchors?: Record<string, string>;
   /** Gives the first paragraph that matches its own labelled sub-section (existing wording, plus a heading), so it can be linked to. */
-  splitParagraph?: { match: RegExp; heading: string };
+  splitParagraph?: {
+    match: RegExp;
+    heading: string;
+    /** Used only when no paragraph matches (this language's policy lacks the fact): adds the section at the end of the section whose heading slug is in `afterSlugs`. */
+    fallback?: { afterSlugs: string[]; bodyHtml: string };
+  };
   /** When no heading received this stable id, place an empty anchor right before the heading that has `before`. */
   fallbackAnchor?: { id: string; before: string };
 };
@@ -72,13 +77,21 @@ export function preparePolicyHtml(source: string, pageTitle = "", options: Polic
 
   // Optional: label the paragraph that holds a given fact, so it becomes its own linkable section. Wording is untouched.
   if (options.splitParagraph) {
-    const { match, heading } = options.splitParagraph;
+    const { match, heading, fallback } = options.splitParagraph;
     let done = false;
     html = html.replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (paragraph) => {
       if (done || !match.test(plainText(paragraph))) return paragraph;
       done = true;
       return `<h3>${heading}</h3>${paragraph}`;
     });
+    if (!done && fallback) {
+      const headings = Array.from(html.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi));
+      const index = headings.findIndex((h) => fallback.afterSlugs.includes(slugify(plainText(h[1]))));
+      if (index >= 0) {
+        const nextStart = headings[index + 1]?.index ?? html.length;
+        html = `${html.slice(0, nextStart)}<h3>${heading}</h3>${fallback.bodyHtml}\n${html.slice(nextStart)}`;
+      }
+    }
   }
 
   // A rule right before a heading doubles the heading's own divider.

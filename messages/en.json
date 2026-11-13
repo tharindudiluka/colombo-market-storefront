@@ -331,6 +331,7 @@
   },
   "policyPages": {
     "freeShippingHeading": "Free shipping",
+    "freeShippingBody": "Shipping within Germany is free for orders of {threshold} or more.",
     "eyebrow": "Colombo Market",
     "onThisPage": "On this page",
     "titles": {
